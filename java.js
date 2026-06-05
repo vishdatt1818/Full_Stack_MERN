@@ -217,9 +217,9 @@ const moveZeroTwoPointer = (arr) => {
 
     let left = 0;
 
-    for (let right = 0; right < arr.length; right++) {
-        if (arr[right] !== 0) {
-            arr[left] = arr[right]
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== 0) {
+            arr[left] = arr[i]
             left++;
         }
     }
@@ -232,6 +232,27 @@ const moveZeroTwoPointer = (arr) => {
 }
 
 console.log(moveZeroTwoPointer([0, 1, 0, 3, 12]));
+
+
+const moveZeroSwap = (arr) => {
+    let j = 0;
+
+    for(let i = 0; i < arr.length; i++) {
+
+        if(arr[i] !== 0) {
+
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+
+            j++;
+        }
+    }
+
+    return arr;
+}
+console.log("swap")
+console.log(moveZeroSwap([0,1,0,3,12]));
 
 
 const moveZeroLeftTwoPointer = (arr) => {
@@ -287,7 +308,9 @@ const palindrome = (str) => {
     }
     return true
 }
-console.log(palindrome("radar")); // Output: true
+console.log(palindrome("radar")); 
 console.log(palindrome("hello")); 
+
+
 
 
