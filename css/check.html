@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css_practice</title>
+    <style>
+      body {
+        background-color: antiquewhite;
+      }
+      .heading {
+        background-color: orange;
+        padding: 10px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Centering the entire table section */
+      .linkForSheet {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      /* Setting equal gaps between columns */
+      table {
+        border-collapse: separate;
+        border-spacing: 30px 10px; /* 30px horizontal gap, 10px vertical gap */
+      }
+
+      /* Centering content inside the table cells */
+      td {
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      ul {
+        background-color: orange;
+        padding: 20px;
+        list-style: square;
+      }
+      li {
+        display: inline;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heading">
+      <h1>Welcome to my Homepage</h1>
+      <h3>Use the menu to change the style</h3>
+    </div>
+    <div class="container">
+      <h2>Same Page Different Style Sheets</h2>
+      <p>
+        This is a demonstration of how different styles can change the layout of
+        our HTML page. You can change the layout of the page by selecting
+        different stylesheets in the menu or by selecting the link given below:
+      </p>
+    </div>
+
+    <div class="linkForSheet">
+      <table>
+        <tr>
+          <td><a href="css_assign.html">StyleSheet1</a></td>
+          <td><button>StyleSheet1</button></td>
+        </tr>
+        <tr>
+          <td><a href="">StyleSheet2</a></td>
+          <td><button>StyleSheet2</button></td>
+        </tr>
+        <tr>
+          <td><a href="">StyleSheet3</a></td>
+          <td><button>StyleSheet3</button></td>
+        </tr>
+        <tr>
+          <td><a href="">StyleSheet4</a></td>
+          <td><button>StyleSheet4</button></td>
+        </tr>
+        <tr>
+          <td><a href="">NoStyleSheet</a></td>
+          <td><button>NO_StyleSheet</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <h2><u>No Style</u></h2>
+    <p>
+      This page uses DIV elements to group different sections of the HTML page.
+      Click here to see how the page looks like with no stylesheet:
+    </p>
+    <a href="noStyle.html">No Style</a>
+
+    <ul>
+      <li>CSS INTRODUCTION</li>
+      <li>CSS INTRODUCTION</li>
+      <li>CSS INTRODUCTION</li>
+      <li>CSS INTRODUCTION</li>
+    </ul>
+  </body>
+</html>

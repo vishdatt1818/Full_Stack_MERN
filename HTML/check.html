@@ -3,9 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Homepage</title>
+    <style>
+        /* Reset basic spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+}
+
+/* Header Section */
+.main-header {
+    background-color: #ff0000;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.main-header p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Layout Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* Main Content Area */
+.content {
+    flex: 1;
+}
+
+.content section {
+    margin-bottom: 40px;
+}
+
+.content h2 {
+    color: #ff0000;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.content p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Inline links below text blocks */
+.links-inline a {
+    color: #ff0000;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 1.05rem;
+}
+
+.links-inline a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar Navigation Buttons */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: flex-end;
+    min-width: 150px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #ff0000;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+    width: 130px;
+}
+
+.btn:active {
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+/* Footer Section */
+.footer-nav {
+    background-color: #ff0000;
+    padding: 10px;
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.footer-nav li {
+    display: flex;
+    align-items: center;
+}
+
+/* Adds the bullet points dynamically between items just like the image */
+.footer-nav li:not(:first-child)::before {
+    content: "•";
+    color: #000000;
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+.footer-nav a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}
+    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>hello</h1>
+
+    <header class="main-header">
+        <h1>Welcom to My Homepage</h1>
+        <p>use the menu to change the style</p>
+    </header>
+
+    <div class="container">
+        <main class="content">
+            <section>
+                <h2>Same Page Different Stylesheets</h2>
+                <p>This is a demonstration of how different styles can change the layout of out HTML page. You can change the layout of the page by selecting different stylesheets in the menu or by selecting the link given below:</p>
+                <div class="links-inline">
+                    <a href="#">StyleSheet1</a>
+                    <a href="#">StyleSheet2</a>
+                    <a href="#">StyleSheet3</a>
+                    <a href="#">StyleSheet4</a>
+                    <a href="#">No StyleSheet</a>
+                </div>
+            </section>
+
+            <section>
+                <h2>No Style</h2>
+                <p>This page uses DIV elements to group different sections of the HTML page. Click here to see how the page looks like with no stylesheet:</p>
+                <div class="links-inline">
+                    <a href="#">No Style</a>
+                </div>
+            </section>
+        </main>
+
+        <aside class="sidebar">
+            <a href="#" class="btn">StyleSheet1</a>
+            <a href="#" class="btn">StyleSheet2</a>
+            <a href="#" class="btn">StyleSheet3</a>
+            <a href="#" class="btn">StyleSheet4</a>
+            <a href="#" class="btn">No StyleSheet</a>
+        </aside>
+    </div>
+
+    <footer class="footer-nav">
+        <ul>
+            <li><a href="#">CSS INTRODUCTION</a></li>
+            <li><a href="#">CSS INTRODUCTION</a></li>
+            <li><a href="#">CSS INTRODUCTION</a></li>
+            <li><a href="#">CSS INTRODUCTION</a></li>
+            <li><a href="#">CSS INTRODUCTION</a></li>
+        </ul>
+    </footer>
+
 </body>
 </html>

@@ -237,9 +237,9 @@ console.log(moveZeroTwoPointer([0, 1, 0, 3, 12]));
 const moveZeroSwap = (arr) => {
     let j = 0;
 
-    for(let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
 
-        if(arr[i] !== 0) {
+        if (arr[i] !== 0) {
 
             let temp = arr[i];
             arr[i] = arr[j];
@@ -252,7 +252,7 @@ const moveZeroSwap = (arr) => {
     return arr;
 }
 console.log("swap")
-console.log(moveZeroSwap([0,1,0,3,12]));
+console.log(moveZeroSwap([0, 1, 0, 3, 12]));
 
 
 const moveZeroLeftTwoPointer = (arr) => {
@@ -298,19 +298,66 @@ const palindrome = (str) => {
     let right = str.length - 1;
 
     while (left < right) {
-        if(str[left] !== str[right]){
+        if (str[left] !== str[right]) {
             return false;
         }
         left++;
         right--;
-    
+
 
     }
     return true
 }
-console.log(palindrome("radar")); 
-console.log(palindrome("hello")); 
+console.log(palindrome("radar"));
+console.log(palindrome("hello"));
 
 
+let ah = [1, 2, 3, 4, 5]
+k = 1;
+
+for (let j = 0; j < k; j++) {
+    let copy = ah[0];
+
+    for (let i = 0; i < ah.length - 1; i++) {
+        ah[i] = ah[i + 1]
+    }
+    ah[ah.length - 1] = copy;
+}
+
+
+
+console.log(ah)
+
+
+let ah1 = [1, 2, 3, 4, 5]
+k = 2;
+
+for (let j = 0; j < k; j++) {
+    let copy = ah1[ah1.length-1];
+
+    for (let i = ah1.length-1; i > 0 ; i--) {
+        ah1[i] = ah1[i - 1]
+    }
+    ah1[0] = copy;
+}
+
+
+
+console.log(ah1)
+
+let arrSor = [1,1,2,2,3,3,4,4,5,5,6,6,7]
+
+const removeDup = function(num) {
+    let j =1;
+    for(let i=0; i<num.length; i++){
+       if( num[i] != num[i+1]){
+            num[j] = num[i + j]
+       }
+       j++
+    }
+    return j
+}
+
+console.log(removeDup(arrSor))
 
 
