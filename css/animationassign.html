@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* animation: child 3s infinite; */
+        position: relative;
+
+        background-image: url(https://cdn.dribbble.com/userupload/10065225/file/original-79ae512fddef5f5c6352103e2b02f2b2.jpg);
+      }
+      .child {
+        height: 60px;
+        width: 150px;
+        background-size: cover;
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWH-kDHj-Zbk2EIfdhE4ARFLab10dICZZRXg&s);
+        animation: child 20s infinite;
+        position: absolute;
+      }
+      .child1 {
+        height: 60px;
+        width: 150px;
+        background-size: cover;
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWH-kDHj-Zbk2EIfdhE4ARFLab10dICZZRXg&s);
+        animation: child1 15s infinite linear;
+        /* animation-delay: 3s; */
+        position: absolute;
+      }
+         .child2{
+        height: 60px;
+        width: 150px;
+        background-size: cover;
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcOKJLUIji3Pb1k7-y57uwULGWqQgCKL1aOA&s);
+        animation: child2 10s infinite linear;
+        /* animation-delay: 5s; */
+        position: absolute;
+      }
+        .child3{
+        height: 60px;
+        width: 150px;
+        background-size: cover;
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcOKJLUIji3Pb1k7-y57uwULGWqQgCKL1aOA&s);
+        animation: child3 20s infinite linear;
+        /* animation-delay: 5s; */
+        position: absolute;
+      }
+
+      @keyframes child {
+        from {
+          top: 550px;
+          left: -150px;
+        }
+        to {
+          top: 550px;
+          left: 100%;
+        }
+      }
+
+      @keyframes child1 {
+        from {
+          top: 650px;
+          left: -150px;
+        }
+        to {
+          top: 650px;
+          left: 100%;
+        }
+      }
+
+         @keyframes child2 {
+        from {
+          top: 650px;
+          right: -150px;
+        }
+        to {
+          top: 650px;
+          right: 100%;
+        }
+      }
+        @keyframes child3 {
+        from {
+          top: 550px;
+          right: -150px;
+        }
+        to {
+          top: 550px;
+          right: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+        <div>
+      <div class="child"></div>
+      <div class="child1"></div>
+      <div class="child2"></div>
+      <div class="child3"></div>
+      </div>
+    </div>
+  </body>
+</html>

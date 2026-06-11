@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .parent{
+            height: 300px;
+            width: 300px;
+            border: 2px solid orange;
+              animation: orbit 4s infinite;
+              border-radius: 50%;
+        }
+        .child{
+            height: 100px;
+            width: 100px;
+            background-color: orange;
+            border: 2px solid orange;
+            animation: orbit 4s infinite;
+
+        }
+        .parent1{
+            height: 300px;
+            width: 300px;
+            border: 2px solid orange;
+              /* animation: square 4s infinite; */
+        }
+        .child1{
+            height: 100px;
+            width: 100px;
+            background-color: orange;
+            border: 2px solid orange;
+            animation: square 4s infinite;
+
+        }
+        @keyframes orbit{
+            from{
+                transform: rotate(0);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes square{
+            0%{
+                transform: translate(0,0);
+            }
+            25%{
+                transform: translate(200px,0);
+            }
+            50%{
+                transform: translate(200px,200px);
+            }
+            75%{
+                transform: translate(0px,200px);
+            }
+        }
+    </style>
+</head>
+<body>
+     <div class="parent1">
+        <div class="child1"></div>
+    </div>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+    
+</body>
+</html>

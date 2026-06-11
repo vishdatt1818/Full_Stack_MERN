@@ -158,206 +158,208 @@ console.log("Hello, World!");
 // console.log(checkAnagram("hello", "world"));
 
 
-const checkAnagramBox = (arr1, arr2) => {
+// const checkAnagramBox = (arr1, arr2) => {
 
-    if (arr1.length === arr2.length) {
+//     if (arr1.length === arr2.length) {
 
-        let box = {};
+//         let box = {};
 
-        for (let i = 0; i < arr1.length; i++) {
+//         for (let i = 0; i < arr1.length; i++) {
 
-            let num = arr1[i]
-
-
-            if (box[num]) {
-                box[num]++
-            } else {
-                box[num] = 1
-            }
-
-        }
-        for (let i = 0; i < arr2.length; i++) {
-
-            let num = arr2[i]
+//             let num = arr1[i]
 
 
-            if (box[num]) {
-                box[num]--
-            } else {
-                return false;
-            }
+//             if (box[num]) {
+//                 box[num]++
+//             } else {
+//                 box[num] = 1
+//             }
 
-        }
-        return true
-    } else {
-        return false;
-    }
-}
+//         }
+//         for (let i = 0; i < arr2.length; i++) {
 
-console.log(checkAnagramBox("listen", "silent"));
-console.log(checkAnagramBox("hello", "world"));
+//             let num = arr2[i]
 
 
-const moveZero = (arr) => {
+//             if (box[num]) {
+//                 box[num]--
+//             } else {
+//                 return false;
+//             }
 
-    let zero = [];
-    let nonZero = [];
+//         }
+//         return true
+//     } else {
+//         return false;
+//     }
+// }
 
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr[i] === 0) {
-            zero.push(arr[i])
-        } else {
-            nonZero.push(arr[i])
-        }
-    }
-}
-
-
-const moveZeroTwoPointer = (arr) => {
-
-    let left = 0;
-
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] !== 0) {
-            arr[left] = arr[i]
-            left++;
-        }
-    }
-    while (left < arr.length) {
-        arr[left] = 0;
-        left++;
-    }
-    return arr
-
-}
-
-console.log(moveZeroTwoPointer([0, 1, 0, 3, 12]));
+// console.log(checkAnagramBox("listen", "silent"));
+// console.log(checkAnagramBox("hello", "world"));
 
 
-const moveZeroSwap = (arr) => {
-    let j = 0;
+// const moveZero = (arr) => {
 
-    for (let i = 0; i < arr.length; i++) {
+//     let zero = [];
+//     let nonZero = [];
 
-        if (arr[i] !== 0) {
-
-            let temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-
-            j++;
-        }
-    }
-
-    return arr;
-}
-console.log("swap")
-console.log(moveZeroSwap([0, 1, 0, 3, 12]));
+//     for (let i = 0; i < arr1.length; i++) {
+//         if (arr[i] === 0) {
+//             zero.push(arr[i])
+//         } else {
+//             nonZero.push(arr[i])
+//         }
+//     }
+// }
 
 
-const moveZeroLeftTwoPointer = (arr) => {
+// const moveZeroTwoPointer = (arr) => {
 
-    let left = arr.length - 1;
+//     let left = 0;
 
-    for (let right = arr.length - 1; right >= 0; right--) {
-        if (arr[right] !== 0) {
-            arr[left] = arr[right]
-            left--;
-        }
-    }
-    while (left >= 0) {
-        arr[left] = 0;
-        left--;
-    }
-    return arr
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i] !== 0) {
+//             arr[left] = arr[i]
+//             left++;
+//         }
+//     }
+//     while (left < arr.length) {
+//         arr[left] = 0;
+//         left++;
+//     }
+//     return arr
 
-}
+// }
 
-console.log(moveZeroLeftTwoPointer([0, 1, 0, 3, 12]));
-
-const reverseArrey = (arr) => {
-
-    let left = 0;
-    let right = arr.length - 1;
-
-    while (left < right) {
-        let temp = arr[left];
-        arr[left] = arr[right];
-        arr[right] = temp;
-
-        left++;
-        right--;
-    }
-    return arr;
-}
-console.log(reverseArrey([1, 2, 3, 4, 5]))
-
-const palindrome = (str) => {
-
-    let left = 0;
-    let right = str.length - 1;
-
-    while (left < right) {
-        if (str[left] !== str[right]) {
-            return false;
-        }
-        left++;
-        right--;
+// console.log(moveZeroTwoPointer([0, 1, 0, 3, 12]));
 
 
-    }
-    return true
-}
-console.log(palindrome("radar"));
-console.log(palindrome("hello"));
+// const moveZeroSwap = (arr) => {
+//     let j = 0;
+
+//     for (let i = 0; i < arr.length; i++) {
+
+//         if (arr[i] !== 0) {
+
+//             let temp = arr[i];
+//             arr[i] = arr[j];
+//             arr[j] = temp;
+
+//             j++;
+//         }
+//     }
+
+//     return arr;
+// }
+// console.log("swap")
+// console.log(moveZeroSwap([0, 1, 0, 3, 12]));
 
 
-let ah = [1, 2, 3, 4, 5]
-k = 1;
+// const moveZeroLeftTwoPointer = (arr) => {
 
-for (let j = 0; j < k; j++) {
-    let copy = ah[0];
+//     let left = arr.length - 1;
 
-    for (let i = 0; i < ah.length - 1; i++) {
-        ah[i] = ah[i + 1]
-    }
-    ah[ah.length - 1] = copy;
-}
+//     for (let right = arr.length - 1; right >= 0; right--) {
+//         if (arr[right] !== 0) {
+//             arr[left] = arr[right]
+//             left--;
+//         }
+//     }
+//     while (left >= 0) {
+//         arr[left] = 0;
+//         left--;
+//     }
+//     return arr
+
+// }
+
+// console.log(moveZeroLeftTwoPointer([0, 1, 0, 3, 12]));
+
+// const reverseArrey = (arr) => {
+
+//     let left = 0;
+//     let right = arr.length - 1;
+
+//     while (left < right) {
+//         let temp = arr[left];
+//         arr[left] = arr[right];
+//         arr[right] = temp;
+
+//         left++;
+//         right--;
+//     }
+//     return arr;
+// }
+// console.log(reverseArrey([1, 2, 3, 4, 5]))
+
+// const palindrome = (str) => {
+
+//     let left = 0;
+//     let right = str.length - 1;
+
+//     while (left < right) {
+//         if (str[left] !== str[right]) {
+//             return false;
+//         }
+//         left++;
+//         right--;
 
 
+//     }
+//     return true
+// }
+// console.log(palindrome("radar"));
+// console.log(palindrome("hello"));
 
-console.log(ah)
 
+// let ah = [1, 2, 3, 4, 5]
+// k = 1;
 
-let ah1 = [1, 2, 3, 4, 5]
-k = 2;
+// for (let j = 0; j < k; j++) {
+//     let copy = ah[0];
 
-for (let j = 0; j < k; j++) {
-    let copy = ah1[ah1.length-1];
-
-    for (let i = ah1.length-1; i > 0 ; i--) {
-        ah1[i] = ah1[i - 1]
-    }
-    ah1[0] = copy;
-}
+//     for (let i = 0; i < ah.length - 1; i++) {
+//         ah[i] = ah[i + 1]
+//     }
+//     ah[ah.length - 1] = copy;
+// }
 
 
 
-console.log(ah1)
+// console.log(ah)
 
-let arrSor = [1,1,2,2,3,3,4,4,5,5,6,6,7]
 
-const removeDup = function(num) {
-    let j =1;
-    for(let i=0; i<num.length; i++){
-       if( num[i] != num[i+1]){
-            num[j] = num[i + j]
-       }
-       j++
-    }
-    return j
-}
+// let ah1 = [1, 2, 3, 4, 5]
+// k = 2;
 
-console.log(removeDup(arrSor))
+// for (let j = 0; j < k; j++) {
+//     let copy = ah1[ah1.length-1];
+
+//     for (let i = ah1.length-1; i > 0 ; i--) {
+//         ah1[i] = ah1[i - 1]
+//     }
+//     ah1[0] = copy;
+// }
+
+
+
+// console.log(ah1)
+
+// let arrSor = [1,1,2,2,3,3,4,4,5,5,6,6,7]
+
+// const removeDup = function(num) {
+//     let j =1;
+//     for(let i=0; i<num.length; i++){
+//        if( num[i] != num[i+1]){
+//             num[j] = num[i + j]
+//        }
+//        j++
+//     }
+//     return j
+// }
+
+// console.log(removeDup(arrSor))
+
+
 
 
