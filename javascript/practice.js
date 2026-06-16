@@ -104,7 +104,7 @@ grindBeans()
     .then(() => {
         serveCoffee();
     })
-    // How do you trigger serveCoffee next?
+   
 
 
 
