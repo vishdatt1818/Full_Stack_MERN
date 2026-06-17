@@ -106,17 +106,17 @@
 // }
 
 
-let no= 12345;
-let strNo = no.toString(); // Convert number to "1231231"
+// let no= 12345;
+// let strNo = no.toString(); // Convert number to "1231231"
 
-let reverseno= '';
+// let reverseno= '';
 
-let i=strNo.length-1;
-while(i>=0){
-    reverseno += strNo[i];
-    i--
-}
-console.log(reverseno);
+// let i=strNo.length-1;
+// while(i>=0){
+//     reverseno += strNo[i];
+//     i--
+// }
+// console.log(reverseno);
 
 // let no = 1231231;
 // let reverseno = 0;

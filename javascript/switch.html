@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let a = 10;
+      let b = 5;
+      let c = 6;
+
+      if (a > b) {
+        if (a > c) {
+          console.log("a is greatest");
+        } else {
+          console.log("c is greatest");
+        }
+      } else {
+        if (b > c) {
+          console.log("b is greatest");
+        } else {
+          console.log("c is greatest");
+        }
+      }
+
+      let userChoice = 3;
+
+      if (userChoice == 1) {
+        console.log("Checking your balance");
+      } else if (userChoice == 2) {
+        console.log("Withdrawing cash");
+      } else if (userChoice == 3) {
+        console.log("Depositing money");
+      } else {
+        console.log("Invalid option");
+      }
+
+      switch (userChoice) {
+        case 1:
+          console.log("Checking your balance");
+          break;
+        case 2:
+          console.log("Withdrawing cash");
+          break;
+        case 3:
+          console.log("Depositing money");
+          break;
+        default:
+          console.log("Invalid option");
+      }
+
+      let year = 2000;
+
+      if (year % 400 === 0 || year % 100 === 0 || year % 4 === 0) {
+        console.log(year, " leap year");
+      } else {
+        console.log("not leap year");
+      }
+
+      let wether = 45;
+
+      if (wether >= 35) {
+        console.log("very hot");
+      } else if (wether >= 25) {
+        console.log("hot");
+      } else if (wether >= 15) {
+        console.log("Pleasant");
+      } else {
+        console.log("very cold");
+      }
+    </script>
+    <script src="l"></script>
+  </body>
+</html>
