@@ -177,16 +177,50 @@
 
 // console.log(show4KButton);
 
-const user = { name: "Chris", roles: ["admin"] };
-const { roles } = user;
+// const user = { name: "Chris", roles: ["admin"] };
+// const { roles } = user;
 // console.log(roles);
+// console.log(user.name);
 
- const show4KButton =( roles.includes("premium") || roles.includes("admin") ) && "🟢 Show 4K Button";
- console.log(show4KButton);
 
- const maxx= [4,5,4,5,6,7,8,9,0]
+//  const show4KButton =( roles.includes("premium") || roles.includes("admin") ) && "🟢 Show 4K Button";
+//  console.log(show4KButton);
 
- maxx.forEach((x) => {
-    console.log(x*x);
+//  const maxx= [4,5,4,5,6,7,8,9,0]
+
+//  maxx.forEach((x) => {
+//     // console.log(x*x);
     
- })
+//  })
+
+
+ async function fetchUserDashboard() {
+    try{
+        console.log("Fetching user data");
+
+        const userResponse = await fetch('https://jsonplaceholder.typicode.com/users/1');
+
+        const user = await userResponse.json();
+
+        console.log(`User found: ${user.name}. Fetching their to-do list...`);
+
+        const todoResponse = await
+
+    }catch(error){
+            console.error("An error occurred while loading the dashboard:", error.message);
+    }
+    }
+
+    fetchUserDashboard();
+
+//     const user = {
+//     name: "Chris",
+//     roles: ["admin"]
+// };
+
+// const { name, roles } = user;
+
+// console.log(name);
+// console.log(roles[0]);
+    
+ 
