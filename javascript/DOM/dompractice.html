@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="countDisply">0</h1>
+    <button id="btn">Click for count</button> <br>
+    <button id="btn1">Click for Dark mode</button>
+    <script>
+        const countDisply = document.querySelector("#countDisply")
+        const btn = document.querySelector("#btn")
+        
+        let count = 0;
+        
+        btn.addEventListener("click", () =>{
+            count++;
+            countDisply.textContent = count;
+        })
+        
+        const body = document.querySelector("body")
+        const btn1 = document.querySelector("#btn1")
+
+        btn1.addEventListener("click" , () =>{
+            if(body.style.backgroundColor === "white"){
+                body.style.backgroundColor = "teal"
+            }else{
+                body.style.backgroundColor = "white"
+            }
+        })
+
+
+
+
+    </script>
+</body>
+</html>

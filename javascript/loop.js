@@ -204,8 +204,11 @@
 
         console.log(`User found: ${user.name}. Fetching their to-do list...`);
 
-        const todoResponse = await
+        const todoResponse = await fetch(`https://jsonplaceholder.typicode.com/todos?userId=${user.id}`);
 
+        await todoResponse.json()
+
+        todoResponse.slice(0,3).foreach(todo =>)
     }catch(error){
             console.error("An error occurred while loading the dashboard:", error.message);
     }

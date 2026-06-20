@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .firstBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid orange;
+        background-color: bisque;
+        height: 450px;
+      }
+      .parent {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 100vh;
+      }
+      .panel {
+        height: 450px;
+        background-color: bisque;
+        border: 2px solid orange;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .keypad {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 120px);
+        gap: 5px;
+        justify-content: center;
+      }
+
+      body {
+        background-color: beige;
+      }
+      #units {
+        width: 50px;
+      }
+      #pay{
+        margin-top: 20px;
+        width: 60px;
+        height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="parent">
+      <div class="firstBox">
+        <h1>Admin</h1>
+        <h4>Add a new Product</h4>
+        <div>
+          <input id="product" type="text" />
+          <button id="btn">Add Product</button>
+        </div>
+        <h4>Select a product then add the price per unit</h4>
+        <select name="" id="pList"></select>
+        <div>
+          <input id="price" type="text" />
+          <button id="btn1">Add Price</button>
+        </div>
+        <p id="mess"></p>
+      </div>
+
+      <div class="panel">
+        <h2>Checkout</h2>
+
+        <button id="newTransaction">New Transaction</button>
+
+        <h3>Select a product then add the number of units</h3>
+
+        <div class="row">
+          <select id="checkoutProduct"></select>
+
+          <label>Unit:</label>
+          <input type="text" id="units" value="0" />
+        </div>
+
+        <button id="addCartBtn">Add To Cart</button>
+
+        <div class="keypad">
+          <button id="1" class="num">1</button>
+          <button id="2" class="num">2</button>
+          <button id="3" class="num">3</button>
+          <button id="4" class="num">4</button>
+          <button id="5" class="num">5</button>
+          <button id="6" class="num">6</button>
+          <button id="7" class="num">7</button>
+          <button id="8" class="num">8</button>
+          <button id="9" class="num">9</button>
+        </div>
+        <button id="pay">Pay</button>
+      </div>
+    </div>
+    <script>
+      let list = [];
+
+      const product = document.querySelector("#product");
+      const btn = document.querySelector("#btn");
+      const pList = document.querySelector("#pList");
+      const mess = document.querySelector("#mess");
+
+      btn.addEventListener("click", () => {
+        let productObj = {
+          name: product.value,
+          price: null,
+          unit: null,
+        };
+        list.push(productObj);
+
+        // console.log(product.value);
+        console.log(list);
+        pList.innerHTML += `<option value="${product.value}">${product.value}</option>`;
+        mess.textContent = `${product.value} added`;
+        product.value = "";
+      });
+
+      const btn1 = document.querySelector("#btn1");
+
+      btn1.addEventListener("click", () => {
+        const pprice = document.querySelector("#price");
+        const selectedProduct = pList.value;
+
+        const foundProduct = list.find((item) => item.name === selectedProduct);
+        console.log(foundProduct);
+
+        foundProduct.price = pprice.value;
+
+        mess.textContent = `${selectedProduct} price ${pprice.value} added`;
+        pprice.value = "";
+        console.log(list);
+      });
+
+      const newTransaction = document.querySelector("#newTransaction");
+      const checkoutProduct = document.querySelector("#checkoutProduct");
+
+      newTransaction.addEventListener("click", () => {
+        list.forEach((item) => {
+          checkoutProduct.innerHTML += `<option value="${item.name}">${item.name} $ ${item.price} /unit</option>`;
+        });
+      });
+
+      const units = document.querySelector("#units");
+      const numButtons = document.querySelectorAll(".num");
+
+      numButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (units.value === "0") {
+            units.value = button.textContent;
+          } else {
+            units.value += button.textContent;
+          }
+        });
+      });
+
+      const addCartBtn = document.querySelector("#addCartBtn");
+
+      addCartBtn.addEventListener("click", () => {
+        // alert("hello")
+        const selectedProduct = checkoutProduct.value;
+        console.log(selectedProduct);
+
+        const checkOutProductSelected = list.find(
+          (item) => item.name === selectedProduct,
+        );
+        console.log(checkOutProductSelected);
+
+        checkOutProductSelected.unit = units.value;
+        console.log(list);
+        alert("item added to cart")
+        units.value = "0"
+      });
+
+      const pay = document.querySelector("#pay")
+
+      pay.addEventListener("click", () => {
+        
+      })
+    </script>
+  </body>
+</html>
