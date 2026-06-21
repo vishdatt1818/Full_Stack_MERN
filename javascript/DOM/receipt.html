@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      
       .firstBox {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        gap: 15px;
         align-items: center;
-        border: 2px solid orange;
-        background-color: bisque;
+      background-color: white;
+        border: 2px solid gray;
         height: 450px;
+         padding: 15px;
+        box-sizing: border-box;
+        font-family: monospace;
+        width: 300px;
       }
       .parent {
         display: flex;
@@ -22,12 +28,17 @@
       }
       .panel {
         height: 450px;
-        background-color: bisque;
-        border: 2px solid orange;
+        background-color: white;
+        border: 2px solid gray;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 10px;
+         padding: 15px;
+        box-sizing: border-box;
+        font-family: monospace;
+        width: 350px;
       }
       .keypad {
         margin-top: 20px;
@@ -47,6 +58,25 @@
         margin-top: 20px;
         width: 60px;
         height: 30px;
+      }
+    .receiptBox {
+        height: 450px;
+        width: 350px;
+        background-color: white;
+        border: 2px solid gray;
+        padding: 15px;
+        box-sizing: border-box;
+        font-family: monospace;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th, td {
+        border: 1px solid black;
+        text-align: left;
+        padding: 4px;
       }
     </style>
   </head>
@@ -98,7 +128,23 @@
         </div>
         <button id="pay">Pay</button>
       </div>
+
+      <div class="receiptBox" id="receiptContainer">
+        <h2>Receipt</h2>
+        <p id="clickpay">Click "Pay" to generate invoice...</p>
+        <table id="tablecontainer">
+            <tr>
+                <th>Product</th>
+                <th>$/unit</th>
+                <th>unit</th>
+                <th>Price</th>
+            </tr>
+        </table>
+      </div>
     </div>
+
+    
+</div>
     <script>
       let list = [];
 
@@ -142,6 +188,7 @@
       const checkoutProduct = document.querySelector("#checkoutProduct");
 
       newTransaction.addEventListener("click", () => {
+        checkoutProduct.innerHTML = "";
         list.forEach((item) => {
           checkoutProduct.innerHTML += `<option value="${item.name}">${item.name} $ ${item.price} /unit</option>`;
         });
@@ -181,7 +228,48 @@
       const pay = document.querySelector("#pay")
 
       pay.addEventListener("click", () => {
-        
+
+        document.querySelector("#clickpay").textContent = ""
+
+        const cartItems = list.filter(item => item.unit > 0 && item.price !== null);
+
+        let totalPrice = 0 
+        let tableRowsHtml = `
+    <tr>
+        <th>Product</th>
+        <th>$/unit</th>
+        <th>unit</th>
+        <th>Price</th>
+    </tr>
+  `;
+
+        cartItems.forEach(item =>{
+            const totalCost = item.price * item.unit
+            totalPrice += totalCost
+
+            tableRowsHtml += `
+            <tr>
+              <td>${item.name}</td>
+              <td>${item.price}</td>
+              <td>${item.unit}</td>
+              <td>${totalCost}</td>
+            </tr>
+          `;
+
+        //   receiptContainer.innerHTML = `${tableRowsHtml}`
+        })
+
+        tableRowsHtml += `
+    <tr style="font-weight: bold;">
+      <td colspan="3">Total</td>
+      <td>$${totalPrice.toFixed(2)}</td>
+    </tr>
+  `;
+
+  // FIX 2: Target the table container instead of destroying the receiptBox div
+  tablecontainer.innerHTML = tableRowsHtml;
+
+
       })
     </script>
   </body>

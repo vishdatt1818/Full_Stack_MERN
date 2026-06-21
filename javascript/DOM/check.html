@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleek POS Terminal</title>
+    <style>
+      :root {
+        --bg-color: #0b0f19;
+        --card-bg: #131a26;
+        --text-primary: #f3f4f6;
+        --text-secondary: #9ca3af;
+        --accent-blue: #3b82f6;
+        --accent-green: #10b981;
+        --accent-red: #ef4444;
+        --border-glow: linear-gradient(90deg, #3b82f6, #10b981, #ef4444, #3b82f6);
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        padding: 20px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      /* Animated Glowing Border Container */
+      .card-wrapper {
+        position: relative;
+        border-radius: 16px;
+        padding: 3px; /* Controls border thickness */
+        background: var(--border-glow);
+        background-size: 300% 300%;
+        animation: borderFlow 6s linear infinite;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes borderFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* Inner content area of panels */
+      .firstBox, .panel, .receiptBox {
+        background-color: var(--card-bg);
+        width: 320px;
+        height: 550px;
+        border-radius: 13px; /* Slightly less than wrapper to fit perfectly */
+        padding: 24px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+      }
+
+      .firstBox { justify-content: flex-start; gap: 12px; }
+      .panel { justify-content: flex-start; gap: 12px; }
+      .receiptBox { justify-content: flex-start; }
+
+      /* Typography Styling */
+      h1, h2, h3, h4 {
+        margin: 0;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      h1 { color: var(--accent-blue); font-size: 1.8rem; margin-bottom: 5px;}
+      h2 { color: var(--accent-green); font-size: 1.6rem; margin-bottom: 15px;}
+      h3 { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 10px; font-weight: 400;}
+      h4 { font-size: 0.9rem; color: var(--text-secondary); text-align: left; width: 100%; margin-top: 5px;}
+
+      /* Form Elements */
+      .input-group {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"], select {
+        flex: 1;
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        color: var(--text-primary);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      input[type="text"]:focus, select:focus {
+        border-color: var(--accent-blue);
+      }
+
+      select {
+        cursor: pointer;
+        appearance: none;
+        width: 100%;
+      }
+
+      #units {
+        width: 70px;
+        flex: none;
+        text-align: center;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .row label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      /* Interactive Buttons */
+      button {
+        background-color: var(--accent-blue);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+      }
+
+      button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      #btn, #btn1, #addCartBtn, #newTransaction {
+        width: 100%;
+      }
+
+      #newTransaction {
+        background-color: #334155;
+        margin-bottom: 10px;
+      }
+      #newTransaction:hover { background-color: #475569; }
+
+      #addCartBtn {
+        background-color: var(--accent-green);
+      }
+
+      /* Keypad Grid */
+      .keypad {
+        margin-top: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1s);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        width: 100%;
+      }
+
+      .num {
+        background-color: #1e293b;
+        color: var(--text-primary);
+        border: 1px solid #334155;
+        padding: 12px 0;
+        font-size: 1.1rem;
+        border-radius: 8px;
+      }
+
+      .num:hover {
+        background-color: #2d3748;
+        border-color: var(--text-secondary);
+      }
+
+      #pay {
+        width: 100%;
+        margin-top: 12px;
+        background-color: var(--accent-red);
+        font-size: 1rem;
+        padding: 12px;
+      }
+
+      /* Message Text */
+      #mess {
+        margin: 5px 0 0 0;
+        font-size: 0.85rem;
+        color: var(--accent-green);
+        text-align: center;
+        min-height: 18px;
+      }
+
+      #clickpay {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      /* Table Styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        border-bottom: 1px solid #2d3748;
+        text-align: left;
+        padding: 10px 8px;
+      }
+
+      th {
+        color: var(--text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        color: var(--text-primary);
+      }
+
+      /* Scrollbar fine-tuning */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2d3748;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="parent">
+      
+      <div class="card-wrapper">
+        <div class="firstBox">
+          <h1>Admin</h1>
+          <h4>Add a new Product</h4>
+          <div class="input-group">
+            <input id="product" type="text" placeholder="e.g., Coffee" />
+            <button id="btn">Add</button>
+          </div>
+          
+          <h4>Select product & set price ($)</h4>
+          <select id="pList"></select>
+          <div class="input-group">
+            <input id="price" type="text" placeholder="0.00" />
+            <button id="btn1">Set</button>
+          </div>
+          <p id="mess"></p>
+        </div>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="panel">
+          <h2>Checkout</h2>
+          <button id="newTransaction">New Transaction</button>
+          <h3>Select product and register quantity</h3>
+
+          <div class="row">
+            <select id="checkoutProduct"></select>
+            <label for="units">Units:</label>
+            <input type="text" id="units" value="0" readonly />
+          </div>
+
+          <button id="addCartBtn" style="margin-top: 10px;">Add To Cart</button>
+
+          <div class="keypad">
+            <button id="1" class="num">1</button>
+            <button id="2" class="num">2</button>
+            <button id="3" class="num">3</button>
+            <button id="4" class="num">4</button>
+            <button id="5" class="num">5</button>
+            <button id="6" class="num">6</button>
+            <button id="7" class="num">7</button>
+            <button id="8" class="num">8</button>
+            <button id="9" class="num">9</button>
+          </div>
+          <button id="pay">Complete Pay</button>
+        </div>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="receiptBox" id="receiptContainer">
+          <h2>Receipt</h2>
+          <p id="clickpay">Click "Pay" to generate invoice...</p>
+          <table id="tablecontainer">
+            <tr>
+              <th>Product</th>
+              <th>$/unit</th>
+              <th>unit</th>
+              <th>Price</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      let list = [];
+
+      const product = document.querySelector("#product");
+      const btn = document.querySelector("#btn");
+      const pList = document.querySelector("#pList");
+      const mess = document.querySelector("#mess");
+
+      btn.addEventListener("click", () => {
+        if(!product.value.trim()) return;
+        let productObj = {
+          name: product.value,
+          price: null,
+          unit: null,
+        };
+        list.push(productObj);
+
+        pList.innerHTML += `<option value="${product.value}">${product.value}</option>`;
+        mess.textContent = `✔ ${product.value} added`;
+        product.value = "";
+      });
+
+      const btn1 = document.querySelector("#btn1");
+
+      btn1.addEventListener("click", () => {
+        const pprice = document.querySelector("#price");
+        const selectedProduct = pList.value;
+        if(!selectedProduct) return;
+
+        const foundProduct = list.find((item) => item.name === selectedProduct);
+        foundProduct.price = parseFloat(pprice.value) || 0;
+
+        mess.textContent = `✔ ${selectedProduct} rate set to $${pprice.value}`;
+        pprice.value = "";
+      });
+
+      const newTransaction = document.querySelector("#newTransaction");
+      const checkoutProduct = document.querySelector("#checkoutProduct");
+
+      newTransaction.addEventListener("click", () => {
+        checkoutProduct.innerHTML = "";
+        list.forEach((item) => {
+          const displayPrice = item.price !== null ? `$${item.price}` : 'Not set';
+          checkoutProduct.innerHTML += `<option value="${item.name}">${item.name} (${displayPrice}/unit)</option>`;
+        });
+      });
+
+      const units = document.querySelector("#units");
+      const numButtons = document.querySelectorAll(".num");
+
+      numButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (units.value === "0") {
+            units.value = button.textContent;
+          } else {
+            units.value += button.textContent;
+          }
+        });
+      });
+
+      const addCartBtn = document.querySelector("#addCartBtn");
+
+      addCartBtn.addEventListener("click", () => {
+        const selectedProduct = checkoutProduct.value;
+        if(!selectedProduct) return;
+
+        const checkOutProductSelected = list.find(
+          (item) => item.name === selectedProduct,
+        );
+
+        checkOutProductSelected.unit = (parseInt(checkOutProductSelected.unit) || 0) + parseInt(units.value);
+        alert(`${units.value} unit(s) of ${selectedProduct} staged inside Cart.`);
+        units.value = "0";
+      });
+
+      const pay = document.querySelector("#pay");
+      const tablecontainer = document.querySelector("#tablecontainer");
+
+      pay.addEventListener("click", () => {
+        const promptMsg = document.querySelector("#clickpay");
+        if(promptMsg) promptMsg.textContent = "";
+
+        const cartItems = list.filter(item => item.unit > 0 && item.price !== null);
+
+        let totalPrice = 0; 
+        let tableRowsHtml = `
+          <tr>
+            <th>Product</th>
+            <th>$/unit</th>
+            <th>unit</th>
+            <th>Price</th>
+          </tr>
+        `;
+
+        cartItems.forEach(item => {
+          const totalCost = item.price * item.unit;
+          totalPrice += totalCost;
+
+          tableRowsHtml += `
+            <tr>
+              <td>${item.name}</td>
+              <td>$${parseFloat(item.price).toFixed(2)}</td>
+              <td>${item.unit}</td>
+              <td>$${totalCost.toFixed(2)}</td>
+            </tr>
+          `;
+        });
+
+        tableRowsHtml += `
+          <tr style="font-weight: bold; border-top: 2px solid var(--accent-green);">
+            <td colspan="3" style="color: var(--accent-green)">Total Due</td>
+            <td style="color: var(--accent-green)">$${totalPrice.toFixed(2)}</td>
+          </tr>
+        `;
+
+        tablecontainer.innerHTML = tableRowsHtml;
+      });
+    </script>
+  </body>
+</html>
