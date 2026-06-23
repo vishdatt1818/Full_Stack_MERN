@@ -1,0 +1,23 @@
+.pokemon{
+    border: 2px solid orange;
+    width: 300px;
+}
+
+.pokemon img{
+
+    width: 150px;
+}
+
+.parent{
+    display: flex;
+    justify-content: space-around;
+
+}
+.card{
+    margin: 10px;
+}
+.card-text{
+    color: orange;
+    text-align: center;
+    /* text-size-adjust: ; */
+}
