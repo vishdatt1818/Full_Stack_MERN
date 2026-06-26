@@ -6,6 +6,7 @@ import "./App.css"
 import Image from './Image'
 import Slots from './Slots'
 import PropertyList from './PropertyList'
+import Clicker from './components/clicker'
 
 const properties = [
   { id: 129031, name: "Desert Yurt", rating: 4.9, price: 150 },
@@ -22,6 +23,7 @@ function App() {
   return (
     <>
       <Navbar/>
+      <Clicker buttonText="hello" message="hello" />
       <Carosel/>
 
       <div className='box'>
