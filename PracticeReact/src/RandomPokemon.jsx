@@ -11,9 +11,9 @@ export default function RandomPokemon() {
         <h1>Pokemon #{pokeNum}</h1>
         <img src={url} alt="" />
       </div> */}
-      <div className="parent">
+      {/* <div className="parent"> */}
 
-      <div className="card" style={{ width: "25rem" }}>
+      <div className="card">
         <img src={url} className="card-img-top" alt="..." />
         <div className="card-body">
           <h3 className="card-text">
@@ -41,7 +41,7 @@ export default function RandomPokemon() {
       </div> */}
 
 
-      </div>
+      {/* </div> */}
     </>
   );
 }

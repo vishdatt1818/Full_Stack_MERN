@@ -3,10 +3,11 @@
     width: 300px;
 }
 
-.pokemon img{
+/* .card img{
 
-    width: 150px;
-}
+    width: 600px;
+    height: 300px;
+} */
 
 .parent{
     display: flex;

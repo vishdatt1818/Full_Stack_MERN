@@ -2,9 +2,9 @@ import "./Image.css"
 
 export default function Image(){
     return(
+      
         <>
-        <>
-  <div className="card mb-3 box">
+  <div className="card mb-3 imgbox">
     <img src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?w=1920&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGxhbmRzY2FwZXxlbnwwfHwwfHx8MA%3D%3D" className="card-img-top" alt="..." />
     <div className="card-body">
       <h5 className="card-title">Card title</h5>
@@ -20,6 +20,6 @@ export default function Image(){
   
 </>
 
-        </>
+  
     )
 }
