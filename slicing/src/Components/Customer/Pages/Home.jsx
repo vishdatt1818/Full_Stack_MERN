@@ -16,7 +16,7 @@ export default function Home(){
               className="btn"
               href="https://htmlcodex.com/barber-shop-template"
             >
-              Download Now
+              Book Appointment
             </a>
           </div>
         </div>
@@ -313,45 +313,47 @@ export default function Home(){
   </div>
   {/* Pricing End */}
   {/* Testimonial Start */}
-  <div className="testimonial">
-    <div className="container">
-      <div className="owl-carousel testimonials-carousel">
-        <div className="testimonial-item">
-          <img src="img/testimonial-1.jpg" alt="Image" />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            ut mollis mauris. Vivamus egestas eleifend dui ac consequat. Fusce
-            venenatis at lectus in malesuada. Suspendisse sit amet dolor et odio
-            varius mattis.
-          </p>
-          <h2>Client Name</h2>
-          <h3>Profession</h3>
-        </div>
-        <div className="testimonial-item">
-          <img src="img/testimonial-2.jpg" alt="Image" />
-          <p>
-            Phasellus pellentesque tempus pretium. Quisque in enim sit amet
-            purus venenatis porttitor sed non velit. Vivamus vehicula finibus
-            tortor. Aliquam vehicula molestie pulvinar. Sed varius libero in leo
-            finibus, ac consectetur tortor rutrum.
-          </p>
-          <h2>Client Name</h2>
-          <h3>Profession</h3>
-        </div>
-        <div className="testimonial-item">
-          <img src="img/testimonial-3.jpg" alt="Image" />
-          <p>
-            Sed in lectus eu eros tincidunt cursus. Aliquam eleifend velit nisl.
-            Sed et posuere urna, ut vestibulum massa. Integer quis magna non
-            enim luctus interdum. Phasellus sed eleifend erat. Aliquam ligula
-            ex, semper vel tempor pellentesque, pretium eu nulla.
-          </p>
-          <h2>Client Name</h2>
-          <h3>Profession</h3>
-        </div>
-      </div>
-    </div>
+      <div className="container d-flex  justify-content-between">
+        <div className="card " style={{ width: "18rem" }}>
+  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D" className="card-img-top" alt="..." />
+  <div className="card-body">
+    <h5 className="card-title">Card title</h5>
+    <p className="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card’s content.
+    </p>
+ 
   </div>
+</div>
+
+
+<div className="card " style={{ width: "18rem" }}>
+  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D" className="card-img-top" alt="..." />
+  <div className="card-body">
+    <h5 className="card-title">Card title</h5>
+    <p className="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card’s content.
+    </p>
+  
+  </div>
+</div>
+
+
+<div className="card " style={{ width: "18rem" }}>
+  <img src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D" className="card-img-top" alt="..." />
+  <div className="card-body">
+    <h5 className="card-title">Card title</h5>
+    <p className="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card’s content.
+    </p>
+ 
+  </div>
+</div>
+
+      </div>
+
   {/* Testimonial End */}
   {/* Team Start */}
   <div className="team">

@@ -1,70 +1,81 @@
-export default function AdminHeader(){
-    return(
-        <>
-      <nav className="navbar admin-navbar navbar-expand bg-white">
-  <div className="container-fluid px-3 px-lg-4">
-    <button
-      className="sidebar-toggle"
-      type="button"
-      data-sidebar-toggle=""
-      aria-controls="adminSidebar"
-      aria-expanded="true"
-      aria-label="Toggle sidebar"
-    >
-      <span />
-      <span />
-      <span />
-    </button>
-    <form className="d-none d-md-flex ms-3 flex-grow-1" role="search">
-      <input
-        className="form-control search-input"
-        type="search"
-        placeholder="Search users, orders, reports"
-        aria-label="Search"
-      />
-    </form>
-    <div className="navbar-actions ms-auto">
-      <button
-        className="icon-button theme-toggle"
-        type="button"
-        data-theme-toggle=""
-        aria-label="Switch color theme"
-        title="Switch color theme"
-      >
-        <i className="bi bi-moon-stars" data-theme-icon="" aria-hidden="true" />
-      </button>
-      <div className="dropdown">
-        <button
-          className="icon-button"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          aria-label="Notifications"
-        >
-          <span className="notification-dot" />
-          <i className="bi bi-bell" aria-hidden="true" />
-        </button>
-        <div className="dropdown-menu dropdown-menu-end notification-menu">
-          <div className="dropdown-header fw-bold text-body">Notifications</div>
-          <a className="dropdown-item" href="users.html">
-            <span className="notification-title">New user registered</span>
-            <span className="notification-time">4 minutes ago</span>
-          </a>
-          <a className="dropdown-item" href="charts.html">
-            <span className="notification-title">Revenue target reached</span>
-            <span className="notification-time">32 minutes ago</span>
-          </a>
-          <a className="dropdown-item" href="settings.html">
-            <span className="notification-title">
-              Security review completed
-            </span>
-            <span className="notification-time">1 hour ago</span>
-          </a>
+import {Link} from "react-router-dom"
+
+export default function AdminHeader() {
+  return (
+
+      <>
+        {/* Top Bar Start */}
+        <div className="top-bar d-none d-md-block">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="top-bar-left">
+                  <div className="text">
+                    <h2>8:00 - 9:00</h2>
+                    <p>Opening Hour Mon - Fri</p>
+                  </div>
+                  <div className="text">
+                    <h2>+123 456 7890</h2>
+                    <p>Call Us For Appointment</p>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="top-bar-right">
+                  <div className="social">
+                    <a href="">
+                      <i className="fab fa-twitter" />
+                    </a>
+                    <a href="">
+                      <i className="fab fa-facebook-f" />
+                    </a>
+                    <a href="">
+                      <i className="fab fa-linkedin-in" />
+                    </a>
+                    <a href="">
+                      <i className="fab fa-instagram" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</nav>
-</>
-    )
+        {/* Top Bar End */}
+        {/* Nav Bar Start */}
+        <div className="navbar navbar-expand-lg bg-dark navbar-dark">
+          <div className="container-fluid">
+            <a href="index.html" className="navbar-brand">
+              Barber <span>X</span>
+            </a>
+            <button
+              type="button"
+              className="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div className="navbar-nav ml-auto">
+                <Link to="/admin" className="nav-item nav-link active">
+                  Dashboard
+                </Link>
+                <Link to="/admin/barbers" className="nav-item nav-link">
+                  Barber/Services
+                </Link>
+                <Link to="/services" className="nav-item nav-link">
+                  Service
+                </Link>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Nav Bar End */}
+      </>
+  );
 }

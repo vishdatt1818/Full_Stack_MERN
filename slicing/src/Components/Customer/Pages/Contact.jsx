@@ -16,6 +16,7 @@ export default function Contact(){
     </div>
   </div>
   {/* Page Header End */}
+  
   {/* Contact Start */}
   <div className="section-header text-center" style={{ marginTop: 90 }}>
     <p>Get In Touch</p>

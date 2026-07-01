@@ -76,28 +76,13 @@ export default function Header() {
                 <Link to="/team" className="nav-item nav-link">
                   Barber
                 </Link>
-                <Link to="/portfolio" className="nav-item nav-link">
-                  Gallery
-                </Link>
-                <div className="nav-item dropdown">
-                  <a
-                    href="#"
-                    className="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    Pages
-                  </a>
-                  <div className="dropdown-menu">
-                    <Link to="/blog" className="dropdown-item">
-                      Blog Page
-                    </Link>
-                    <Link to="/single" className="dropdown-item">
-                      Single Page
-                    </Link>
-                  </div>
-                </div>
+               
+               
                 <Link to="/contact" className="nav-item nav-link">
                   Contact
+                </Link>
+                 <Link to="/login" className="nav-item nav-link">
+                  Login
                 </Link>
               </div>
             </div>
