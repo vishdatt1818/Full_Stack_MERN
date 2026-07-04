@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify'
 
 import Layout from './Components/Customer/Layout/Layout'
 import Home from './Components/Customer/Pages/Home';
@@ -15,6 +16,8 @@ import Contact from './Components/Customer/Pages/Contact';
 import AdminLayout from './Components/Admin/Layout/AdminLayout';
 import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import AddBarberServices from './Components/Admin/AddBarberServices/AddBarberServices';
+import AddBarber from './Components/Admin/AddBarberServices/AddBarber';
+import AddService from './Components/Admin/AddBarberServices/AddService';
 
 function App() {
   
@@ -38,6 +41,8 @@ function App() {
       <Route path='/admin' element={<AdminLayout/>}>
         <Route path='/admin' element={<Dashboard/>}></Route>
         <Route path='/admin/barbers' element={<AddBarberServices/>}></Route>
+        <Route path='/admin/barberservice' element={<AddBarber/>}></Route>
+        <Route path='/admin/service' element={<AddService/>}></Route>
 
 
       </Route>
@@ -45,6 +50,7 @@ function App() {
       </Routes>
       </BrowserRouter>
 
+       <ToastContainer/>
 
     </>
   )

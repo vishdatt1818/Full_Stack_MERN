@@ -476,7 +476,7 @@ a:focus {
 .page-header {
     position: relative;
     margin-bottom: 45px;
-    padding: 150px 0 90px 0;
+    padding: 80px 0 80px 0;
     text-align: center;
     background: #D5B981;
 }
@@ -1210,6 +1210,22 @@ a:focus {
     background: #D5B981;
 }
 
+.newbtn{
+      padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #D5B981;
+    background: none;
+    border: 2px solid #D5B981;
+    border-radius: 0;
+    transition: .3s;
+}
+
+.newbtn:hover{
+     color: #1d2434;
+    background: #D5B981;
+}
 .contact .help-block ul {
     margin: 0;
     padding: 0;

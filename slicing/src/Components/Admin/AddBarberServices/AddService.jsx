@@ -1,26 +1,44 @@
-export default function Contact(){
-    return(
-        <>
-  {/* Page Header Start */}
-  <div className="page-header">
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          <h2>Contact</h2>
-        </div>
-        <div className="col-12">
-          <a href="">Home</a>
-          <a href="">Contact</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  {/* Page Header End */}
+import { log } from 'firebase/firestore/pipelines'
+import React, { useState } from 'react'
+import BarberService from "../../../Services/BarberService"
+import { toast } from 'react-toastify'
+import { useNavigate } from "react-router-dom";
 
-  {/* Contact Start */}
+const AddService = () => {
+
+      const [serviceName, setServiceName] = useState("")
+  const [price , setPrice] = useState("")
+  const [duration , setDuration] = useState("")
+  const nav = useNavigate()
+  
+  function addbarber(e){
+      e.preventDefault()
+  
+      try{ let payload = {
+          name: BarberName,
+          specialty: specialty
+      }
+      
+      BarberService.add(payload)
+      nav("/admin/barbers")
+      console.log(payload);
+      toast.success("Item Added Successfully")
+  
+  } catch(err){
+      console.log("Error", err);
+      toast.error("Item not added")
+      
+  }
+  }
+
+
+
+  return (
+     <>
+      {/* Contact Start */}
   <div className="section-header text-center" style={{ marginTop: 90 }}>
-    <p>Get In Touch</p>
-    <h2>If You Have Any Query, Please Contact Us</h2>
+    <p>Admin Dashboard</p>
+    <h2>Add Service</h2>
   </div>
   <div className="contact" style={{ marginBottom: 90 }}>
     <div className="container-fluid">
@@ -36,7 +54,7 @@ export default function Contact(){
                     type="text"
                     className="form-control"
                     id="name"
-                    placeholder="Your Name"
+                    placeholder="Service Name"
                     required="required"
                     data-validation-required-message="Please enter your name"
                   />
@@ -46,38 +64,29 @@ export default function Contact(){
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
-                    placeholder="Your Email"
+                    id="text"
+                    placeholder="Price"
                     required="required"
                     data-validation-required-message="Please enter your email"
                   />
                   <p className="help-block text-danger" />
                 </div>
+
                 <div className="control-group">
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
-                    id="subject"
-                    placeholder="Subject"
+                    id="text"
+                    placeholder="Duration(min)"
                     required="required"
-                    data-validation-required-message="Please enter a subject"
+                    data-validation-required-message="Please enter your email"
                   />
                   <p className="help-block text-danger" />
                 </div>
-                <div className="control-group">
-                  <textarea
-                    className="form-control"
-                    id="message"
-                    placeholder="Message"
-                    required="required"
-                    data-validation-required-message="Please enter your message"
-                    defaultValue={""}
-                  />
-                  <p className="help-block text-danger" />
-                </div>
+                
                 <div>
                   <button className="btn" type="submit" id="sendMessageButton">
-                    Send Message
+                    Add Service
                   </button>
                 </div>
               </form>
@@ -88,7 +97,8 @@ export default function Contact(){
     </div>
   </div>
   {/* Contact End */}
-</>
-
-    )
+    </>
+  )
 }
+
+export default AddService
