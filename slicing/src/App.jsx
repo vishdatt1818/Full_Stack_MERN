@@ -18,6 +18,8 @@ import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import AddBarberServices from './Components/Admin/AddBarberServices/AddBarberServices';
 import AddBarber from './Components/Admin/AddBarberServices/AddBarber';
 import AddService from './Components/Admin/AddBarberServices/AddService';
+import Customer from './Components/Admin/Customer/Customer';
+import AddCustomer from './Components/Admin/Customer/AddCustomer';
 
 function App() {
   
@@ -43,6 +45,8 @@ function App() {
         <Route path='/admin/barbers' element={<AddBarberServices/>}></Route>
         <Route path='/admin/barberservice' element={<AddBarber/>}></Route>
         <Route path='/admin/service' element={<AddService/>}></Route>
+        <Route path='/admin/customer' element={<Customer/>}></Route>
+        <Route path='/admin/addcustomer' element={<AddCustomer/>}></Route>
 
 
       </Route>
