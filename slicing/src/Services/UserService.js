@@ -15,6 +15,45 @@ class UserService{
     
              return docref
 }
+
+ async all() {
+        const querySnapshot = await getDocs(collection(db, "user"));
+        let users = []
+        querySnapshot.forEach((doc) => {
+            users.push({ id: doc.id, ...doc.data() })
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+        });
+        console.log(users);
+        
+        return users
+    }
+
+    async deleteu(id){
+        const docref = doc(db,"user",id)
+        await deleteDoc(docref)
+
+    }
+
+    async Single(id){
+        const docRef = doc(db, "user" , id)
+        const docSnap = await getDoc( docRef)
+
+        if (docSnap.exists()) {
+            // console.log("Document data:", docSnap.data());
+            return { id: docSnap.id, ...docSnap.data() }
+        } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            return false;
+        }
+        
+    }
+
+    async update(payload, id){
+        const categoryRef = doc(db, "user", id)
+        return await updateDoc(categoryRef, payload)
+    }
 }
 
 export default new UserService;
