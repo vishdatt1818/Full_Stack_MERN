@@ -1,27 +1,45 @@
-import { log } from 'firebase/firestore/pipelines'
-import React, { useState } from 'react'
-import BarberService from "../../../Services/BarberService"
+import React, { useEffect, useState } from 'react'
+import BarberServices from "../../../Services/BarberService"
 import { toast } from 'react-toastify'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { log } from 'firebase/firestore/pipelines'
 
-const AddBarber = () => {
+const EditBarber = () => {
 
-    const [BarberName, setBarberName] = useState("")
-const [specialty , setSpeciality] = useState("")
-const [image , setImage] = useState("")
+   
+       const [BarberName, setBarberName] = useState("")
+   const [specialty , setSpeciality] = useState("")
+   const nav = useNavigate()
 
-const nav = useNavigate()
+    const params = useParams()
 
-function addbarber(e){
+    
+
+    async function getBarberDetails() {
+        let res = await BarberServices.single(params.id)
+        if(res){
+            setBarberName(res.name)
+            setSpeciality(res.specialty)
+        
+        }else{
+             toast.error("No such Document")
+        }
+    }
+
+    useEffect(()=>{
+        getBarberDetails()
+    }, [])
+
+
+function editbarber(e){
     e.preventDefault()
 
     try{ let payload = {
         name: BarberName,
-        specialty: specialty,
-        image:image
+        specialty: specialty
     }
     
-    BarberService.add(payload)
+    BarberServices.update(payload, params.id)
     nav(-1)
     console.log(payload);
     toast.success("Item Added Successfully")
@@ -34,11 +52,11 @@ function addbarber(e){
 }
 
   return (
-    <>
+       <>
       {/* Contact Start */}
   <div className="section-header text-center" style={{ marginTop: 90 }}>
     <p>Admin Dashboard</p>
-    <h2>Add Barber</h2>
+    <h2>Edit Barber</h2>
   </div>
   <div className="contact" style={{ marginBottom: 90 }}>
     <div className="container-fluid">
@@ -48,14 +66,15 @@ function addbarber(e){
           <div className="col-md-8">
             <div className="contact-form">
               <div id="success" />
-              <form name="sentMessage" onSubmit={addbarber} id="contactForm" noValidate="novalidate">
+              <form name="sentMessage" onSubmit={editbarber}  id="contactForm" noValidate="novalidate">
                 <div className="control-group">
                   <input
                     type="text"
                     className="form-control"
                     id="name"
-                    placeholder="Barber Name"
-                      onChange={(e) => { setBarberName( e.target.value)}}
+                    placeholder="Edit Name"
+                    onChange={(e) => { setBarberName( e.target.value)}}
+                    value={BarberName}
                     required="required"
                     data-validation-required-message="Please enter your name"
                   />
@@ -66,30 +85,20 @@ function addbarber(e){
                     type="text"
                     className="form-control"
                     id="text"
-                    placeholder="Speciality Tag"
-                      onChange={(e) => { setSpeciality( e.target.value)}}
+                       onChange={(e) => { setSpeciality( e.target.value)}}
+                       value={specialty}
+                    placeholder="Edit Email"
                     required="required"
-                    data-validation-required-message="Please enter your speciality"
+                    data-validation-required-message="Please enter your email"
                   />
                   <p className="help-block text-danger" />
                 </div>
 
-                 <div className="control-group">
-                  <input
-                    type="file"
-                    // className="form-control"
-                    id="text"
-                 
-                      onChange={(e) => { setSpeciality( e.target.files)}}
-                   
-                    data-validation-required-message="Please enter your speciality"
-                  />
-                  <p className="help-block text-danger" />
-                </div>
+           
                 
                 <div>
                   <button className="btn" type="submit" id="sendMessageButton">
-                    Add Barber
+                    Edit Barber
                   </button>
                 </div>
               </form>
@@ -104,4 +113,4 @@ function addbarber(e){
   )
 }
 
-export default AddBarber
+export default EditBarber

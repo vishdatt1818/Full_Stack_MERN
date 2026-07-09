@@ -154,9 +154,11 @@ const AddBarberServices = () => {
                 <td>{new Date(bar.createAt).toLocaleDateString()}</td>
 
                 <td>
+                  <Link to={`/admin/editbarber/${bar.id}`}>
                   <button className="btn btn-md rounded-circle bg-light border ">
                     <i className="bi bi-pencil text-danger" />
                   </button>
+                  </Link>
                   &nbsp;
                   <button
                     className="btn btn-md rounded-circle bg-light border "

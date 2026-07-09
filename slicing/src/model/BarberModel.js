@@ -5,10 +5,3 @@ export default class Barber{
     createAt = Date.now()
 }
 
-// export default class BarberService{
-//     serviceName = ""
-//     price = ""
-//     duration = ""
-//     status = true
-//     createAt = Date.now()
-// }

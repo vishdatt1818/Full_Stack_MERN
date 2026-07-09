@@ -15,12 +15,13 @@ import Contact from './Components/Customer/Pages/Contact';
 
 import AdminLayout from './Components/Admin/Layout/AdminLayout';
 import Dashboard from './Components/Admin/Dashboard/Dashboard';
-import AddBarberServices from './Components/Admin/AddBarberServices/AddBarberServices';
+import AddBarberServices from './Components/Admin/AddBarberServices/ManageBarberServices';
 import AddBarber from './Components/Admin/AddBarberServices/AddBarber';
 import AddService from './Components/Admin/AddBarberServices/AddService';
 import Customer from './Components/Admin/Customer/ManageCustomer';
 import AddCustomer from './Components/Admin/Customer/AddCustomer';
 import EditCustomer from "./Components/Admin/Customer/EditCustomer"
+import EditBarber from './Components/Admin/AddBarberServices/EditBarber';
 
 function App() {
   
@@ -49,6 +50,7 @@ function App() {
         <Route path='/admin/customer' element={<Customer/>}></Route>
         <Route path='/admin/addcustomer' element={<AddCustomer/>}></Route>
         <Route path='/admin/editcustomer/:id' element={<EditCustomer/>}></Route>
+        <Route path='/admin/editbarber/:id' element={<EditBarber/>}></Route>
 
 
       </Route>

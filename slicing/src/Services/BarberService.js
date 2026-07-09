@@ -33,6 +33,25 @@ class BarberServices{
         const docref = doc(db,"barber", id)
         await deleteDoc(docref)
     }
+
+       async single(id) {
+        const docRef = doc(db, "barber", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            // console.log("Document data:", docSnap.data());
+            return { id: docSnap.id, ...docSnap.data() }
+        } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            return false;
+        }
+    }
+
+    async update(payload, id) {
+        const categoryRef = doc(db, "barber", id);
+        return await updateDoc(categoryRef, payload);
+    }
 }
 
 export default new BarberServices;
