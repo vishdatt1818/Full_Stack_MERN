@@ -15,13 +15,18 @@ import Contact from './Components/Customer/Pages/Contact';
 
 import AdminLayout from './Components/Admin/Layout/AdminLayout';
 import Dashboard from './Components/Admin/Dashboard/Dashboard';
-import AddBarberServices from './Components/Admin/AddBarberServices/ManageBarberServices';
-import AddBarber from './Components/Admin/AddBarberServices/AddBarber';
-import AddService from './Components/Admin/AddBarberServices/AddService';
+import AddBarberServices from './Components/Admin/AddBarber/ManageBarberServices';
+import AddBarber from './Components/Admin/AddBarber/AddBarber';
+import AddService from './Components/Admin/AddService/AddService';
 import Customer from './Components/Admin/Customer/ManageCustomer';
 import AddCustomer from './Components/Admin/Customer/AddCustomer';
 import EditCustomer from "./Components/Admin/Customer/EditCustomer"
-import EditBarber from './Components/Admin/AddBarberServices/EditBarber';
+import EditBarber from './Components/Admin/AddBarber/EditBarber';
+import ManageService from './Components/Admin/AddService/ManageService';
+import ManageCategory from './Components/Admin/AddCategory/ManageCategory';
+import AddCategory from './Components/Admin/AddCategory/AddCategory';
+import EditCategory from './Components/Admin/AddCategory/EditCategory';
+import EditService from './Components/Admin/AddService/EditService';
 
 function App() {
   
@@ -51,6 +56,11 @@ function App() {
         <Route path='/admin/addcustomer' element={<AddCustomer/>}></Route>
         <Route path='/admin/editcustomer/:id' element={<EditCustomer/>}></Route>
         <Route path='/admin/editbarber/:id' element={<EditBarber/>}></Route>
+        <Route path='/admin/manageservice' element={<ManageService/>}></Route>
+        <Route path='/admin/managecategory' element={<ManageCategory/>}></Route>
+        <Route path='/admin/category' element={<AddCategory/>}></Route>
+        <Route path='/admin/editcategory/:id' element={<EditCategory/>}></Route>
+        <Route path='/admin/editservice/:id' element={<EditService/>}></Route>
 
 
       </Route>

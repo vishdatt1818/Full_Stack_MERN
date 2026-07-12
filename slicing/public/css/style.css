@@ -197,6 +197,7 @@ a:focus {
 .navbar-dark .navbar-nav .nav-link.active {
     background: rgba(256, 256, 256, .1);
     transition: none;
+    /* color: #ffffff; */
 }
 
 .navbar .dropdown-menu {

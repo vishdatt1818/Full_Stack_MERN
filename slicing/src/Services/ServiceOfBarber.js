@@ -10,6 +10,7 @@ class ServiceOfBarber{
         service.serviceName = data.serviceName
         service.price = data.price
         service.duration = data.duration
+        service.image = data.image
 
         
         const docref = await addDoc(collection(db, "service"), {...service} )
@@ -35,6 +36,25 @@ class ServiceOfBarber{
       async deleteSer(id){
         const docref = doc(db,"service", id)
         await deleteDoc(docref)
+    }
+
+     async single(id) {
+        const docRef = doc(db, "service", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            return { id: docSnap.id, ...docSnap.data() }
+        } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            return false;
+        }
+    }
+
+    async update(payload, id) {
+        const categoryRef = doc(db, "service", id);
+        return await updateDoc(categoryRef, payload);
     }
 }
 

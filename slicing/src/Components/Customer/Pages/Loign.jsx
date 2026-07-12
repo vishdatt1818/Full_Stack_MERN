@@ -20,11 +20,11 @@ const Loign = () => {
   {/* Page Header End */}
 
   {/* Contact Start */}
-  <div className="section-header text-center" style={{ marginTop: 90 }}>
+  {/* <div className="section-header text-center" style={{ marginTop: 0 }}>
     <p>Login</p>
     <h2>Login to see your Account</h2>
-  </div>
-  <div className="contact" style={{ marginBottom: 90 }}>
+  </div> */}
+  <div className="contact" style={{ marginBottom: 10 }}>
     <div className="container-fluid">
       <div className="container">
         <div className="row align-items-center">

@@ -1,19 +1,37 @@
 import { log } from 'firebase/firestore/pipelines'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { toast } from 'react-toastify'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import   ServieOfbarber from "../../../Services/ServiceOfBarber"
+import   ServiceOfBarber from "../../../Services/ServiceOfBarber"
 
-const AddService = () => {
+const EditService = () => {
 
       const [serviceName, setServiceName] = useState("")
   const [price , setPrice] = useState("")
   const [duration , setDuration] = useState("")
   const nav = useNavigate()
+
+  const params = useParams()
+
+   async function getServiceDetails() {
+          let res = await ServiceOfBarber.single(params.id)
+          if(res){
+              setServiceName(res.serviceName)
+              setPrice(res.price)
+              setDuration(res.duration)
+          
+          }else{
+               toast.error("No such Document")
+          }
+      }
   
-  function addService(e){
+      useEffect(()=>{
+          getServiceDetails()
+      }, [])
+  
+  function editservice(e){
       e.preventDefault()
   
       try{ let payload = {
@@ -23,10 +41,10 @@ const AddService = () => {
         
       }
     
-      ServieOfbarber.add(payload)
-      nav("/admin/barbers")
-      console.log(payload);
-      toast.success("Item Added Successfully")
+     ServiceOfBarber.update(payload, params.id)
+       nav(-1)
+       console.log(payload);
+       toast.success("Item Edit Successfully")
   
   } catch(err){
       console.log("Error", err);
@@ -42,7 +60,7 @@ const AddService = () => {
       {/* Contact Start */}
   <div className="section-header text-center" style={{ marginTop: 90 }}>
     <p>Admin Dashboard</p>
-    <h2>Add Service</h2>
+    <h2>Edit Service</h2>
   </div>
   <div className="contact" style={{ marginBottom: 90 }}>
     <div className="container-fluid">
@@ -52,7 +70,7 @@ const AddService = () => {
           <div className="col-md-8">
             <div className="contact-form">
               <div id="success" />
-              <form name="sentMessage" onSubmit={addService} id="contactForm" noValidate="novalidate">
+              <form name="sentMessage" onSubmit={editservice} id="contactForm" noValidate="novalidate">
                 <div className="control-group">
                   <input
                     type="text"
@@ -60,6 +78,7 @@ const AddService = () => {
                     id="name"
                     placeholder="Service Name"
                     onChange={(e) => { setServiceName( e.target.value)}}
+                    value={serviceName}
                     required="required"
                     data-validation-required-message="Please enter your name"
                   />
@@ -71,6 +90,7 @@ const AddService = () => {
                     className="form-control"
                     id="text"
                        onChange={(e) => { setPrice( e.target.value)}}
+                       value={price}
                     placeholder="Price"
                     required="required"
                     data-validation-required-message="Please enter your email"
@@ -83,6 +103,7 @@ const AddService = () => {
                     type="text"
                     className="form-control"
                     id="text"
+                    value={duration}
                        onChange={(e) => { setDuration( e.target.value)}}
                     placeholder="Duration(min)"
                     required="required"
@@ -93,7 +114,7 @@ const AddService = () => {
                 
                 <div>
                   <button className="btn" type="submit" id="sendMessageButton">
-                    Add Service
+                    Edit Service
                   </button>
                 </div>
               </form>
@@ -108,4 +129,4 @@ const AddService = () => {
   )
 }
 
-export default AddService
+export default EditService

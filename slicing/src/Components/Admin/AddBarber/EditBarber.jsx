@@ -42,7 +42,7 @@ function editbarber(e){
     BarberServices.update(payload, params.id)
     nav(-1)
     console.log(payload);
-    toast.success("Item Added Successfully")
+    toast.success("Item Edit Successfully")
 
 } catch(err){
     console.log("Error", err);

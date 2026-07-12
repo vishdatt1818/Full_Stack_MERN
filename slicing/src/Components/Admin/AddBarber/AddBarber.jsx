@@ -3,22 +3,34 @@ import React, { useState } from 'react'
 import BarberService from "../../../Services/BarberService"
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+import CloudinaryService from '../../../Services/CloudinaryService';
 
-const AddBarber = () => {
+ const AddBarber = () => {
 
     const [BarberName, setBarberName] = useState("")
 const [specialty , setSpeciality] = useState("")
 const [image , setImage] = useState("")
 
+
+
 const nav = useNavigate()
 
-function addbarber(e){
+async function addbarber(e){
     e.preventDefault()
+
+    let imageUrl = ""
+
+
+    if(image){
+      imageUrl = await CloudinaryService.upload(image)
+}
 
     try{ let payload = {
         name: BarberName,
         specialty: specialty,
-        image:image
+        image: imageUrl
+       
     }
     
     BarberService.add(payload)
@@ -35,12 +47,26 @@ function addbarber(e){
 
   return (
     <>
+  {/* Page Header Start */}
+      <div className="page-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <h2>Add Barber</h2>
+            </div>
+            <div className="col-12">
+              <a href="">Home</a>
+              <a href="">Add Barber</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Page Header End */}
+
+
       {/* Contact Start */}
-  <div className="section-header text-center" style={{ marginTop: 90 }}>
-    <p>Admin Dashboard</p>
-    <h2>Add Barber</h2>
-  </div>
-  <div className="contact" style={{ marginBottom: 90 }}>
+  
+  <div className="contact" style={{ marginBottom: 10,marginTop: 10 }}>
     <div className="container-fluid">
       <div className="container">
         <div className="row align-items-center">
@@ -80,7 +106,7 @@ function addbarber(e){
                     // className="form-control"
                     id="text"
                  
-                      onChange={(e) => { setSpeciality( e.target.files)}}
+                      onChange={(e) => { setImage( e.target.files[0])}}
                    
                     data-validation-required-message="Please enter your speciality"
                   />

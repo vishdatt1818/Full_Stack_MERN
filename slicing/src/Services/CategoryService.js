@@ -1,42 +1,44 @@
-import Barber from "../model/BarberModel";
-
-// import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from "../firebase/firebaseConfig";
 
-class BarberServices{
-    async add(data){
 
-        let barber = new Barber
-        barber.name = data.name
-        barber.specialty = data.specialty
-        barber.image = data.image
+import CategoryModel from '../model/CategoryModel';
 
-        const docref = await addDoc(collection(db, "barber"), {...barber} )
+class CategoryService{
+     async add(data){
+        let category = new CategoryModel
+        category.CategoryName = data.CategoryName
+        category.Description = data.Description
+        category.Image = data.image
 
-        return docref
+        
+        const docref = await addDoc(collection(db, "category"), {...category} )
 
+         return docref
     }
 
+
+    
      async all() {
-        const querySnapshot = await getDocs(collection(db, "barber"));
-        let barbers = []
+        const querySnapshot = await getDocs(collection(db, "category"));
+        let category = []
         querySnapshot.forEach((doc) => {
-            barbers.push({ id: doc.id, ...doc.data() })
+            category.push({ id: doc.id, ...doc.data() })
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, " => ", doc.data());
         });
-        // console.log(barbers);
+        console.log(category);
         
-        return barbers
+        return category
     }
-    async deleteBar(id){
-        const docref = doc(db,"barber", id)
+
+      async deleteCat(id){
+        const docref = doc(db,"category", id)
         await deleteDoc(docref)
     }
 
-       async single(id) {
-        const docRef = doc(db, "barber", id);
+     async single(id) {
+        const docRef = doc(db, "category", id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -50,9 +52,9 @@ class BarberServices{
     }
 
     async update(payload, id) {
-        const categoryRef = doc(db, "barber", id);
+        const categoryRef = doc(db, "category", id);
         return await updateDoc(categoryRef, payload);
     }
 }
 
-export default new BarberServices;
+export default new CategoryService;

@@ -5,26 +5,37 @@ import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
 
 import   ServieOfbarber from "../../../Services/ServiceOfBarber"
+import CloudinaryService from '../../../Services/CloudinaryService';
+
 
 const AddService = () => {
 
       const [serviceName, setServiceName] = useState("")
   const [price , setPrice] = useState("")
   const [duration , setDuration] = useState("")
+  const [image , setImage] = useState("")
   const nav = useNavigate()
   
-  function addService(e){
+  async function addService(e){
       e.preventDefault()
+
+      let imageUrl = ""
+      
+      
+          if(image){
+            imageUrl = await CloudinaryService.upload(image)
+      }
   
       try{ let payload = {
           serviceName : serviceName,
           price : price,
-          duration : duration
+          duration : duration,
+          image: imageUrl
         
       }
     
       ServieOfbarber.add(payload)
-      nav("/admin/barbers")
+      nav(-1)
       console.log(payload);
       toast.success("Item Added Successfully")
   
@@ -39,12 +50,25 @@ const AddService = () => {
 
   return (
      <>
+  {/* Page Header Start */}
+      <div className="page-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <h2>Add Service</h2>
+            </div>
+            <div className="col-12">
+              <a href="">Home</a>
+              <a href="">Add Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Page Header End */}
+
       {/* Contact Start */}
-  <div className="section-header text-center" style={{ marginTop: 90 }}>
-    <p>Admin Dashboard</p>
-    <h2>Add Service</h2>
-  </div>
-  <div className="contact" style={{ marginBottom: 90 }}>
+ 
+  <div className="contact" style={{ marginBottom: 10 }}>
     <div className="container-fluid">
       <div className="container">
         <div className="row align-items-center">
@@ -87,6 +111,19 @@ const AddService = () => {
                     placeholder="Duration(min)"
                     required="required"
                     data-validation-required-message="Please enter your email"
+                  />
+                  <p className="help-block text-danger" />
+                </div>
+
+                 <div className="control-group">
+                  <input
+                    type="file"
+                    // className="form-control"
+                    id="text"
+                 
+                      onChange={(e) => { setImage( e.target.files[0])}}
+                   
+                    data-validation-required-message="Please enter your speciality"
                   />
                   <p className="help-block text-danger" />
                 </div>
