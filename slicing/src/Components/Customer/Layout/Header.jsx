@@ -67,8 +67,11 @@ export default function Header() {
                 <Link to="/about" className="nav-item nav-link">
                   About
                 </Link>
+                <Link to="/category" className="nav-item nav-link">
+                  Categorires
+                </Link>
                 <Link to="/services" className="nav-item nav-link">
-                  Service
+                  services
                 </Link>
                 <Link to="/price" className="nav-item nav-link">
                   Price
@@ -83,6 +86,9 @@ export default function Header() {
                 </Link>
                  <Link to="/login" className="nav-item nav-link">
                   Login
+                </Link>
+                 <Link to="/signup" className="nav-item nav-link">
+                  Sign Up
                 </Link>
               </div>
             </div>

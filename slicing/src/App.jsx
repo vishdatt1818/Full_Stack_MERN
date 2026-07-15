@@ -5,11 +5,12 @@ import { ToastContainer } from 'react-toastify'
 import Layout from './Components/Customer/Layout/Layout'
 import Home from './Components/Customer/Pages/Home';
 import About from './Components/Customer/Pages/About';
-import Services from './Components/Customer/Services/Services';
 import Pricing from './Components/Customer/Pricing/Pricing';
 import Team from './Components/Customer/Team/Team';
 import Loign from './Components/Customer/Pages/Loign';
 import Contact from './Components/Customer/Pages/Contact';
+import Category from './Components/Customer/Category/Category';
+import Services from './Components/Customer/Category/Services';
 
 
 
@@ -27,6 +28,7 @@ import ManageCategory from './Components/Admin/AddCategory/ManageCategory';
 import AddCategory from './Components/Admin/AddCategory/AddCategory';
 import EditCategory from './Components/Admin/AddCategory/EditCategory';
 import EditService from './Components/Admin/AddService/EditService';
+import SignUp from './Components/Customer/Pages/SignUp';
 
 function App() {
   
@@ -38,11 +40,13 @@ function App() {
       <Route path="/" element={<Layout/>}>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/about' element={<About/>}></Route>
+        <Route path='/category' element={<Category/>}></Route>
         <Route path='/services' element={<Services/>}></Route>
         <Route path='/price' element={<Pricing/>}></Route>
         <Route path='/team' element={<Team/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
         <Route path='/login' element={<Loign/>}></Route>
+        <Route path='/signup' element={<SignUp/>}></Route>
       
       </Route>
 

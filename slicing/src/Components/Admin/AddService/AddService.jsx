@@ -1,8 +1,9 @@
 import { log } from 'firebase/firestore/pipelines'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
+import CategoryService from "../../../Services/CategoryService";
 
 import   ServieOfbarber from "../../../Services/ServiceOfBarber"
 import CloudinaryService from '../../../Services/CloudinaryService';
@@ -10,7 +11,22 @@ import CloudinaryService from '../../../Services/CloudinaryService';
 
 const AddService = () => {
 
-      const [serviceName, setServiceName] = useState("")
+    const [addCategory , setAddCategory] = useState([])
+    
+        async function AddCategory(){
+            let res = await CategoryService.all()
+            setAddCategory(res)
+            // console.log( setBarberService(res));
+            
+        }
+    
+         useEffect(() => {
+      
+             AddCategory()
+      }, []);
+
+  const [serviceName, setServiceName] = useState("")
+  const [category , setCategory] = useState("")
   const [price , setPrice] = useState("")
   const [duration , setDuration] = useState("")
   const [image , setImage] = useState("")
@@ -28,6 +44,7 @@ const AddService = () => {
   
       try{ let payload = {
           serviceName : serviceName,
+          category: category,
           price : price,
           duration : duration,
           image: imageUrl
@@ -87,6 +104,29 @@ const AddService = () => {
                     required="required"
                     data-validation-required-message="Please enter your name"
                   />
+                  <p className="help-block text-danger" />
+                </div>
+
+                <div className="control-group">
+                  <select 
+                   
+                    className="form-control w-50"
+               
+                       onChange={(e) => { setCategory( e.target.value)}}
+                    placeholder="category"
+                   value={category}
+                    data-validation-required-message="Please enter your email"
+               
+                  >
+                    <option value="" disabled>-- Select a Category --</option>
+                 {addCategory.map((item) =>(
+
+                     <option 
+                    //    onChange={(e) => { setCategory( e.target.value)}}
+                     value={item.id}>{item.CategoryName}</option>
+
+                 ))}
+                 </select>
                   <p className="help-block text-danger" />
                 </div>
                 <div className="control-group">

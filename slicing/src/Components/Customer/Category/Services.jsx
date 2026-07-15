@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import CategoryService from "../../../Services/CategoryService";
+import ServiceOfBarber from "../../../Services/ServiceOfBarber";
 
 export default function Services() {
-  const [category, setCategory] = useState([]);
+  const [services, setServices] = useState([]);
 
-  async function getCategories() {
-    let res = await CategoryService.all();
-    setCategory(res);
+  async function getServices() {
+    let res = await ServiceOfBarber.all();
+    setServices(res);
     console.log(res);
   }
   useEffect(() => {
-    getCategories();
+    getServices();
   }, []);
 
   return (
@@ -20,11 +20,11 @@ export default function Services() {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2>Best Salon and Barber Services for You</h2>
+              <h2>Best Salon and Barber services for You</h2>
             </div>
             <div className="col-12">
               <a href="">Home</a>
-              <a href="">Service</a>
+              <a href="">Services</a>
             </div>
           </div>
         </div>
@@ -39,16 +39,19 @@ export default function Services() {
           </div>
 <div className=" container   ">
   <div className="row  d-flex justify-content-around">
-          {category.map((cat) => (
+          {services.map((ser) => (
             
-              <div className="card my-4" style={{ width: "18rem"}}>
-                <img src={cat.Image} style={{height:"250px", objectFit: "cover"}} className="card-img-top" alt="..." />
+              <div className="card my-4 text-center" style={{ width: "18rem"}}>
+                <img src={ser.image} style={{height:"250px", objectFit: "cover"}} className="card-img-top" alt="..." />
                 <div className="card-body">
-                  <h5 className="card-title">{cat.CategoryName}</h5>
-                  <p className="card-text">
-                   {cat.Description}
+                  <h5 className="card-title">{ser.serviceName}</h5>
+                   <p className="card-text">Price
+                   {ser.price}
                   </p>
-                  <a href="#" className="btn btn-primary">
+                  <p className="card-text">
+                   {ser.duration}
+                  </p>
+                  <a href="#" className="btn newbtn btn-primary">
                     Add Service
                   </a>
                 </div>
@@ -58,7 +61,7 @@ export default function Services() {
           </div>
              </div>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-4 col-md-6">
               <div className="service-item">
                 <div className="service-img">
@@ -104,7 +107,7 @@ export default function Services() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* Service End */}

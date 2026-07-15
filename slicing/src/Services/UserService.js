@@ -1,59 +1,48 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
-import { db } from "../firebase/firebaseConfig";
-import UserModel from '../model/UserModel';
+import { db, auth } from "../firebase/firebaseConfig";
+import UserModel from "../model/UserModel";
+import { doc, getDoc, setDoc } from "firebase/firestore"
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth"
+import { toast } from "react-toastify";
 
+const dbPath = "users"
 
-class UserService{
-    async add(data){
-            let user = new UserModel
-            user.userName = data.userName
-            user.email = data.email
-            user.phoneNo = data.phoneNo
-    
-            
-            const docref = await addDoc(collection(db, "user"), {...user} )
-    
-             return docref
-}
+class UserService {
+    async register(data){
 
- async all() {
-        const querySnapshot = await getDocs(collection(db, "user"));
-        let users = []
-        querySnapshot.forEach((doc) => {
-            users.push({ id: doc.id, ...doc.data() })
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());
-        });
-        console.log(users);
+        const userRegister = await createUserWithEmailAndPassword(auth, data.email, data.password )
+
+        let newUser = new UserModel
+
+        newUser.name = data.name
+        newUser.email = data.email
         
-        return users
+        newUser.phone = data.phone
+        newUser.userType = 4
+        newUser.id = userRegister.user.uid
+
+        console.log(newUser);
+        
+
+        await setDoc(doc(db,dbPath,userRegister.user.uid), {...newUser})
+        console.log( userRegister.user)
     }
 
-    async deleteu(id){
-        const docref = doc(db,"user",id)
-        await deleteDoc(docref)
-
+    async login(data){
+        const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+     return userCredential
     }
 
-    async Single(id){
-        const docRef = doc(db, "user" , id)
-        const docSnap = await getDoc( docRef)
+      async single(id) {
+        const docRef = doc(db, dbPath, id);
+        const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            // console.log("Document data:", docSnap.data());
             return { id: docSnap.id, ...docSnap.data() }
         } else {
-            // docSnap.data() will be undefined in this case
             console.log("No such document!");
-            return false;
+            return false
         }
-        
-    }
-
-    async update(payload, id){
-        const categoryRef = doc(db, "user", id)
-        return await updateDoc(categoryRef, payload)
     }
 }
 
-export default new UserService;
+export default new UserService

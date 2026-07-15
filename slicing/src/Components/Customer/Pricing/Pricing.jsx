@@ -1,4 +1,7 @@
 export default function Pricing(){
+
+
+  
     return(
        <>
   {/* Page Header Start */}
@@ -158,6 +161,12 @@ export default function Pricing(){
         </div>
       </div>
     </div>
+  </div>
+
+  <div className="container">
+    <button className="btn newbtn" type="submit">
+            Payment
+          </button>
   </div>
   {/* Pricing End */}
 </>

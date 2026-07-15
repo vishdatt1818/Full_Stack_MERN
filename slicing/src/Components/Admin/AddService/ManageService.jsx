@@ -98,6 +98,7 @@ const ManageService = () => {
                 <thead>
                   <tr>
                     <th scope="col">Sr. No</th>
+                    <th scope="col">Cagegory</th>
                     <th scope="col">ServiceName</th>
                     <th scope="col">Image</th>
                     <th scope="col">Price</th>
@@ -113,6 +114,9 @@ const ManageService = () => {
                     < tr  >
                       <td>
                         <p className="mb-0 mt-1">{index + 1}</p>
+                      </td>
+                      <td>
+                        <p className="mb-0 mt-1">{service.category}</p>
                       </td>
                       <td>
                         <p className="mb-0 mt-1">{service.serviceName}</p>

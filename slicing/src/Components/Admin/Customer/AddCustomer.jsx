@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import UserService from "../../../Services/UserService"
+import UserService from "../../../Services/CustomerService"
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
 import { log } from 'firebase/firestore/pipelines'

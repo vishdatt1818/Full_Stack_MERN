@@ -83,20 +83,20 @@ let no = 1231231;
 
 // let arr = [4, 9, 2, 7]
 
-let largest = (arr) =>{
-    let lar = arr[0]
+// let largest = (arr) =>{
+//     let lar = arr[0]
 
-    for(let i=0 ; i<arr.length ; i++){
-        if(arr[i]> lar){
-            lar = arr[i]
-        }
-    }
-    return lar
-}
-console.log(
-    largest([4, 9, 2, 7])
+//     for(let i=0 ; i<arr.length ; i++){
+//         if(arr[i]> lar){
+//             lar = arr[i]
+//         }
+//     }
+//     return lar
+// }
+// console.log(
+//     largest([4, 9, 2, 7])
 
-);
+// );
 
 // let findDuplicate = (arr) =>{
 //     let dup = {}
@@ -114,17 +114,33 @@ console.log(
 // }
 // console.log(findDuplicate([1,2,3,2,4,1]));
 
-let arr = [2,4,4,5,6,6,7]
-dup =[]
- for(let i=0 ; i<arr.length ; i++){
-     for(let j=i+1 ; j<arr.length ; j++){
-            if(arr[i] == arr[j]){
-                dup.push(arr[i])
-            }
-     }
- }
- console.log(dup);
+// let arr = [2,4,4,5,6,6,7]
+// dup =[]
+//  for(let i=0 ; i<arr.length ; i++){
+//      for(let j=i+1 ; j<arr.length ; j++){
+//             if(arr[i] == arr[j]){
+//                 dup.push(arr[i])
+//             }
+//      }
+//  }
+//  console.log(dup);
  
+function fib(num){
+ let a = 0
+ let b = 1
 
+ for(let i=0 ; i<num; i++){
+    // console.log(a);
+
+    c = a+b
+    a = b
+    b = c
+    console.log(c);
+    
+ }
+
+}
+
+    fib(7)
 
  

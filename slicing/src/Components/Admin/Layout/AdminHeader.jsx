@@ -67,14 +67,14 @@ export default function AdminHeader() {
                 <Link to="/admin/barbers" className="nav-item nav-link">
                   Barber
                 </Link>
+                 <Link to="/admin/managecategory" className="nav-item nav-link">
+                  Category
+                </Link>
                   <Link to="/admin/manageservice" className="nav-item nav-link">
                   Service
                 </Link>
                 <Link to="/admin/customer" className="nav-item nav-link">
                   Customer
-                </Link>
-                 <Link to="/admin/managecategory" className="nav-item nav-link">
-                  Category
                 </Link>
               
               </div>

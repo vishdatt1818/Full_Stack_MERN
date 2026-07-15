@@ -5,46 +5,32 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import UserService from '../../../Services/UserService'
 
+const SignUp = () => {
 
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState("")
+    const [phone, setPhone] = useState("")
 
-const Loign = () => {
+    async function userDetail(e) {
 
-     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-      const nav = useNavigate();
-
-
-    async function submitForm(e) {
         e.preventDefault();
 
-        let payload = {
-            email: email,
-            password: password
-        };
+      let payload = {
+        name : name,
+        phone : phone,
+        email : email,
+        password : password
+      }
 
-        try {
-            const user = await UserService.login(payload);
-            toast.success("Login Success");
-            
-            nav("/")
-            const userData = await UserService.single(user.user.uid)
-            console.log(userData);
+      await UserService.register(payload)
+      console.log(payload);
+      
 
-            localStorage.setItem("userName" , userData.name)
-            
-            // if (user.userType == "1") {
-            //     nav("/admin");  
-            // } else if (user.userType == "4") { // navigate based on your user Roles
-            //     nav("/");
-            // } else {
-            //     nav("/");
-            // }
+         toast.success("Registeration Successful")
 
-        } catch (err) {
-            toast.error(err.message);
-        }
     }
+
 
   return (
    <>
@@ -53,11 +39,11 @@ const Loign = () => {
     <div className="container">
       <div className="row">
         <div className="col-12">
-          <h2>Login</h2>
+          <h2>Sign Up</h2>
         </div>
         <div className="col-12">
           <a href="">Home</a>
-          <a href="">Login</a>
+          <a href="">Sign Up</a>
         </div>
       </div>
     </div>
@@ -77,12 +63,24 @@ const Loign = () => {
           <div className="col-md-8">
             <div className="contact-form">
               <div id="success" />
-              <form name="sentMessage" onSubmit={submitForm} id="contactForm" noValidate="novalidate">
+              <form name="sentMessage" onSubmit={ userDetail } id="contactForm" noValidate="novalidate">
+                <div className="control-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="Enter your Name"
+                    onChange={(e) => { setName( e.target.value)}}
+                    required="required"
+                    data-validation-required-message="Please enter your name"
+                  />
+                  <p className="help-block text-danger" />
+                </div>
                 <div className="control-group">
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
+                    id="name"
                     placeholder="Enter your email"
                     onChange={(e) => { setEmail( e.target.value)}}
                     required="required"
@@ -96,9 +94,21 @@ const Loign = () => {
                     className="form-control"
                     id="password"
                     placeholder="Enter your Password"
-                      onChange={(e) => { setPassword( e.target.value)}}
+                    onChange={(e) => { setPassword( e.target.value)}}
                     required="required"
                     data-validation-required-message="Please enter your email"
+                  />
+                  <p className="help-block text-danger" />
+                </div>
+                 <div className="control-group">
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="phone"
+                    placeholder="Enter your Phone No."
+                    onChange={(e) => { setPhone( e.target.value)}}
+                    required="required"
+                    data-validation-required-message="Please enter your name"
                   />
                   <p className="help-block text-danger" />
                 </div>
@@ -106,7 +116,7 @@ const Loign = () => {
                
                 <div>
                   <button className="btn" type="submit" id="sendMessageButton">
-                    Login
+                    SIGN UP
                   </button>
                 </div>
               </form>
@@ -121,4 +131,4 @@ const Loign = () => {
   )
 }
 
-export default Loign
+export default SignUp

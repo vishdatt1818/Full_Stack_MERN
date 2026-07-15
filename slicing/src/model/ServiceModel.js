@@ -1,5 +1,6 @@
 export default class BarberService{
     serviceName = ""
+    category = ""
     price = ""
     duration = ""
     image = ""

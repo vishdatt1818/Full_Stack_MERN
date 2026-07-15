@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import UserService from "../../../Services/UserService";
+import UserService from "../../../Services/CustomerService";
 
 import Swal from "sweetalert2";
 

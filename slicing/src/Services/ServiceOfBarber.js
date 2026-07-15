@@ -8,6 +8,7 @@ class ServiceOfBarber{
      async add(data){
         let service = new BarberService
         service.serviceName = data.serviceName
+        service.category = data.category
         service.price = data.price
         service.duration = data.duration
         service.image = data.image
