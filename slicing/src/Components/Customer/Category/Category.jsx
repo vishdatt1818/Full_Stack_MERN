@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import CategoryService from "../../../Services/CategoryService";
+import { Link, useParams } from "react-router-dom";
+import ServiceOfBarber from "../../../Services/ServiceOfBarber";
 
 export default function Category() {
   const [category, setCategory] = useState([]);
@@ -12,6 +14,16 @@ export default function Category() {
   useEffect(() => {
     getCategories();
   }, []);
+
+  const params = useParams()
+  console.log(params);
+
+  async function getFilter() {
+    let res = await ServiceOfBarber.all(params.id)
+  }
+  
+
+ 
 
   return (
     <>
@@ -48,9 +60,11 @@ export default function Category() {
                   <p className="card-text">
                    {cat.Description}
                   </p>
-                  <a href="#" className="btn newbtn ">
+                  <Link to={`/services/${cat.id}`} 
+                     
+                  className="btn newbtn ">
                     View Category
-                  </a>
+                  </Link>
                 </div>
               </div>
          

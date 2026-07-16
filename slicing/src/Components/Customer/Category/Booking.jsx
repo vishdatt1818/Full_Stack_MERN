@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ServiceOfBarber from "../../../Services/ServiceOfBarber";
 import { Link, useParams } from "react-router-dom";
 
-export default function Services() {
-  const [services, setServices] = useState([]);
+const Booking = () => {
+      const [services, setServices] = useState([]);
 
   const {id}=useParams()
 
@@ -19,17 +19,17 @@ export default function Services() {
   }, []);
 
   return (
-    <>
+       <>
       {/* Page Header Start */}
       <div className="page-header">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2>Best Salon and Barber services for You</h2>
+              <h2>Bookings</h2>
             </div>
             <div className="col-12">
               <a href="">Home</a>
-              <a href="">Services</a>
+              <a href="">Bookings</a>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function Services() {
       <div className="service">
         <div className="container">
           <div className="section-header text-center">
-            <p>Our Salon Services</p>
+            <p>Bookings</p>
             {/* <h2>Best Salon and Barber Services for You</h2> */}
           </div>
 <div className=" container   ">
@@ -56,9 +56,9 @@ export default function Services() {
                   <p className="card-text">
                    {ser.duration}
                   </p>
-                  <Link to={`/booking/${ser.category}`} className="btn newbtn btn-primary">
+                  <a href="#" className="btn newbtn btn-primary">
                     Add Service
-                  </Link>
+                  </a>
                 </div>
               </div>
          
@@ -71,5 +71,7 @@ export default function Services() {
       </div>
       {/* Service End */}
     </>
-  );
+  )
 }
+
+export default Booking

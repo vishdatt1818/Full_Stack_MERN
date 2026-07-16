@@ -1,11 +1,11 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { db } from "../firebase/firebaseConfig";
 
 
 import BarberService from '../model/ServiceModel';
 
-class ServiceOfBarber{
-     async add(data){
+class ServiceOfBarber {
+    async add(data) {
         let service = new BarberService
         service.serviceName = data.serviceName
         service.category = data.category
@@ -13,16 +13,31 @@ class ServiceOfBarber{
         service.duration = data.duration
         service.image = data.image
 
-        
-        const docref = await addDoc(collection(db, "service"), {...service} )
 
-         return docref
+        const docref = await addDoc(collection(db, "service"), { ...service })
+
+        return docref
     }
 
 
-    
-     async all() {
-        const querySnapshot = await getDocs(collection(db, "service"));
+
+    async all(id) {
+
+      let querySnapshot=null
+
+        if (!!id) {
+            let filter = query(collection(db, "service"), where("category", "==", id))
+
+             querySnapshot = await getDocs(filter);
+
+        } else {
+            let filter = collection(db, "service")
+
+             querySnapshot = await getDocs(filter);
+
+        }
+
+
         let service = []
         querySnapshot.forEach((doc) => {
             service.push({ id: doc.id, ...doc.data() })
@@ -30,16 +45,16 @@ class ServiceOfBarber{
             // console.log(doc.id, " => ", doc.data());
         });
         console.log(service);
-        
+
         return service
     }
 
-      async deleteSer(id){
-        const docref = doc(db,"service", id)
+    async deleteSer(id) {
+        const docref = doc(db, "service", id)
         await deleteDoc(docref)
     }
 
-     async single(id) {
+    async single(id) {
         const docRef = doc(db, "service", id);
         const docSnap = await getDoc(docRef);
 

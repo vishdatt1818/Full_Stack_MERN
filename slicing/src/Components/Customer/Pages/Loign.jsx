@@ -4,6 +4,8 @@ import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router-dom'
 import UserService from '../../../Services/UserService'
+import AuthService from '../../../Services/AuthService'
+
 
 
 
@@ -27,19 +29,19 @@ const Loign = () => {
             const user = await UserService.login(payload);
             toast.success("Login Success");
             
-            nav("/")
-            const userData = await UserService.single(user.user.uid)
-            console.log(userData);
-
-            localStorage.setItem("userName" , userData.name)
+            if (user.userType == "1") {
+                nav("/admin");  
+            } else if (user.userType == "4") { // navigate based on your user Roles
+                nav("/");
+            } else {
+                nav("/");
+            }
             
-            // if (user.userType == "1") {
-            //     nav("/admin");  
-            // } else if (user.userType == "4") { // navigate based on your user Roles
-            //     nav("/");
-            // } else {
-            //     nav("/");
-            // }
+            // const userData = await UserService.single(user.user.uid)
+            // console.log(userData);
+
+            // localStorage.setItem("userName" , userData.name)
+            
 
         } catch (err) {
             toast.error(err.message);

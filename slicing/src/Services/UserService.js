@@ -3,6 +3,7 @@ import UserModel from "../model/UserModel";
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth"
 import { toast } from "react-toastify";
+import AuthService from "./AuthService";
 
 const dbPath = "users"
 
@@ -29,20 +30,34 @@ class UserService {
 
     async login(data){
         const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
-     return userCredential
-    }
 
-      async single(id) {
-        const docRef = doc(db, dbPath, id);
-        const docSnap = await getDoc(docRef);
+        const docRef = doc(db, dbPath, userCredential.user.uid )
+        const docSnap = await getDoc(docRef)
+        const userData = docSnap.data()
 
-        if (docSnap.exists()) {
-            return { id: docSnap.id, ...docSnap.data() }
+        console.log(userCredential);
+        
+
+     if (docSnap.exists()) {
+           let authData = {
+                 id: userCredential.user.uid,
+                name: userData.name,
+                email: userData.email,
+                token: userCredential.user.accessToken,
+                userType: userData.userType
+           }
+           console.log(authData);
+           
+            await AuthService.setData(authData)
+            return authData;
         } else {
             console.log("No such document!");
             return false
         }
     }
+
+  
+    
 }
 
 export default new UserService

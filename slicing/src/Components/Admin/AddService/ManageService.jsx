@@ -4,11 +4,28 @@ import BarberServices from "../../../Services/BarberService";
 import ServiceOfBarber from "../../../Services/ServiceOfBarber";
 import axios from 'axios'
 import { FadeLoader, PacmanLoader } from "react-spinners";
+import CategoryService from "../../../Services/CategoryService";
 
 import Swal from "sweetalert2";
 
 const ManageService = () => {
   
+
+  
+  
+      const [addCategory , setAddCategory] = useState([])
+      
+          async function AddCategory(){
+              let res = await CategoryService.all()
+              setAddCategory(res)
+              console.log( res);
+              
+          }
+      
+           useEffect(() => {
+        
+               AddCategory()
+        }, []);
 
 
     const [barberService , setBarberService] = useState([])
@@ -116,7 +133,12 @@ const ManageService = () => {
                         <p className="mb-0 mt-1">{index + 1}</p>
                       </td>
                       <td>
-                        <p className="mb-0 mt-1">{service.category}</p>
+                        
+                          <p>
+                         {addCategory.find((item) => item.id === service.category)?.CategoryName || "Unknown Category"}
+                          </p>
+                        
+                        {/* <p className="mb-0 mt-1">{service.category}</p> */}
                       </td>
                       <td>
                         <p className="mb-0 mt-1">{service.serviceName}</p>

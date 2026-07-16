@@ -29,6 +29,7 @@ import AddCategory from './Components/Admin/AddCategory/AddCategory';
 import EditCategory from './Components/Admin/AddCategory/EditCategory';
 import EditService from './Components/Admin/AddService/EditService';
 import SignUp from './Components/Customer/Pages/SignUp';
+import Booking from './Components/Customer/Category/Booking';
 
 function App() {
   
@@ -42,6 +43,8 @@ function App() {
         <Route path='/about' element={<About/>}></Route>
         <Route path='/category' element={<Category/>}></Route>
         <Route path='/services' element={<Services/>}></Route>
+        <Route path='/services/:id' element={<Services/>}></Route>
+        <Route path='/booking/:id' element={<Booking/>}></Route>
         <Route path='/price' element={<Pricing/>}></Route>
         <Route path='/team' element={<Team/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>

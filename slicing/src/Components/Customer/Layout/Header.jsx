@@ -1,6 +1,28 @@
-import {Link} from "react-router-dom"
+import { useEffect, useState } from "react";
+import {Link, useNavigate} from "react-router-dom"
+import { auth } from "../../../firebase/firebaseConfig";
+import AuthService from "../../../Services/AuthService";
+import { toast } from "react-toastify";
 
 export default function Header() {
+
+const [email , setEmail] = useState("")
+
+function getEmail(){
+  setEmail( AuthService.getEmail)
+}
+
+const nav = useNavigate()
+function logout(){
+  AuthService.logout()
+   toast.success("Logged Out")
+        nav("/")
+}
+
+useEffect(() =>{
+  getEmail()
+})
+
   return (
 
       <>
@@ -84,12 +106,22 @@ export default function Header() {
                 <Link to="/contact" className="nav-item nav-link">
                   Contact
                 </Link>
+
+                {email ?
+                 <Link to="/" onClick={logout} className="nav-item nav-link">
+                  Logout
+                </Link>
+
+                :
+                <>
                  <Link to="/login" className="nav-item nav-link">
                   Login
                 </Link>
                  <Link to="/signup" className="nav-item nav-link">
                   Sign Up
                 </Link>
+                </>
+}
               </div>
             </div>
           </div>
