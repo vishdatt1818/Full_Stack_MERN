@@ -25,7 +25,7 @@ const ManageBooking = () => {
 
       let res = await BookingService.all();
       setBooking(res);
-      // console.log( setBarberService(res));
+      console.log("booking",res);
     } catch (err) {
       console.log(err);
     } finally {
@@ -102,22 +102,26 @@ const ManageBooking = () => {
 
   const [dropDown , setDropDown] = useState()
 
-  function getValue(){
+  function getValue(e){
      
-    //  setDropDown(e.target.value)
+     setDropDown(e.target.value)
 
   }
 
    
 
-  // async function updateBooking(){
+  async function handleStatusChange(e , bookingId){
 
-  //   let payload = {
-  //     appointmentStatus: dropDown
-  //   }
-  //       BookingService.update(payload,)
-  // }
+    const newStatus = e.target.value;
 
+    let payload = {
+      appointmentStatus: newStatus
+    }
+       await BookingService.update(payload,bookingId)
+
+       await getBooings()
+  }
+// checking
   return (
     <>
       {/* Page Header Start */}
@@ -218,11 +222,11 @@ const ManageBooking = () => {
 
                         <td className="d-flex gap-2">
                           {/* <Link to={`/admin/managebooking/${book.}`}> */}
-                          <select name="" id="">
+                          <select name="" id="" onChange={(e) => handleStatusChange(e , book.id)}>
 
-                            <option value="" onClick={getValue()}>{book.appointmentStatus}</option>
-                            <option value="" onClick={getValue()}>On Progress</option>
-                            <option value="" onClick={getValue()}>Completed</option>
+                            <option value="Pending" >{book.appointmentStatus}</option>
+                            <option value="On Progress" >On Progress</option>
+                            <option value="Completed" >Completed</option>
 
                           </select>
                           {/* </Link> */}
