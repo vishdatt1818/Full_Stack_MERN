@@ -55,6 +55,8 @@ class ServiceOfBarber {
     }
 
     async single(id) {
+        console.log(id);
+        
         const docRef = doc(db, "service", id);
         const docSnap = await getDoc(docRef);
 
@@ -62,7 +64,7 @@ class ServiceOfBarber {
             console.log("Document data:", docSnap.data());
             return { id: docSnap.id, ...docSnap.data() }
         } else {
-            // docSnap.data() will be undefined in this case
+            
             console.log("No such document!");
             return false;
         }

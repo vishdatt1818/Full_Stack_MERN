@@ -1,6 +1,6 @@
 import { db, auth } from "../firebase/firebaseConfig";
 import UserModel from "../model/UserModel";
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore"
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth"
 import { toast } from "react-toastify";
 import AuthService from "./AuthService";
@@ -55,6 +55,19 @@ class UserService {
             return false
         }
     }
+
+      async all() {
+            const querySnapshot = await getDocs(collection(db, dbPath));
+            let users = []
+            querySnapshot.forEach((doc) => {
+                users.push({...doc.data() })
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+            });
+            console.log(users);
+            
+            return users
+        }
 
   
     

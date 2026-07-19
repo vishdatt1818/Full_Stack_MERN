@@ -8,8 +8,18 @@ import CategoryService from "../../../Services/CategoryService";
 import   ServieOfbarber from "../../../Services/ServiceOfBarber"
 import CloudinaryService from '../../../Services/CloudinaryService';
 
+import { FadeLoader } from "react-spinners";
+
 
 const AddService = () => {
+
+   const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+
+   let [loading, setLoading] = useState(false);
 
     const [addCategory , setAddCategory] = useState([])
     
@@ -42,7 +52,11 @@ const AddService = () => {
             imageUrl = await CloudinaryService.upload(image)
       }
   
-      try{ let payload = {
+      try{ 
+
+        setLoading(true)
+        
+        let payload = {
           serviceName : serviceName,
           category: category,
           price : price,

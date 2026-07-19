@@ -6,16 +6,17 @@ import BookingModel from '../model/BookingModel';
 
 class BookingService{
      async add(data){
-        let category = new BookingModel
-        category.customerId = data.customerId
-        category.serviceId = data.serviceId
-        category.appointmentDate = data.appointmentDate
-        category.totalAmount = data.totalAmount
-        category.notes = data.notes
+        let booking = new BookingModel
+        booking.customerId = data.customerId
+        booking.serviceId = data.serviceId
+        booking.appointmentDate = data.appointmentDate
+        booking.time = data.time
+        booking.totalAmount = data.totalAmount
+        booking.notes = data.notes
        
 
         
-        const docref = await addDoc(collection(db, "category"), {...category} )
+        const docref = await addDoc(collection(db, "booking"), {...booking} )
 
          return docref
     }
@@ -23,25 +24,29 @@ class BookingService{
 
     
      async all() {
-        const querySnapshot = await getDocs(collection(db, "category"));
-        let category = []
+        const querySnapshot = await getDocs(collection(db, "booking"));
+        let booking = []
         querySnapshot.forEach((doc) => {
-            category.push({ id: doc.id, ...doc.data() })
+            booking.push({ id: doc.id, ...doc.data() })
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, " => ", doc.data());
         });
-        console.log(category);
+        // console.log(barbers);
         
-        return category
+        return booking
     }
 
-      async deleteCat(id){
-        const docref = doc(db,"category", id)
+    
+
+      async deleteBook(id){
+        const docref = doc(db,"booking", id)
         await deleteDoc(docref)
     }
 
      async single(id) {
-        const docRef = doc(db, "category", id);
+        console.log(id);
+        
+        const docRef = doc(db, "booking", id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -55,7 +60,7 @@ class BookingService{
     }
 
     async update(payload, id) {
-        const categoryRef = doc(db, "category", id);
+        const categoryRef = doc(db, "booking", id);
         return await updateDoc(categoryRef, payload);
     }
 }

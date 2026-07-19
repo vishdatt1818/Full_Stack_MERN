@@ -73,6 +73,9 @@ export default function AdminHeader() {
                   <Link to="/admin/manageservice" className="nav-item nav-link">
                   Service
                 </Link>
+                 <Link to="/admin/managebooking" className="nav-item nav-link">
+                  Booking
+                </Link>
                 <Link to="/admin/customer" className="nav-item nav-link">
                   Customer
                 </Link>

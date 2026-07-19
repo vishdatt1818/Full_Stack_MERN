@@ -1183,6 +1183,7 @@ a:focus {
     border-radius: 0;
     border: none;
     border-bottom: 1px solid #D5B981;
+    color:white
 }
 
 .contact .contact-form textarea {
@@ -1191,6 +1192,7 @@ a:focus {
     background: none;
     border-radius: 0;
     border: none;
+    color:white;
     border-bottom: 1px solid #D5B981;;
 }
 

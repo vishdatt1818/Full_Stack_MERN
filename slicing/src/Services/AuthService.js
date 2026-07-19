@@ -18,6 +18,9 @@ class AuthService {
     getUserType(){
         return localStorage.getItem("userType")
     }
+    getUid(){
+        return localStorage.getItem("id")
+    }
 
     logout(){
         localStorage.clear()

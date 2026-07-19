@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import ServiceOfBarber from "../../../Services/ServiceOfBarber";
 import { Link, useParams } from "react-router-dom";
 
+
 export default function Services() {
   const [services, setServices] = useState([]);
 
   const {id}=useParams()
+  console.log(id);
+  
 
   async function getServices() {
 
@@ -56,8 +59,8 @@ export default function Services() {
                   <p className="card-text">
                    {ser.duration}
                   </p>
-                  <Link to={`/booking/${ser.category}`} className="btn newbtn btn-primary">
-                    Add Service
+                  <Link to={`/booking/${ser.id}`} className="btn newbtn btn-primary">
+                    Book Service
                   </Link>
                 </div>
               </div>

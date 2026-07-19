@@ -3,16 +3,20 @@ import { Link } from "react-router-dom";
 import BarberServices from "../../../Services/BarberService";
 import ServiceOfBarber from "../../../Services/ServiceOfBarber";
 import axios from 'axios'
-import { FadeLoader, PacmanLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import CategoryService from "../../../Services/CategoryService";
 
 import Swal from "sweetalert2";
 
 const ManageService = () => {
   
-
+ const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
   
-  
+   let [loading, setLoading] = useState(false);
       const [addCategory , setAddCategory] = useState([])
       
           async function AddCategory(){
@@ -31,10 +35,21 @@ const ManageService = () => {
     const [barberService , setBarberService] = useState([])
 
     async function AddServiceOfBarber(){
+
+      try{
+
+         setLoading(true)
+
         let res = await ServiceOfBarber.all()
         setBarberService(res)
         // console.log( setBarberService(res));
+      } catch (err){
+        console.log(err);
         
+      }
+        finally{
+          setLoading(false)
+        }
     }
 
      useEffect(() => {
@@ -108,9 +123,24 @@ const ManageService = () => {
 
      
         {/* Service Page Start */}
-        <div className="container-fluidF">
-          <div className="container py-5">
+        <div className="container-fluid">
+          <div className="container d-flex justify-content-center py-5">
+              { loading ?
+
+                <ScaleLoader
+
+                color="orange"
+                loading={loading}
+                cssOverride={override}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+
+              :
             <div className="table-responsive">
+
+              
               <table className="table">
                 <thead>
                   <tr>
@@ -179,7 +209,9 @@ const ManageService = () => {
                   }
               </tbody>
             </table>
+            
           </div>
+            }
 
         </div>
       </div>

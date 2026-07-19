@@ -30,6 +30,7 @@ import EditCategory from './Components/Admin/AddCategory/EditCategory';
 import EditService from './Components/Admin/AddService/EditService';
 import SignUp from './Components/Customer/Pages/SignUp';
 import Booking from './Components/Customer/Category/Booking';
+import ManageBooking from './Components/Admin/Managebooking/ManageBooking';
 
 function App() {
   
@@ -68,6 +69,7 @@ function App() {
         <Route path='/admin/category' element={<AddCategory/>}></Route>
         <Route path='/admin/editcategory/:id' element={<EditCategory/>}></Route>
         <Route path='/admin/editservice/:id' element={<EditService/>}></Route>
+        <Route path='/admin/managebooking' element={<ManageBooking/>}></Route>
 
 
       </Route>
