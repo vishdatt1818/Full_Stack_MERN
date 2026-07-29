@@ -222,9 +222,9 @@ const ManageBooking = () => {
 
                         <td className="d-flex gap-2">
                           {/* <Link to={`/admin/managebooking/${book.}`}> */}
-                          <select name="" id="" onChange={(e) => handleStatusChange(e , book.id)}>
+                          <select name="" id="" value={book.appointmentStatus} onChange={(e) => handleStatusChange(e , book.id)}>
 
-                            <option value="Pending" >{book.appointmentStatus}</option>
+                            <option value="Pending" >Pending</option>
                             <option value="On Progress" >On Progress</option>
                             <option value="Completed" >Completed</option>
 

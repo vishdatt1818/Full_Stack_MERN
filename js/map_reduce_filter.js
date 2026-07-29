@@ -116,3 +116,17 @@ class carr {
 
 const car1 = new carr("Toyota", "Carolla")
 car1.showInfo()
+
+
+  const phone1 = orders.filter((order) =>{ 
+   const total =  order.items.reduce((acc,citem ) => acc+ citem.price ,0 )
+   return total>30000
+   
+})
+ console.log(phone1);
+
+
+ phone1.forEach(order => {
+  const total = order.items.reduce((acc, citem) => acc + citem.price, 0);
+  console.log(`${order.customer}: ₹${total}`);
+});
