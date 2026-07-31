@@ -99,3 +99,7 @@ function keepUnique(arr){
 }
 console.log(keepUnique(arr));
 
+let a ="vaasu"
+let b= "singh"
+
+output ="vsaian"

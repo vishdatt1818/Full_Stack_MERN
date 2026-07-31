@@ -48,7 +48,7 @@ const addGrade = students.map((stu) => {
 // console.log(addGrade);
 
 const passedStuAvg = students.filter((stu) => stu.marks>=40).reduce((acc,curr) => acc +curr.marks, 0)
-console.log(passedStuAvg/students.length);
+// console.log(passedStuAvg/students.length);
 
 const products = [
   { name: "Laptop", price: 70000, stock: 5 },
@@ -60,17 +60,85 @@ const products = [
 ];
 
 const onlyInstok = products.filter((item) =>  item.stock>0)
-console.log(onlyInstok);
+// console.log(onlyInstok);
 
 const sortProducts = onlyInstok.sort((a , b) => b.price - a.price)
-console.log(sortProducts);
+// console.log(sortProducts);
 
 const nameOnly = products.map((item) => item.name)
-console.log(nameOnly);
+// console.log(nameOnly);
 
-const inventoryValue = sortProducts.map((item) => item.price*item.stock)
-console.log(inventoryValue);
+// If you NEED to create a variable: Use {} and write return.
 
+const inventoryValue = sortProducts.map((item) =>{
+    
+     total =  item.price*item.stock
+     return{
+        ...item, inventoryValue:total
+     }
+    
+    })
+// console.log(inventoryValue);
+
+// If you DO NOT need a variable: You can skip the variable entirely and use () to return the object directly.
+
+// const inventoryValue = sortProducts.map((item) =>(
+
+     
+//      {
+//         ...item, inventoryValue:item.price*item.stock
+//      }
+    
+// ))
+// console.log(inventoryValue);
+
+// Quick SummaryCreating variables?  Use {} with an explicit return.
+// No variables, just returning an object?  Use () for a clean 1-liner.
+
+
+
+
+const employees1 = [
+  { name: "John", dept: "IT", salary: 50000 },
+  { name: "Alice", dept: "HR", salary: 60000 },
+  { name: "Bob", dept: "IT", salary: 70000 },
+  { name: "David", dept: "Sales", salary: 40000 },
+  { name: "Emma", dept: "HR", salary: 55000 },
+  { name: "Tom", dept: "IT", salary: 80000 }
+]
+
+const hr = employees1.filter((emp) => emp.dept == "HR")
+console.log(hr);
+
+const It = employees1.filter((emp) => emp.dept == "IT")
+// console.log(hr);
+
+const sales = employees1.filter((emp) => emp.dept == "Sales")
+// console.log(hr);
+
+const avgSalaryhr = hr.reduce((acc, curr) =>
+    {
+        const total = ( acc + curr.salary , 0)
+        return{
+        
+        }
+
+    })
+
+const groupByDept = Object.groupBy(employees1, (emp) => emp.dept)
+console.log(groupByDept);
+
+const avgSal = Object.entries(groupByDept).reduce((acc,[dept, emp]) => {
+    const total = emp.reduce((sum, curr) => sum + curr.salary ,0)
+    acc[dept] = total/emp.length
+    return acc
+
+},{})
+console.log(avgSal);
+
+const highestPaid = Object.entries(groupByDept).reduce((acc, [dept, emp]) => {
+    const salarySort = emp.reduce((sum ,curr) => sum+ curr.salary,0)
+})
 
 
 

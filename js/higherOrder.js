@@ -124,11 +124,33 @@ const orders = [    {
 //   console.log(`${order.customer}: ₹${total}`);
 });
 
- const phone = orders.map((order) => order.items.filter(pro => pro.product == "Phone"))
+ const phone = orders.map((order) =>{
+    const filterr =  order.items.filter(pro => pro.product == "Phone")
+    return{
+        ...order,filterr:filterr
+    }
+})
  console.log("phone" ,phone);
+
+ phone.forEach((item) =>{ 
+
+    console.log( item.customer)
+})
+
+ const phone1 = orders.filter((item) => item.items.product == "Phone")
+//  console.log(phone1);
+
+  const phone2 = orders.map((order) => order.items)
+//   console.log("phone2",phone2)
+  const filltering=phone2.filter((item) => item.product == "Phone")
+//  console.log("phone" ,filltering);
 
  const phoneCus = orders.filter((order) => order.items.some((item => item.product === "Phone"))).map(order => order.customer)
  console.log(phoneCus);
+ 
+ 
+
+
  
 
 
