@@ -1,4 +1,9 @@
 let output = document.getElementById("show")
+let pattern=/^[A-Za-z0-9]+@+[a-z]+\.+[a-z]{2,3}$/
+const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+
+
 function logic(e){
     e.preventDefault()
    let email =  document.getElementById("exampleInputEmail1").value
@@ -6,7 +11,8 @@ function logic(e){
     if(email === ""){
         output.innerText= "Kindly fill the value"
     }
-   else if(email === "admin@gmail.com" && pass === "123"){
+   else if(pattern.test(email)  && strongPasswordRegex.test( pass ) &&
+      email === "admin@gmail.com" && pass === "Admin@123"){
     document.getElementById("show").innerText ="login Success"
     output.style.color = "green"
    }else{

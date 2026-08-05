@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<p id="body">test</p>
+<p class="text">Hi</p>
+<h1 class="text">Hello</h1>
+
+<div id="div">
+    <p>para1</p>
+</div>
+
+
+<input type="text" id="input"  onchange="brace()">
+<button onclick="test()">click</button>
+
+
+
+<script>
+
+    function brace(){
+        alert("input filled")
+    }
+    //  let p=document.getElementsByClassName("text")
+    //  console.log(p)
+  
+    //  for(let i=0;i<=p.length;i++){
+    //     p[i].style.backgroundColor="red"
+    //  }
+
+
+const q=document.querySelectorAll(".text")
+console.log(q)
+
+    // document.querySelector(".text").style.color="blue"
+    // document.querySelector("#body").style.color="green"
+
+
+    let p=document.createElement("p")
+    console.log(p)
+    p.innerText="paragrpah"
+
+    let division=document.getElementById("div")
+    // division.style.height="200px"
+    division.style.backgroundColor="red"
+
+  division.appendChild(p)
+  
+
+
+  let pattern=/^[A-Za-z0-9]+@+[a-z]+\.+[a-z]{2,3}$/
+
+  let email="abc@gmail.com"
+  if(pattern.test(email)){
+    console.log("valid")
+  }
+  else{
+    console.log("invalid")
+  }
+
+  function test(){
+    let input=document.getElementById("input").value
+  if(input==""){
+document.getElementById("body").innerText="fill the value"
+  }
+  else{
+    
+        document.getElementById("body").innerText=input
+  }
+
+  }
+  
+</script>
+    
+</body>
+</html>
