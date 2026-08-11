@@ -8,4 +8,11 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  server: {
+    watch: {
+      usePolling: true, // Forces Vite to poll for file changes
+      interval: 100,    // Checks for changes every 100ms
+    },
+    hmr: true,          // Ensures Hot Module Replacement is explicitly active
+  },
 })

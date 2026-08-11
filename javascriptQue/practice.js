@@ -73,6 +73,8 @@ function abc(){
 // }
 
 // let arr = [0, 1, 0, 3, 12];
+
+
 // console.log(moveZeroInPlace(arr)); 
 // Output: [1, 3, 12, 0, 0]
 
@@ -124,7 +126,7 @@ function abc(){
 //     b.split(" ").reverse().join(" ")
 // );
 
-let arr = [0, 1, 0, 3, 12,23];
+// let arr = [0, 1, 0, 3, 12,23];
 
 // output = [[0,1],[0,3],[12,23]]
 
@@ -150,13 +152,85 @@ let arr = [0, 1, 0, 3, 12,23];
 
 // var a=b=200
 
-console.log(NaN === NaN);
+// console.log(NaN === NaN);
 
-function sum(a){
-  return function(b){
-        if(b !== undefined){
-            return sum(a+b)
-        }
-    }
-}
-console.log(sum((a)));
+// function sum(a){
+//   return function(b){
+//         if(b !== undefined){
+//             return sum(a+b)
+//         }
+//         return a
+//     }
+// }
+// console.log(sum(1) (43) (3) ());
+
+// let ss = [2,4,6,7,8,9]
+
+// function secondLargest(arr){
+//     let largest = 0
+//     let secondLargest = 0
+
+//     for( char of arr){
+//         if(char > largest){
+//             let temp = largest
+//             largest = char
+//             secondLargest = temp
+//         }
+//         if(char > secondLargest && char < largest){
+//             secondLargest = char
+//         }
+//     }
+//     return secondLargest
+
+// }
+// console.log(secondLargest(ss));
+
+    
+// function removeDup(arr){
+//     let uni=[]
+//     for(let i=0 ; i<arr.length ; i++){
+//         let isDuplicate = false
+//         for(let j =i+1 ; j<arr.length ; j++){
+//             if(arr[i] === arr[j]){
+//                 isDuplicate = true
+//                 break
+//             }
+//         }
+//         if(!isDuplicate){
+//             uni.push(arr[i])
+//         }
+//     }
+//     return uni
+// }
+// console.log(removeDup(arr));
+
+// let x ={}
+// y= {name: "vaasu"}
+// z= {name: "datt"}
+// x[y] = {name: "ram"}
+// x[z] = {name: "kapil"}
+// console.log(x[y]);
+
+// const a = {name: "aa" , age:23, city: "jal"}
+// let b = {...a, name: "rahul"}
+// const {name, ...xyz} = a
+// console.log(a);
+
+// console.log(xyz, b);
+// console.log(name);
+
+
+// let arr = [2,3,4,5,6,7,8,3,3,3]
+
+// function countFre(arr){
+//     let fre ={}
+//     for(char of arr){
+//         if(fre[char] == undefined){
+//             fre[char] =1
+//         }else{
+//             fre[char] += 1
+//         }
+//     }
+//     return fre
+// }
+// console.log(countFre(arr));

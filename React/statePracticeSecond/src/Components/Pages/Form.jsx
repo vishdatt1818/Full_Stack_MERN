@@ -39,7 +39,7 @@ const [passwordMessage, setPasswordMessage] = useState("");
     else if (password.length < 8) {
       setPasswordMessage("Minimum 8 characters");
       setIsStrongPassword(false);
-    } else if (!/[A-z]/.test(password)) {
+    } else if (!/[A-Z]/.test(password)) {
       setPasswordMessage("Add one uppercase letter");
       setIsStrongPassword(false);
     } else if (!/[0-9]/.test(password)) {

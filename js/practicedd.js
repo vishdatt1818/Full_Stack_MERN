@@ -71,11 +71,11 @@
 //     twoSum([1,2,3,4,5,6,],6)
 // );
 
-function sum(...args){
-    return args.reduce((acc,citem) =>  acc+citem,0)
-}
+// function sum(...args){
+//     return args.reduce((acc,citem) =>  acc+citem,0)
+// }
 
-console.log(sum(1,2,3));
+// console.log(sum(1,2,3));
 
 let arr = [1,2,4,5,6,6,7,7]
 
