@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/api/user/single"
+method: POST
+headers:
+  Authorization: "{{customerToken}}"
+body:
+  type: urlencoded
+  content:
+    _id: 626a14d24b9ebd193273a4bb
+order: 3000

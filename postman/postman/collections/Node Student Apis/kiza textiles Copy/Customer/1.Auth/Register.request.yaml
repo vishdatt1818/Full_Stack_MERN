@@ -1,0 +1,10 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/user/add
+method: POST
+body:
+  type: urlencoded
+  content:
+    email: customer5052@gmail.com
+    password: "123"
+    name: Customer 2
+order: 2000

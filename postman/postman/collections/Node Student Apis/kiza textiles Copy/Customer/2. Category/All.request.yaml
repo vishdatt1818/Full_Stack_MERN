@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseUrl}}/api/category/all"
+method: POST
+body:
+  type: urlencoded
+order: 1000

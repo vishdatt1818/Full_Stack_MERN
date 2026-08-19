@@ -234,3 +234,120 @@ function abc(){
 //     return fre
 // }
 // console.log(countFre(arr));
+
+
+// let arr = [1,2,3,4,5,6,7]
+
+// function reverseIn(arr){
+//     let left = 0
+//     let right = arr.length-1
+
+//     while(left<right){
+//         let temp = arr[left]
+//         arr[left] = arr[right]
+//         arr[right] = temp
+
+//         left++
+//         right--
+//     }
+//     return arr
+// }
+// console.log(reverseIn(arr));
+
+// let arr1 = [1, 3, 5, 7];
+// let arr2 = [2, 4, 6, 8];
+
+// arr1.push(...arr2).sort((a,b) => a-b )
+// console.log(
+// arr1
+    // arr1.concat(arr2).sort((a,b) => a-b)
+// );
+
+// let i = 0
+// let j = 0
+
+// result = []
+
+// while(i < arr1.length && j < arr2.length){
+//  result.push(arr1[i])
+//  i++
+//  result.push(arr2[j])
+//  j++
+// }
+// console.log(result);
+
+
+// let arr = [3, 0, 1];
+
+// function findMissing(arr){
+//     let box = {}
+//     for(num of arr){
+//         if(box[num] == undefined){
+//             box[num] = 1
+//         }else{
+//             box[num]++
+//         }
+//     }
+
+//     for(let i=0; i<arr.length ; i++){
+//         if(!(i in box)){
+
+//         }
+//     }
+    
+// }
+// console.log(findMissing(arr));
+
+
+// const str = "well reverse this"
+
+// function reverse(str){
+//     rev = ''
+
+//     for(let i=str.length-1 ; i>0 ; i--){
+//         rev += str[i]
+//     }
+//     return rev
+// }
+// console.log(
+//     reverse(str)
+
+// );
+
+// if([]){
+//     console.log("hello");
+    
+// }else{
+//     console.log("else block");
+    
+// }
+
+// function prime(no){
+//     for(let i = 2 ; i<no ; i++){
+//         if(no%i == 0){
+//             return false
+//         }else{
+//             return true
+//         }
+//     }
+// }
+// console.log(prime(10));
+
+let arr =[3,5,1,2,434,54,64,4]
+
+function sortt(arr){
+    
+
+    for(let i =0 ; i < arr.length-1 ; i++){
+        for(let j=0 ; j < arr.length -i -1 ; j++){
+            if(arr[j] > arr[j+1]){
+                temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+            }
+        }
+    }
+    return arr
+}
+console.log(sortt(arr));
+

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/api/dashboard"
+method: GET
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: urlencoded
+settings: {}
+order: 1000

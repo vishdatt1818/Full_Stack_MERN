@@ -1,0 +1,21 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/category/add
+method: POST
+headers:
+  Authorization: "{{json_web_token_0nya}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Accessories 1232
+    - type: file
+      key: category_image
+      src:
+        - /C:/Users/Arshpreet/Downloads/download.gif
+    - type: file
+      key: ""
+      src:
+        - ""
+      disabled: true
+order: 3000

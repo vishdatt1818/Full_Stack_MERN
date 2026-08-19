@@ -65,6 +65,16 @@ function Header() {
                 Count
               </Link>
             </li>
+              <li className="nav-item">
+              <Link className="nav-link" to="/user">
+                user
+              </Link>
+            </li>
+              <li className="nav-item">
+              <Link className="nav-link" to="/auto">
+                AutoForm
+              </Link>
+            </li>
 
 
             

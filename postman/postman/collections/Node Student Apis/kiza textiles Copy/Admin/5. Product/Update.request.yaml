@@ -1,0 +1,33 @@
+$kind: http-request
+url: "{{baseUrl}}/admin/product/update"
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: _id
+      value: 626928446df90316b74b2e50
+    - type: text
+      key: status
+      value: "true"
+    - type: file
+      key: subcategory_image
+      src: []
+      disabled: true
+    - type: text
+      key: name
+      value: Gold Ring
+    - type: text
+      key: categoryId
+      value: 6268f46e9102de38b2625dee
+      disabled: true
+    - type: text
+      key: subcategoryId
+      value: ""
+      disabled: true
+    - type: text
+      key: price
+      value: "4000"
+order: 4000

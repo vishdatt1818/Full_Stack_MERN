@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/api/order/all"
+method: POST
+headers:
+  Authorization: "{{customerToken}}"
+body:
+  type: urlencoded
+order: 1000

@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/subcategory/all
+method: POST
+headers:
+  - key: Authorization
+    value: "{{adminToken}}"
+    disabled: true
+body:
+  type: urlencoded
+  content:
+    - key: categoryId
+      value: 641ae73f13ffe1196c627835
+      disabled: true
+order: 1000

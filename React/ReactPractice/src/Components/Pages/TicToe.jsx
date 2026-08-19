@@ -25,7 +25,7 @@ const TicToe = () => {
       }
     }
     return null;
-  }
+  } 
 
   const childCss = {
     height: "80px",

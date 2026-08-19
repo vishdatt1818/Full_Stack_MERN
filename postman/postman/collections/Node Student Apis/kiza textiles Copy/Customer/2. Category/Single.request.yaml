@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/api/category/single"
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 62678e205be44e8bae7a77f0
+order: 2000

@@ -8,6 +8,7 @@ import Home from "./Components/Pages/Home";
 import TicToe from "./Components/Pages/TicToe";
 import User from "./Components/Pages/User";
 import Count from "./Components/Pages/Count";
+import AutoForm from "./Components/Pages/AutoForm";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/TicToe" element = {<TicToe/>} />
         <Route path="/User" element = {<User/>} />
         <Route path="/count" element = {<Count/>} />
+        <Route path="/auto" element = {<AutoForm/>} />
         
       </Route>
       </Routes>

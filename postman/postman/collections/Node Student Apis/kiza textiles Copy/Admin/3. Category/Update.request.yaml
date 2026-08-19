@@ -1,0 +1,24 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/category/update
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: _id
+      value: 640ea3fc13ffe1196c627634
+    - type: text
+      key: status
+      value: "true"
+    - type: file
+      key: category_image
+      src:
+        - ""
+      disabled: true
+    - type: text
+      key: name
+      value: Accesories
+      disabled: true
+order: 4000

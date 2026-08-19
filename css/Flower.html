@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Lotus Flower</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: white;
+        }
+
+
+        /* =========================
+           MAIN FLOWER CONTAINER
+        ========================= */
+
+        .flower {
+            position: relative;
+
+            width: 300px;
+            height: 330px;
+        }
+
+
+        /* =========================
+           STEM
+        ========================= */
+
+        .stem {
+            position: absolute;
+
+            top: 145px;
+            left: 146px;
+
+            width: 8px;
+            height: 175px;
+
+            background: #0b9e12;
+
+            z-index: 1;
+        }
+
+
+        /* =========================
+           LOTUS
+        ========================= */
+
+        .lotus {
+            position: absolute;
+
+            top: 5px;
+            left: 25px;
+
+            width: 250px;
+            height: 155px;
+
+            z-index: 5;
+        }
+
+
+        /* =========================
+           PETALS
+           Convex lens shape
+        ========================= */
+
+        .petal {
+            position: absolute;
+
+            width: 100px;
+            height: 150px;
+
+            background: #e85d6b;
+
+            /*
+                Makes the petal look
+                like a convex lens / ()
+            */
+            border-radius: 50%;
+        }
+
+
+        /* =========================
+           CENTER PETAL
+        ========================= */
+
+        .petal-center {
+            left: 75px;
+            top: 0;
+
+            width: 80px;
+            height: 155px;
+
+            background: #e85d6b;
+
+            z-index: 5;
+        }
+
+
+        /* =========================
+           LEFT INNER PETAL
+        ========================= */
+
+        .petal-left-inner {
+            left: 40px;
+            top: 20px;
+
+            transform: rotate(-25deg);
+
+            background: #e96a77;
+
+            z-index: 4;
+        }
+
+
+        /* =========================
+           RIGHT INNER PETAL
+        ========================= */
+
+        .petal-right-inner {
+            right: 40px;
+            top: 20px;
+
+            transform: rotate(25deg);
+
+            background: #e96a77;
+
+            z-index: 4;
+        }
+
+
+        /* =========================
+           LEFT OUTER PETAL
+        ========================= */
+
+        .petal-left {
+            left: 5px;
+            top: 65px;
+
+            width: 120px;
+            height: 90px;
+
+            transform: rotate(-8deg);
+
+            background: #e85d6b;
+
+            z-index: 3;
+        }
+
+
+        /* =========================
+           RIGHT OUTER PETAL
+        ========================= */
+
+        .petal-right {
+            right: 5px;
+            top: 65px;
+
+            width: 120px;
+            height: 90px;
+
+            transform: rotate(8deg);
+
+            background: #e85d6b;
+
+            z-index: 3;
+        }
+
+
+        /* =========================
+           LEAVES
+           Convex lens shape
+        ========================= */
+
+        .leaf {
+            position: absolute;
+
+            width: 120px;
+            height: 65px;
+
+            background: #0b9e12;
+
+            /*
+                Convex lens / oval shape
+            */
+            border-radius: 50%;
+
+            z-index: 3;
+        }
+
+
+        /* =========================
+           LEFT LEAF
+        ========================= */
+
+        .leaf-left {
+            left: 20px;
+            top: 185px;
+
+            transform: rotate(25deg);
+        }
+
+
+        /* =========================
+           RIGHT LEAF
+        ========================= */
+
+        .leaf-right {
+            right: 15px;
+            top: 225px;
+
+            transform: rotate(-25deg);
+        }
+
+
+        /* =========================
+           BOTTOM BASE
+        ========================= */
+
+        .ground {
+            position: absolute;
+
+            bottom: 0;
+            left: 100px;
+
+            width: 100px;
+            height: 8px;
+
+            background: #0b9e12;
+
+            border-radius: 10px;
+
+            z-index: 4;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="flower">
+
+        <!-- STEM -->
+        <div class="stem"></div>
+
+
+        <!-- LOTUS FLOWER -->
+        <div class="lotus">
+
+            <!-- Left outer petal -->
+            <div class="petal petal-left"></div>
+
+            <!-- Left inner petal -->
+            <div class="petal petal-left-inner"></div>
+
+            <!-- Center petal -->
+            <div class="petal petal-center"></div>
+
+            <!-- Right inner petal -->
+            <div class="petal petal-right-inner"></div>
+
+            <!-- Right outer petal -->
+            <div class="petal petal-right"></div>
+
+        </div>
+
+
+        <!-- LEFT LEAF -->
+        <div class="leaf leaf-left"></div>
+
+
+        <!-- RIGHT LEAF -->
+        <div class="leaf leaf-right"></div>
+
+
+        <!-- BOTTOM BASE -->
+        <div class="ground"></div>
+
+    </div>
+
+</body>
+</html>

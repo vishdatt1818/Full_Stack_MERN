@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/product/single"
+method: POST
+headers:
+  - key: Authorization
+    value: "{{adminToken}}"
+    disabled: true
+body:
+  type: urlencoded
+  content:
+    _id: 6423c00313ffe1196c6278a8
+order: 2000

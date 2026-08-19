@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/api/subcategory/add"
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Ringsss
+    - type: file
+      key: subcategory_image
+      src:
+        - /C:/Users/HP/OneDrive/Pictures/Screenshots/2023-06-17.png
+    - type: text
+      key: categoryId
+      value: 640ea3fc13ffe1196c627634
+order: 3000

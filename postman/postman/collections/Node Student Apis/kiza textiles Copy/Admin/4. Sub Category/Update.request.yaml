@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/subcategory/update"
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: _id
+      value: 6269162103bd225b7004b483
+    - type: text
+      key: status
+      value: "true"
+    - type: file
+      key: subcategory_image
+      src: []
+    - type: text
+      key: name
+      value: Rings
+    - type: text
+      key: categoryId
+      value: 6268f46e9102de38b2625dee
+order: 4000

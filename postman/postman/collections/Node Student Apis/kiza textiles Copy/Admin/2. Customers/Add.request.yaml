@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/user/add
+method: POST
+queryParams:
+  - key: ""
+    value: null
+    disabled: true
+body:
+  type: urlencoded
+  content:
+    name: Hemant
+    email: hemant123@gmail.com
+    password: "123456"
+order: 3000

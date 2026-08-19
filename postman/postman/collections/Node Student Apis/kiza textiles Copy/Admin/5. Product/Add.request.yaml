@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/admin/product/add"
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Flower Ring
+    - type: file
+      key: product_image
+      src:
+        - /C:/Users/Dell Optiplex/Desktop/images/dark-brown-labradorite-gemstone-bracelet-500x500.jpg
+    - type: text
+      key: categoryId
+      value: 6268f46e9102de38b2625dee
+    - type: text
+      key: subcategoryId
+      value: 6269162103bd225b7004b483
+    - type: text
+      key: price
+      value: "3500"
+order: 3000

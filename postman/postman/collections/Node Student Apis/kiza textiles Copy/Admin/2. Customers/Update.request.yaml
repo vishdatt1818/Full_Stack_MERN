@@ -1,0 +1,13 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/user/update
+method: POST
+headers:
+  Authorization: "{{json_web_token_0nya}}"
+body:
+  type: urlencoded
+  content:
+    _id: 6406c08713ffe1196c627611
+    email: user404@gmail.com
+    password: "404"
+    name: user 404
+order: 4000

@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/api/order/single"
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: urlencoded
+  content:
+    _id: 626a22f6944654394c0c58e9
+order: 2000

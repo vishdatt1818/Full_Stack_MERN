@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/order/update"
+method: POST
+headers:
+  Authorization: "{{adminToken}}"
+body:
+  type: urlencoded
+  content:
+    - key: _id
+      value: 64f555d513ffe1196c63d709
+    - key: orderStatus
+      value: "2"
+      description: |2
+         1-> Placed , 2-> Confirmed , 3=> Shipped , 4=>Delivered , 5=> Cancelled
+    - key: shipmentUrl
+      value: xyz.com
+      description: //optional
+    - key: trackingId
+      value: "32561"
+      description: //optional
+order: 3000

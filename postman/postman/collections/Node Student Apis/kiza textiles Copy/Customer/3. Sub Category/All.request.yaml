@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/api/subcategory/all"
+method: POST
+body:
+  type: urlencoded
+  content:
+    categoryId: 6268f46e9102de38b2625dee
+order: 1000

@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/api/order/update"
+method: POST
+headers:
+  Authorization: "{{customerToken}}"
+body:
+  type: urlencoded
+  content:
+    orderStatus: "5"
+    _id: 626a255fe9c544f1b0db0dbb
+order: 4000

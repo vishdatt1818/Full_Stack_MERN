@@ -1,0 +1,9 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/user/login
+method: POST
+body:
+  type: urlencoded
+  content:
+    email: admin@kizatextiles.com
+    password: "123"
+order: 1000

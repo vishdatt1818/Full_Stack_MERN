@@ -1,0 +1,4 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/category/all
+method: POST
+order: 1000

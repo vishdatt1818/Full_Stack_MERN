@@ -1,0 +1,8 @@
+$kind: http-request
+url: https://kizaapi.ksesystem.com/api/user/all
+method: POST
+headers:
+  Authorization: "{{json_web_token_0nya}}"
+body:
+  type: urlencoded
+order: 1000

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/api/user/login"
+method: POST
+body:
+  type: urlencoded
+  content:
+    email: customer1@gmail.com
+    password: "123"
+order: 1000

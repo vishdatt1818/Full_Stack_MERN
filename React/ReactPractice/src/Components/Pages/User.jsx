@@ -1,110 +1,115 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useState } from 'react'
 
-const TicTacToe = () => {
+const User = () => {
 
-  const [board, setBoard] = useState([
-    "", "", "",
-    "", "", "",
-    "", "", ""
-  ]);
+   const [email, setEmail] = useState("");
 
-  const [player, setPlayer] = useState("X");
+    const [password, setPassword] = useState("");
 
-  const [winner, setWinner] = useState("");
+     const [showPassword, setShowPassword] = useState(false);
 
-  const boardRef = useRef(null);
+     const[mess, setMess] = useState("")
 
-  const winningPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
+  function toggle(event){
+    event.preventDefault();
+console.log("hello");
 
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
+    setShowPassword((change) => !change )
+  }
 
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  const handleClick = (index) => {
-
-    if (board[index] !== "" || winner !== "") {
-      return;
+  useEffect(() =>{
+    if(email == ""){
+      setEmail("")
     }
-
-    const newBoard = [...board];
-
-    newBoard[index] = player;
-
-    setBoard(newBoard);
-
-    setPlayer(player === "X" ? "O" : "X");
-  };
-
-  useEffect(() => {
-
-    for (let pattern of winningPatterns) {
-
-      const [a, b, c] = pattern;
-
-      if (
-        board[a] &&
-        board[a] === board[b] &&
-        board[a] === board[c]
-      ) {
-        setWinner(board[a]);
-        return;
-      }
+    else if(email.length < 8){
+      setMess("Email length must be 8 ")
     }
-
-  }, [board]);
-
-  const resetGame = () => {
-
-    setBoard([
-      "", "", "",
-      "", "", "",
-      "", "", ""
-    ]);
-
-    setPlayer("X");
-
-    setWinner("");
-  };
+    else if(!email.endsWith("@gmail.com")){
+        setMess("Email is not valid")
+    }else{
+      setMess("Email is valid")
+    }
+  },[email])
 
   return (
-    <div>
+    <>
+     <>
+    
+      <div className="container m-5">
+        <form  className="w-50">
+          
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
+            </div >
+          </div>
+          <p className='text-primary'>{mess}</p>
+          <div style={{position: "relative"}}>
+          <div className="mb-3" >
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              Password
+            </label>
+            <input
+              // type="password"
+              className="form-control"
+              id="exampleInputPassword1"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
 
-      <h1>Tic Tac Toe</h1>
+               style={{
+            width: "100%",
+            padding: "10px 40px 10px 12px", 
+            borderRadius: "6px",
+            border: "1px solid #ccc"
+          }}
+              
+              />
+              <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "Hide password" : "Show password"}
+          style={{
+            position: "absolute",
+            right: "10px",
+            top: "40px",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "1.2rem", 
+            color: "#6c757d"     
+          }}
+        >
+          
+          <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+        </button>
+            {/* <i class="bi bi-eye"></i> */}
+              {/* <span>sdasdsa</span> */}
+            
+          </div>
+          </div>
+      
+            
+       
 
-      <h2>Current Player: {player}</h2>
-
-      <div ref={boardRef}>
-
-        {board.map((value, index) => (
-
-          <button
-            key={index}
-            onClick={() => handleClick(index)}
-          >
-            {value}
-          </button>
-
-        ))}
-
+        <button className='btn btn-primary'>submit</button>
+        {/* <button className='btn btn-primary'  onClick={toggle}>show</button> */}
+        </form>
       </div>
+    </>
+    </>
+  )
+}
 
-      {winner && (
-        <h2>Winner: {winner}</h2>
-      )}
-
-      <button onClick={resetGame}>
-        Reset Game
-      </button>
-
-    </div>
-  );
-};
-
-export default TicTacToe;
+export default User

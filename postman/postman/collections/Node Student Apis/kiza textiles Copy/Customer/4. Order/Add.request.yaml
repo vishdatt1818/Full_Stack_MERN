@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/order/add"
+method: POST
+headers:
+  Authorization: "{{customerToken}}"
+body:
+  type: urlencoded
+  content:
+    productId: 6423c00313ffe1196c6278a8
+    userId: 626a14c84b9ebd193273a4b7
+    address: hno 3 green park ,Near Bus stand, Jalandhar
+order: 3000
