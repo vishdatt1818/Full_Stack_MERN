@@ -333,21 +333,63 @@ function abc(){
 // }
 // console.log(prime(10));
 
-let arr =[3,5,1,2,434,54,64,4]
+// let arr =[3,5,1,2,434,54,64,4]
 
-function sortt(arr){
+// function sortt(arr){
     
 
-    for(let i =0 ; i < arr.length-1 ; i++){
-        for(let j=0 ; j < arr.length -i -1 ; j++){
-            if(arr[j] > arr[j+1]){
-                temp = arr[j]
-                arr[j] = arr[j+1]
-                arr[j+1] = temp
-            }
+//     for(let i =0 ; i < arr.length-1 ; i++){
+//         for(let j=0 ; j < arr.length -i -1 ; j++){
+//             if(arr[j] > arr[j+1]){
+//                 temp = arr[j]
+//                 arr[j] = arr[j+1]
+//                 arr[j+1] = temp
+//             }
+//         }
+//     }
+//     return arr
+// }
+// console.log(sortt(arr));
+
+// let str = "java script"
+
+// function splitt(str){
+//     let aa = str.split(' ')
+//     for(let i=0 ; i<aa.length ; i++){
+
+//     }
+// }
+
+// console.log(splitt(str));
+
+// let output = str
+//     .split(' ')                             // ['java', 'script']
+//     .map(word => word.split('').reverse().join('')) // ['avaj', 'tpircs']
+//     // .join(' ');                             // "avaj tpircs"
+
+// console.log(output);
+
+let str = "java script";
+
+function reverseWords(input) {
+    let words = input.split(' ');
+    let reversedWords = [];
+
+    for (let word of words) {
+        console.log(word);
+        
+        let reversedWord = '';
+        for (let i = word.length - 1; i >= 0; i--) {
+            reversedWord += word[i];
         }
+        reversedWords.push(reversedWord);
     }
-    return arr
+
+    return reversedWords;
 }
-console.log(sortt(arr));
+
+console.log(reverseWords(str)); // Output: "avaj tpircs"
+
+
+
 

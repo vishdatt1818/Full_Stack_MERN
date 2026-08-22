@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const AdminHeader = () => {
   return (
-<header>
+   <header>
   <nav
     className="radio-navbar navbar navbar-expand-lg fixed-top"
     id="main-navbar"
@@ -36,13 +36,13 @@ const Header = () => {
       <div className="collapse navbar-collapse" id="radioNavCollapse">
         <ul className="navbar-nav radio-navbar__links mx-lg-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/" data-nav-link="">
+            <Link className="nav-link" href="#hero-section" data-nav-link="">
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/login" data-nav-link="">
-              Login
+            <Link className="nav-link" to="/admin/addsong" data-nav-link="">
+              Add Song
             </Link>
           </li>
           <li className="nav-item">
@@ -56,9 +56,9 @@ const Header = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#dj-section" data-nav-link="">
+            <Link className="nav-link" href="#dj-section" data-nav-link="">
               DJs
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a
@@ -93,9 +93,7 @@ const Header = () => {
   </nav>
 </header>
 
-
-
   )
 }
 
-export default Header
+export default AdminHeader

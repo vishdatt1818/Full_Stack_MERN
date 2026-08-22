@@ -27,64 +27,21 @@ const Header = () => {
             <div className="col-xl-7 col-lg-9 d-flex justify-content-center">
               <nav id="main-menu">
                 <ul>
-                  <li className="menu-item-has-children">
+                  <li className="">
                     <Link to="/">Home</Link>
-                    <ul>
-                      <li>
-                        <Link to="/">Home 01</Link>
-                      </li>
-                      <li>
-                        <Link to="/login">Login</Link>
-                      </li>
-                    </ul>
+                   
                   </li>
                   <li>
                     <Link to="/login">Login</Link>
                   </li>
-                  <li className="menu-item-has-children">
-                    <Link to="/course">Course</Link>
-                    <ul>
-                      <li>
-                        <Link to="/course">Course</Link>
-                      </li>
-                      <li>
-                        <Link to="/course-details">Course Details</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="menu-item-has-children">
-                    <a href="#">Pages</a>
-                    <ul>
-                      <li>
-                        <Link to="/instructor">Instructor</Link>
-                      </li>
-                      <li>
-                        <Link to="/instructor-details">Instructor Details</Link>
-                      </li>
-                      <li>
-                        <Link to="/pricing">Pricing Plan</Link>
-                      </li>
-                      <li>
-                        <Link to="/faq">Faq Page</Link>
-                      </li>
-                      <li>
-                        <Link to="/404">404</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="menu-item-has-children">
-                    <Link to="/blog">Blog</Link>
-                    <ul>
-                      <li>
-                        <Link to="/blog">Blog</Link>
-                      </li>
-                      <li>
-                        <Link to="/blog-details">Blog Details</Link>
-                      </li>
-                    </ul>
-                  </li>
+                  
+                  
+                  
                   <li>
                     <Link to="/contact">Contact</Link>
+                  </li>
+                  <li>
+                    <Link to="/news">News</Link>
                   </li>
                 </ul>
               </nav>

@@ -5,16 +5,26 @@ import "./Home.css"
 
 const Home = () => {
 
-  const customStyles = {
+const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)', // Dimmed backdrop
+    zIndex: 1000, // Keeps overlay on top of standard content
+  },
   content: {
-    // top: '70%',
-    // left: '50%',
-    // right: 'auto',
-    // bottom: 'auto',
-    // marginRight: '-50%',
-    // transform: 'translate(-50%, -50%)',
-     backgroundColor: "#000000"
-  
+    top: '80px', // Adjust this value to match your navbar's height
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    transform: 'translateX(-50%)', // Centers horizontally while respecting top margin
+    width: '90%', // Responsive width for mobile
+    maxWidth: '600px', // Restricts size on laptop screens
+    maxHeight: 'calc(100vh - 100px)', // Fits within screen height below navbar
+    // maxHeight: '600px', // Fits within screen height below navbar
+    overflowY: 'auto', // Adds vertical scrollbar if form content overflows
+    backgroundColor: '#000000',
+    borderRadius: '8px',
+    padding: '24px',
+    border: '1px solid #333',
   },
 };
 
@@ -210,17 +220,18 @@ const Home = () => {
             </div>
           </dl>
         </div> */}
-        <div style={{
-          position:"fixed",
-          // height:"100px",
-          zIndex:"1000",
-          left:"0px",
-          bottom:"0px",
-          border:"2px solid black"
-        }} className="container ">
+        <div
+        style={{
+    position: 'fixed',
+    bottom: '24px',
+    right: '24px',
+    zIndex: 999, // Keeps button below modal overlay (zIndex: 1000)
+    width: 'auto',
+  }}
+        className="container ">
              <button
              className='btn radio-btn radio-btn--primary radio-navbar__cta'
-             onClick={openModal}>Open Modal</button>
+             onClick={openModal}>Request Song</button>
         </div>
         <div className="col-12  hero-player-col">
           {/* ============ RADIO PLAYER (signature element) ============ */}
@@ -446,7 +457,8 @@ const Home = () => {
           </label>
           <input
             type="range"
-            className="form-range radio-player__volume-slider"
+            // className =" stylish-progress-bar"
+            className="form-range radio-player__volume-slider stylish-progress-bar"
             id="player-volume"
             min={0}
             max={100}
@@ -914,8 +926,7 @@ const Home = () => {
         contentLabel="Example Modal"
       >
         {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
+        {/* <div>I am a modal</div> */}
      <form
             className="song-request-card"
             id="song-request-form"
@@ -924,14 +935,15 @@ const Home = () => {
           >
             <div  className="row g-3">
               <div className="col-12 col-sm-6">
-                <label
+                {/* <label
                   htmlFor="request-name"
                   className="form-label radio-form-label"
                 >
                   Name
-                </label>
+                </label> */}
                 <input
                   type="text"
+                  placeholder='Name'
                   className="form-control radio-form-control"
                   id="request-name"
                   name="name"
@@ -943,13 +955,14 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-12 col-sm-6">
-                <label
+                {/* <label
                   htmlFor="request-email"
                   className="form-label radio-form-label"
                 >
                   Email
-                </label>
+                </label> */}
                 <input
+                placeholder='Email'
                   type="email"
                   className="form-control radio-form-control"
                   id="request-email"
@@ -962,14 +975,15 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-12 col-sm-6">
-                <label
+                {/* <label
                   htmlFor="request-song"
                   className="form-label radio-form-label"
                 >
                   Song Name
-                </label>
+                </label> */}
                 <input
                   type="text"
+                  placeholder='Song Name'
                   className="form-control radio-form-control"
                   id="request-song"
                   name="song"
@@ -980,14 +994,15 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-12 col-sm-6">
-                <label
+                {/* <label
                   htmlFor="request-artist"
                   className="form-label radio-form-label"
                 >
                   Artist Name
-                </label>
+                </label> */}
                 <input
                   type="text"
+                  placeholder='    Artist Name'
                   className="form-control radio-form-control"
                   id="request-artist"
                   name="artist"
@@ -1022,13 +1037,13 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-12">
-                <label
+                {/* <label
                   htmlFor="request-message"
                   className="form-label radio-form-label"
                 >
                   Message / Dedication
-                </label>
-                <textarea
+                </label> */}
+                <input
                   className="form-control radio-form-control"
                   id="request-message"
                   name="message"
@@ -1037,7 +1052,7 @@ const Home = () => {
                   defaultValue={""}
                 />
               </div>
-              <div className="col-12">
+              <div className="col-12 d-flex justify-content-between">
                 <button
                   type="submit"
                   className="btn radio-btn radio-btn--primary radio-btn--lg w-100 w-sm-auto"
@@ -1045,6 +1060,8 @@ const Home = () => {
                   <i className="bi bi-send-fill" aria-hidden="true" /> Send
                   Request
                 </button>
+        <button className='btn radio-btn radio-btn--primary radio-btn--lg w-100 w-sm-auto ' onClick={closeModal}>close</button>
+
               </div>
             </div>
           </form>

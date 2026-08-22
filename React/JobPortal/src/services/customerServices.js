@@ -10,5 +10,9 @@ export const CustomerUpdate = async(data) => {
    return await axios.post(BASEURL+UPDATECUSTOMER,data)
 }
 
+export const NEWSG = async(data) => {
+   return await axios.post(BASEURL+UPDATECUSTOMER,data)
+}
+
 
 

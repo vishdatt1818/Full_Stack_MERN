@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { categoryAll } from '../../../services/categoryServices'
 import { BASEURL } from '../../../endpoints'
+import { Link } from 'react-router-dom'
 
 const ManageCustomers = () => {
 
@@ -56,17 +57,18 @@ const ManageCustomers = () => {
       <th scope="col">Sr. No.</th>
       <th scope="col">Name</th>
       <th scope="col">Image</th>
-      {/* <th scope="col">Handle</th> */}
+      <th scope="col">Update</th>
     </tr>
   </thead>
   <tbody>
     {
-      data.map((item, index) => (
+      data.slice(1,11).map((item, index) => (
 
     <tr>
       <th scope="row">{index+1}</th>
       <td>{item.name}</td>
       <td> <img width={100} src={BASEURL+ item.image} alt="" /> </td>
+      <td> <Link to={"/admin/updatecategory/"+item._id} className='btn btn-success' >Update</Link> </td>
       
     </tr>
       ))

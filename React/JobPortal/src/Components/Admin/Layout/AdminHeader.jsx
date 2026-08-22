@@ -35,11 +35,12 @@ const AdminHeader = () => {
                     <Link to="/admin/managecustomers">Manage Customers</Link>
                   </li>
                 
-               
+
                  
                   <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/admin/addcate">Add Category</Link>
                   </li>
+              
                 </ul>
               </nav>
             </div>
