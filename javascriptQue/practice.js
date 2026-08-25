@@ -369,27 +369,87 @@ function abc(){
 
 // console.log(output);
 
-let str = "java script";
+// let str = "java script";
 
-function reverseWords(input) {
-    let words = input.split(' ');
-    let reversedWords = [];
+// function reverseWords(input) {
+//     let words = input.split(' ');
+//     let reversedWords = [];
 
-    for (let word of words) {
-        console.log(word);
+//     for (let word of words) {
+//         console.log(word);
         
-        let reversedWord = '';
-        for (let i = word.length - 1; i >= 0; i--) {
-            reversedWord += word[i];
+//         let reversedWord = '';
+//         for (let i = word.length - 1; i >= 0; i--) {
+//             reversedWord += word[i];
+//         }
+//         reversedWords.push(reversedWord);
+//     }
+
+//     return reversedWords;
+// }
+
+// console.log(reverseWords(str)); // Output: "avaj tpircs"
+
+// function sumRange(num){
+//     if(num === 1) return 1
+//     return num + sumRange(num-1)
+
+// }
+// console.log(sumRange(4));
+
+// function counting(n){
+//     if (n===1) return 1
+//     counting(n-1)
+//     console.log(
+// n
+//     );
+// }
+
+// console.log(counting(10));
+
+
+
+function binarySearch(arr,target){
+    
+    let left =0
+    let right = arr.length-1
+    
+    while(left <= right){
+         let mid = Math.floor((left + right) / 2);
+        if(arr[mid] === target){
+            return mid
+        }else if(target>arr[mid]){
+            left = mid +1
+        }else{
+            right = mid -1
         }
-        reversedWords.push(reversedWord);
+    }
+}
+console.log(
+
+    binarySearch([1,2,3,4,5,6,7],6) 
+);
+
+
+function binarySearchh(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+
+        if (arr[mid] === target) {
+            return mid;
+        } 
+        else if (target > arr[mid]) {
+            left = mid + 1;
+        } 
+        else {
+            right = mid - 1;
+        }
     }
 
-    return reversedWords;
+    return -1;
 }
 
-console.log(reverseWords(str)); // Output: "avaj tpircs"
-
-
-
-
+console.log(binarySearchh([1, 2, 3, 4, 5,6], 6));

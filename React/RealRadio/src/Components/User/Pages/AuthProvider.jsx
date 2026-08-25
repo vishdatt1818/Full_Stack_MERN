@@ -18,9 +18,7 @@ const AuthProvider = ({ children }) => {
         setUserId(null);
     };
 
-    useEffect(() =>{
-
-    })
+  
 
     return (
         <AuthContext.Provider

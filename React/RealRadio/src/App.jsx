@@ -7,6 +7,7 @@ import Login from './Components/User/Pages/Login'
 import AdminLayout from './Components/Admin/AdminLayout/AdminLayout'
 import Dashboard from './Components/Admin/Dashboard/Dashboard'
 import AddSong from './Components/Admin/AddSong/AddSong'
+import { useEffect } from 'react'
 
 const AuthContext = createContext(null);
 
@@ -28,6 +29,10 @@ function App() {
 //   }
 // }
 
+const randId = Math.floor(1000+Math.random()*9000)
+  // localStorage.setItem("id", randId)
+
+ 
 
   return (
     <>
@@ -35,11 +40,11 @@ function App() {
      <Routes>
       <Route path='/' element={<Layout/>}>
       <Route path='/' element={<Home/>}></Route>
-      <Route path='/login' element={<Login/>}></Route>
+      <Route path='/login' element={<Login value={randId}/>}></Route>
       </Route>
 
-         <Route path='/admin' element={<AdminLayout/>}>
-      <Route path='/admin' element={<Dashboard />}></Route>
+         <Route path='/admin' element={<AdminLayout value={randId}/>}>
+      <Route path='/admin' element={<Dashboard value={randId}/>}></Route>
       {/* <Route path='/admin' element={<Dashboard/>}></Route> */}
       <Route path='/admin/addsong' element={<AddSong/>}></Route>
       </Route>

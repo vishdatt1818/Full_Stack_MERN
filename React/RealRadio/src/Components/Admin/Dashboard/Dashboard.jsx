@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../User/Pages/AuthProvider";
 
-const Dashboard = () => {
+const Dashboard = ({value }) => {
   const { userId } = useContext(AuthContext);
   console.log(userId);
+  console.log("appiddd", value);
+  
   
 
   return (
@@ -14,14 +16,7 @@ const Dashboard = () => {
       consectetur adipisicing elit. Saepe laborum sapiente voluptatum at!
       Dolorem culpa sequi aperiam ipsam illum facere odio iure quasi. Nostrum,
       impedit facere? Dicta nam hic rerum. Lorem ipsum dolor sit amet
-      consectetur adipisicing elit. Doloribus, iure? Cumque doloremque adipisci
-      facere ipsa voluptate cum, porro voluptatem nulla dicta quisquam
-      voluptatibus quam nam cupiditate ex amet odit voluptates aspernatur omnis
-      fugiat saepe suscipit atque harum deserunt neque? Praesentium tenetur
-      expedita eligendi. Voluptas, quis libero natus sint dignissimos vero
-      numquam quasi animi accusamus quisquam aspernatur minima repellat,
-      voluptates ducimus. Dicta sunt quaerat aliquid autem incidunt unde, at
-      doloremque nam ipsum error totam necessitatibus ea quibusdam modi nemo
+      tam necessitatibus ea quibusdam modi nemo
      
     </div>
     <h1>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from './AuthProvider';
 
-const Login = () => {
+const Login = ({value}) => {
 
      const { saveUserId } = useContext(AuthContext);
 
@@ -10,24 +10,25 @@ const Login = () => {
     const [Password, setPassword] = useState("")
 
      const nav=useNavigate()
+     const userIdd =  localStorage.getItem("id")
 
      const handleForm = (e) => {
          e.preventDefault()
          
-         const rand = Math.floor(1000+Math.random()*9000)
+        //  const rand = Math.floor(1000+Math.random()*9000)
         if(email === "admin@gmail.com" && Password === "123" ){
 
-            saveUserId(rand);
+            // saveUserId(rand);
 
             nav("/admin")
             console.log(email);
             console.log(Password);
             localStorage.setItem("email", email)
         localStorage.setItem("password", Password)
-        localStorage.setItem("id", rand)
+        localStorage.setItem("id", value)
         
         
-        console.log(rand);
+        // console.log(rand);
         
         }
 

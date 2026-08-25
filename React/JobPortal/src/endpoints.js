@@ -4,7 +4,7 @@ export const GetToken=()=>{
     let token=localStorage.getItem("token")
     let obj={Authorization:token}
     return {headers:obj}
-
+    
 }
 
 export const ADDCUSTOMER = "api/user/add"
