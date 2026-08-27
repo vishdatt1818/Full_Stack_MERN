@@ -29,8 +29,13 @@ function App() {
 //   }
 // }
 
-const randId = Math.floor(1000+Math.random()*9000)
+// const randId = Math.floor(1000+Math.random()*9000)
   // localStorage.setItem("id", randId)
+   const randId = localStorage.getItem("id") || (() => {
+    const newId = Math.floor(1000 + Math.random() * 9000);
+    localStorage.setItem("id", newId);
+    return newId;
+  })();
 
  
 

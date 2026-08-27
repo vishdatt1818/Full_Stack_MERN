@@ -7,25 +7,65 @@ const AddSong = () => {
 
   const nav = useNavigate();
 
-  const handleForm = (e) => {
-    e.preventDefault();
+  // const handleForm = (e) => {
+  //   e.preventDefault();
 
-    if (!song) return;
+  //   if (!song) return;
 
-    // Create a temporary local URL for the file
-    const fileUrl = URL.createObjectURL(song);
+  //   // Create a temporary local URL for the file
+  //   const fileUrl = URL.createObjectURL(song);
 
-    // Create a temporary <a> tag to trigger download
-    const link = document.createElement("a");
-    link.href = fileUrl;
-    link.download = song.name; // Retain original file name
-    document.body.appendChild(link);
-    link.click();
+  //   // Create a temporary <a> tag to trigger download
+  //   const link = document.createElement("a");
+  //   link.href = fileUrl;
+  //   link.download = song.name; // Retain original file name
+  //   document.body.appendChild(link);
+  //   link.click();
 
-    // Clean up memory
-    document.body.removeChild(link);
-    URL.revokeObjectURL(fileUrl);
-  };
+  //   // Clean up memory
+  //   document.body.removeChild(link);
+  //   URL.revokeObjectURL(fileUrl);
+  // };
+
+
+  const handleForm = async (e) => {
+  e.preventDefault();
+
+  if (!title || !song) {
+    alert("Please enter song title and select a song");
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("song", song);
+
+    const response = await fetch("http://localhost:5000/api/songs/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Upload failed");
+    }
+
+    console.log("Uploaded:", data);
+
+    alert("Song added successfully!");
+
+    setSongTitle("");
+    setSong(null);
+
+  } catch (error) {
+    console.error(error);
+    alert("Song upload failed");
+  }
+};
+
 
   return (
     <>

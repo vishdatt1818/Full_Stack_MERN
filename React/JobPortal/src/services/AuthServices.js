@@ -12,4 +12,16 @@ export const setData = (data) =>{
     localStorage.setItem("email",data.data.email)
     localStorage.setItem("name",data.data.name)
     localStorage.setItem("userType",data.data.userType)
+    localStorage.setItem("IsLogin",true)
+    
+}
+
+export const getIsLogin = () =>{
+   return localStorage.getItem("IsLogin")
+}
+export const getUserType = () =>{
+   return localStorage.getItem("userType")
+}
+export const clear = () =>{
+   return localStorage.clear()
 }

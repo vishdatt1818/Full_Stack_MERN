@@ -119,7 +119,7 @@ const AdminLayout = ({ value }) => {
       setIsAuthenticated(checkAuth());
     };
 
-    // Fires when localStorage changes in ANOTHER tab/window
+    
     window.addEventListener('storage', handleStorageChange);
 
     return () => window.removeEventListener('storage', handleStorageChange);

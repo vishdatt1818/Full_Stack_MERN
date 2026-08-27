@@ -13,6 +13,8 @@ const Login = ({value}) => {
      const userIdd =  localStorage.getItem("id")
 
      const handleForm = (e) => {
+      console.log("hello");
+      
          e.preventDefault()
          
         //  const rand = Math.floor(1000+Math.random()*9000)

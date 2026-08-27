@@ -10,6 +10,7 @@ import AddCategory from "./Components/Admin/Categories/AddCategory"
 import { Toaster } from "react-hot-toast"
 import UpdateCategory from "./Components/Admin/Categories/UpdateCategory"
 import News from "./Components/User/Pages/News"
+import ProtectiveLayout from "./Components/Admin/Pages/ProtectiveLayout"
 
 
 
@@ -30,12 +31,15 @@ function App() {
 
         </Route>
 
-        <Route path="/admin" element={<AdminLayout/>}>
-         <Route path='/admin' element={<Dashboard/>}></Route>
+        <Route path="/admin" element={<ProtectiveLayout/>}>
+        {/* <Route index> */}
+          <Route index element={<Dashboard />} />
+         {/* <Route path='/admin' element={<Dashboard/>}></Route> */}
          <Route path='/admin/managecustomers' element={<ManageCustomers/>}></Route>
          <Route path='/admin/addcate' element={<AddCategory/>}></Route>
          <Route path='/admin/updatecategory/:id' element={<UpdateCategory/>}></Route>
-        </Route>
+         </Route>
+        {/* </Route> */}
      </Routes>
      </BrowserRouter>
 

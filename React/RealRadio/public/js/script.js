@@ -163,15 +163,15 @@ const RadioApp = {
     const collapseEl = qs("#radioNavCollapse");
 
     // Sticky navbar background on scroll
-    const onScroll = () => {
-      if (window.scrollY > 24) {
-        navbar.classList.add("is-scrolled");
-      } else {
-        navbar.classList.remove("is-scrolled");
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    // const onScroll = () => {
+    //   if (window.scrollY > 24) {
+    //     navbar.classList.add("is-scrolled");
+    //   } else {
+    //     navbar.classList.remove("is-scrolled");
+    //   }
+    // };
+    // window.addEventListener("scroll", onScroll, { passive: true });
+    // onScroll();
 
     // Smooth-scroll + close mobile menu on nav click
     navLinks.forEach((link) => {
