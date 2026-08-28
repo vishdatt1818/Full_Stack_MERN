@@ -10,14 +10,14 @@ const ProtectiveLayout = () => {
 
         const IsLogin = getIsLogin()
 
-        if(getUserType === 1){
+        if(Number(getUserType()) === 1){
             nav("/admin")
         }else{
             nav("/login")
         }
     },[])
   return (
-    Outlet
+    <Outlet/>
   )
 }
 

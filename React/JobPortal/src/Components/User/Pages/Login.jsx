@@ -23,10 +23,17 @@
               password:Password
           }
           CustomerLogin(payload).then((res) =>{
-            nav("/")
+            
+            // nav("/")
             console.log(res.data);
               toast.success(res.data.message)
               setData(res.data)
+
+              if(res.data.data.userType==1){
+                nav("/admin")
+            }else{
+                nav("/")
+            }
               
           })
       }

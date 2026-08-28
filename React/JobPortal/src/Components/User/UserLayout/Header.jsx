@@ -1,34 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { clear, getIsLogin } from '../../../services/AuthServices'
-
 import toast from "react-hot-toast";
 
 const Header = () => {
 
 
 
-    // const isLogin = Boolean(getIsLogin())
- 
-  const [isLogin, setIsLogin] = useState(() => Boolean(getIsLogin()));
+    // const isLogin =getIsLogin()
 
+    const nav=useNavigate()
+    // const location = useLocation()
+    
+    
+    const [isLogin, setIsLogin] = useState();
+
+    function isLgoin(){
+      setIsLogin(Boolean(getIsLogin()))
+    }
+    
+    console.log(isLogin);
   const logoutBtn = () =>{
-    setIsLogin(false)
-    console.log("hejjj");
-    console.log(typeof isLogin);
-    console.log( isLogin);
-     toast.success("Logout Successfully")
-    
-    
+
     clear()
+    setIsLogin(false)
+    // console.log("hejjj");
+    // console.log(typeof isLogin);
+    // console.log( isLogin);
+    
+     toast.success("Logout Successfully")
+     nav("/login")
+
+
+    
+    
+    // clear()
   }
 
-  useEffect(() =>{
+  // useEffect(() => {
+  //   setIsLogin(Boolean(getIsLogin()))
+  // }, [location.pathname])
 
-    // const isLogin = Boolean(getIsLogin())
-    // logoutBtn()
-    setIsLogin(Boolean(getIsLogin()))
-  },[])
+  useEffect(() => {
+    isLgoin()
+  })
 
   return (
     <>
@@ -60,10 +75,10 @@ const Header = () => {
                    
                   </li>
                   {
-                    isLogin  ?
+                    isLogin ?
 
                   <li>
-                    <button className='btn' onClick={logoutBtn}>Logout</button>
+                    <button className='btn fw-bold' onClick={logoutBtn}>LOGOUT</button>
                   </li>:
                   <li>
                     <Link to="/login">Login</Link>
@@ -85,12 +100,16 @@ const Header = () => {
 
             {/* BUTTONS COLUMN (FIXED & ALIGNED) */}
             <div className="col-xl-3 d-none d-xl-flex justify-content-end align-items-center gap-3">
-              <Link to="/login" className="header-btn">
-                Sign In
-              </Link>
-              <Link to="/signup" className="btn_one">
-                Sign Up
-              </Link>
+              {!isLogin && (
+                <>
+                  <Link to="/login" className="header-btn">
+                    Sign In
+                  </Link>
+                  <Link to="/signup" className="btn_one">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

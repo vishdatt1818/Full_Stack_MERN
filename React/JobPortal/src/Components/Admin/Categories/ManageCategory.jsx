@@ -6,12 +6,24 @@ import { Link } from "react-router-dom";
 import Switch from "react-switch";
 import toast from "react-hot-toast";
 
-const ManageCustomers = () => {
+import ResponsivePagination from 'react-responsive-pagination';
+
+const ManageCategory = () => {
   const [data, setdata] = useState([]);
+   const [TotalPages, setTotalPages] = useState(0)
+     const [currentPage, setCurrentPage] = useState(1);
+    const limit=10
 
   const fetchData = () => {
     categoryAll()
       .then((res) => {
+
+         console.log(res.data.data.length);
+            let totalLenght=res.data.data.length
+
+            console.log("formula----->", Math.ceil(totalLenght/limit));
+            setTotalPages(Math.ceil(totalLenght/limit))
+            
         // console.log(res.data.data);
         setdata(res.data.data);
       })
@@ -80,9 +92,9 @@ const ManageCustomers = () => {
             </tr>
           </thead>
           <tbody>
-            {data.slice(1, 11).map((item, index) => (
+            {data.slice((currentPage-1)*limit, ((currentPage-1)*limit)+limit).map((item, index) => (
               <tr>
-                <th scope="row">{index + 1}</th>
+                <th scope="row">{(currentPage-1)*limit+index + 1}</th>
                 <td>{item.name}</td>
                 <td>
                 
@@ -112,12 +124,26 @@ const ManageCustomers = () => {
                 </td>
               </tr>
             ))}
+            {/* <tr> */}
+            
+            {/* </tr> */}
           </tbody>
         </table>
+        <div className="d-flex justify-content-center ">
+            <div className="w-50  ">
+                {/* <td colSpan={1}> */}
+         <ResponsivePagination
+      current={currentPage}
+      total={TotalPages}
+      onPageChange={setCurrentPage}
+    />
+                {/* </td> */}
+                </div>
+      </div>
       </div>
       {/* END CONTACT */}
     </>
   );
 };
 
-export default ManageCustomers;
+export default ManageCategory;

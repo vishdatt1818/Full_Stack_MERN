@@ -454,10 +454,29 @@ function abc(){
 
 // console.log(binarySearchh([1, 2, 3, 4, 5,6], 6));
 
-console.log([] == []);
+// console.log([] == []);
 
-console.log({} == {});
+// console.log({} == {});
 
-console.log(typeof []);
+// console.log(typeof []);
 
 
+let arr = [1,2,0,6,0,5,0,7]
+
+function moveZero(arr){
+    let index = 0
+    for(let no of arr){
+        if(no !== 0 ){
+            arr[index] = no
+            index++
+        }
+      
+    }
+      while(index < arr.length){
+            arr[index] = 0
+            index++
+        }
+    return arr
+}
+
+console.log(moveZero(arr));

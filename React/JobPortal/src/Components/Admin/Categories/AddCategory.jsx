@@ -48,12 +48,12 @@ const AddCategory = () => {
               data-wow-delay="0.3s"
               data-wow-offset={0}
             >
-              <h1>Login</h1>
+              <h1>Add Category</h1>
               <ul>
                 <li>
-                  <a href="index.html">Login</a>
+                  <a href="index.html">Add Category</a>
                 </li>
-                <li> / Login</li>
+                <li> / Add Category</li>
               </ul>
             </div>
             {/* //.HERO-TEXT */}

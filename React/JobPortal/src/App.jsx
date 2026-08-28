@@ -4,13 +4,14 @@ import Home from "./Components/User/Pages/Home"
 import Login from "./Components/User/Pages/Login"
 import AdminLayout from "./Components/Admin/Layout/AdminLayout"
 import Dashboard from "./Components/Admin/Pages/Dashboard"
-import ManageCustomers from "./Components/Admin/Categories/ManageCustomers"
+// import ManageCustomers from "./Components/Admin/Categories/ManageCustomers"
 import SignUp from "./Components/User/Pages/SignUp"
 import AddCategory from "./Components/Admin/Categories/AddCategory"
 import { Toaster } from "react-hot-toast"
 import UpdateCategory from "./Components/Admin/Categories/UpdateCategory"
 import News from "./Components/User/Pages/News"
 import ProtectiveLayout from "./Components/Admin/Pages/ProtectiveLayout"
+import ManageCategory from "./Components/Admin/Categories/ManageCategory"
 
 
 
@@ -32,14 +33,15 @@ function App() {
         </Route>
 
         <Route path="/admin" element={<ProtectiveLayout/>}>
-        {/* <Route index> */}
-          <Route index element={<Dashboard />} />
+          <Route element={<AdminLayout/>}>
+          <Route index element={<Dashboard />} /><Route/>
          {/* <Route path='/admin' element={<Dashboard/>}></Route> */}
-         <Route path='/admin/managecustomers' element={<ManageCustomers/>}></Route>
+         <Route path='/admin/managecategory' element={<ManageCategory/>}></Route>
          <Route path='/admin/addcate' element={<AddCategory/>}></Route>
          <Route path='/admin/updatecategory/:id' element={<UpdateCategory/>}></Route>
-         </Route>
-        {/* </Route> */}
+        
+        </Route>
+        </Route>
      </Routes>
      </BrowserRouter>
 
