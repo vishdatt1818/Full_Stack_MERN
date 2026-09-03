@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import "./Home.css"
@@ -65,98 +65,235 @@ const customStyles = {
 //   };
 
 
-  const playlist = [
-    {
-      id: 1,
-      title: "Rock Music",
-      artist: "The Weeknd",
-      src: "/audio/alex-morgan-hype-attitude-rock-music-583246.mp3",
-      art: "images/song-1.jpg",
-    },
-    {
-      id: 2,
-      title: "Lofi Music",
-      artist: "Second Artist",
-      src: "/audio/prettyjohn1-lofi-lofi-music_61sec-587180.mp3",
-      art: "images/song-2.jpg",
-    },
-    {
-      id: 3,
-      title: "Instrumental",
-      artist: "Third Artist",
-      src: "/audio/alex-morgan-party-birthday-instrumental-music-583236.mp3",
-      art: "images/song-3.jpg",
-    },
-  ];
+  // const playlist = [
+  //   {
+  //     id: 1,
+  //     title: "Rock Music",
+  //     artist: "The Weeknd",
+  //     src: "/audio/alex-morgan-hype-attitude-rock-music-583246.mp3",
+  //     art: "images/song-1.jpg",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Lofi Music",
+  //     artist: "Second Artist",
+  //     src: "/audio/prettyjohn1-lofi-lofi-music_61sec-587180.mp3",
+  //     art: "images/song-2.jpg",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Instrumental",
+  //     artist: "Third Artist",
+  //     src: "/audio/alex-morgan-party-birthday-instrumental-music-583236.mp3",
+  //     art: "images/song-3.jpg",
+  //   },
+  // ];
 
   // 2. Track current track index, playing state, and volume
- const [currentIndex, setCurrentIndex] = useState(0);
+const [playlist, setPlaylist] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const audioRef = useRef(null);
-  const currentTrack = playlist[currentIndex];
 
-  const formatTime = (timeInSeconds) => {
-    if (isNaN(timeInSeconds)) return "00:00";
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
-    return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  };
+  const fetchPlaylist = async () => {
+  try {
+    const response = await fetch(
+      "http://192.168.29.46:5000/api/songs"
+    );
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play();
+    if (!response.ok) {
+      throw new Error("Failed to fetch songs");
+    }
+
+    const data = await response.json();
+
+    setPlaylist(data);
+  } catch (error) {
+    console.error(
+      "Error fetching songs:",
+      error
+    );
+  }
+};
+
+useEffect(() => {
+  fetchPlaylist();
+}, []);
+
+const currentTrack =
+  playlist[currentIndex] || null;
+
+
+// =========================
+// CHANGE SONG
+// =========================
+
+useEffect(() => {
+  if (!audioRef.current || !currentTrack) {
+    return;
+  }
+
+  audioRef.current.load();
+
+  if (isPlaying) {
+    audioRef.current
+      .play()
+      .catch((error) => {
+        console.error(
+          "Playback error:",
+          error
+        );
+      });
+  }
+}, [currentIndex, currentTrack]);
+
+
+// =========================
+// PLAY / PAUSE
+// =========================
+
+const togglePlay = async () => {
+  if (!audioRef.current) return;
+
+  if (isPlaying) {
+    audioRef.current.pause();
+
+    setIsPlaying(false);
+  } else {
+    try {
+      await audioRef.current.play();
+
       setIsPlaying(true);
+    } catch (error) {
+      console.error(
+        "Unable to play:",
+        error
+      );
     }
-  };
+  }
+};
 
-  const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % playlist.length;
-    setCurrentIndex(nextIndex);
-    if (isPlaying) {
-      setTimeout(() => audioRef.current.play(), 0);
-    }
-  };
 
-  const handlePrev = () => {
-    const prevIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-    setCurrentIndex(prevIndex);
-    if (isPlaying) {
-      setTimeout(() => audioRef.current.play(), 0);
-    }
-  };
+// =========================
+// NEXT
+// =========================
 
-  const handleTimeUpdate = () => {
-    setCurrentTime(audioRef.current.currentTime);
-  };
+const handleNext = () => {
+  if (playlist.length === 0) return;
 
-  const handleLoadedMetadata = () => {
-    setDuration(audioRef.current.duration);
-  };
+  const nextIndex =
+    (currentIndex + 1) %
+    playlist.length;
 
-  const handleSeek = (e) => {
-    const newTime = parseFloat(e.target.value);
-    audioRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
+  setCurrentIndex(nextIndex);
 
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value / 100;
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-    }
-  };
+  setCurrentTime(0);
+};
 
-  // Calculate percentage filled for dynamic gradient styling
-  const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
+// =========================
+// PREVIOUS
+// =========================
+
+const handlePrev = () => {
+  if (playlist.length === 0) return;
+
+  const prevIndex =
+    (currentIndex - 1 + playlist.length) %
+    playlist.length;
+
+  setCurrentIndex(prevIndex);
+
+  setCurrentTime(0);
+};
+
+
+// =========================
+// TIME UPDATE
+// =========================
+
+const handleTimeUpdate = () => {
+  if (!audioRef.current) return;
+
+  setCurrentTime(
+    audioRef.current.currentTime
+  );
+};
+
+
+// =========================
+// AUDIO LOADED
+// =========================
+
+const handleLoadedMetadata = () => {
+  if (!audioRef.current) return;
+
+  setDuration(
+    audioRef.current.duration
+  );
+};
+
+
+// =========================
+// SEEK
+// =========================
+
+const handleSeek = (e) => {
+  const newTime =
+    parseFloat(e.target.value);
+
+  if (!audioRef.current) return;
+
+  audioRef.current.currentTime =
+    newTime;
+
+  setCurrentTime(newTime);
+};
+
+
+// =========================
+// VOLUME
+// =========================
+
+const handleVolumeChange = (e) => {
+  const newVolume =
+    Number(e.target.value) / 100;
+
+  setVolume(newVolume);
+
+  if (audioRef.current) {
+    audioRef.current.volume =
+      newVolume;
+  }
+};
+
+const formatTime = (timeInSeconds) => {
+  if (isNaN(timeInSeconds)) {
+    return "00:00";
+  }
+
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+
+  return `${minutes < 10 ? "0" : ""}${minutes}:${
+    seconds < 10 ? "0" : ""
+  }${seconds}`;
+};
+
+
+
+// =========================
+// PROGRESS
+// =========================
+
+const progressPercent =
+  duration > 0
+    ? (currentTime / duration) * 100
+    : 0;
   
   return (
   <>
@@ -363,120 +500,225 @@ const customStyles = {
       
 
 
+<div
+  className="radio-player"
+  id="radio-player"
+  role="region"
+  aria-label="Radio player"
+>
+  <div className="radio-player__top">
+    <span
+      className="live-pill live-pill--sm"
+      aria-hidden="true"
+    >
+      <span className="live-pill__dot" />
+      LIVE
+    </span>
 
-  <div className="radio-player" id="radio-player" role="region" aria-label="Radio player">
-      <div className="radio-player__top">
-        <span className="live-pill live-pill--sm" aria-hidden="true">
-          <span className="live-pill__dot" />
-          LIVE
-        </span>
-        <span className="radio-player__listeners" id="player-listener-count" aria-label="Current listeners">
-          <i className="bi bi-headphones" aria-hidden="true" />
-          <span data-field="listeners">1,248</span> listening
-        </span>
-      </div>
-
-      <div className="radio-player__body">
-        <div className="radio-player__art-wrap">
-          <img
-            src={currentTrack.art}
-            alt={currentTrack.title}
-            className="radio-player__art"
-            id="player-art"
-          />
-          <div className="radio-player__art-ring" aria-hidden="true" />
-        </div>
-
-        <div className="radio-player__meta">
-          <p className="radio-player__song" id="player-song-title">
-            {currentTrack.title}
-          </p>
-          <p className="radio-player__artist" id="player-song-artist">
-            {currentTrack.artist}
-          </p>
-          <div className={`waveform ${isPlaying ? "waveform--active" : ""}`} id="player-waveform" aria-hidden="true">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <span key={i} className="waveform__bar" />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* STYLISH PROGRESS BAR SECTION */}
-      <div className="radio-player__progress-container">
-        <div className="progress-bar-wrapper">
-          <input
-            type="range"
-            className="stylish-progress-bar"
-            min={0}
-            max={duration || 0}
-            step="0.1"
-            value={currentTime}
-            onChange={handleSeek}
-            style={{ "--progress-percent": `${progressPercent}%` }}
-          />
-        </div>
-        <div className="radio-player__time-display">
-          <span>{formatTime(currentTime)}</span>
-          <span>{formatTime(duration)}</span>
-        </div>
-      </div>
-
-      <div className="radio-player__controls">
-        <button
-          type="button"
-          className="radio-player__ctrl-btn"
-          onClick={handlePrev}
-          aria-label="Previous song"
-        >
-          <i className="bi bi-skip-start-fill" aria-hidden="true" />
-        </button>
-
-        <button
-          type="button"
-          className="radio-player__ctrl-btn radio-player__ctrl-btn--play"
-          onClick={togglePlay}
-          aria-label={isPlaying ? "Pause" : "Play"}
-        >
-          <i className={`bi ${isPlaying ? "bi-pause-fill" : "bi-play-fill"}`} aria-hidden="true" />
-        </button>
-
-        <button
-          type="button"
-          className="radio-player__ctrl-btn"
-          onClick={handleNext}
-          aria-label="Next song"
-        >
-          <i className="bi bi-skip-end-fill" aria-hidden="true" />
-        </button>
-
-        <div className="radio-player__volume">
-          <i className="bi bi-volume-up-fill" aria-hidden="true" />
-          <label htmlFor="player-volume" className="visually-hidden">
-            Volume
-          </label>
-          <input
-            type="range"
-            // className =" stylish-progress-bar"
-            className="form-range radio-player__volume-slider stylish-progress-bar"
-            id="player-volume"
-            min={0}
-            max={100}
-            value={volume * 100}
-            onChange={handleVolumeChange}
-          />
-        </div>
-      </div>
-
-      <audio
-        ref={audioRef}
-        src={currentTrack.src}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-        onEnded={handleNext}
-        preload="auto"
+    <span
+      className="radio-player__listeners"
+      id="player-listener-count"
+      aria-label="Current listeners"
+    >
+      <i
+        className="bi bi-headphones"
+        aria-hidden="true"
       />
+
+      <span data-field="listeners">
+        1,248
+      </span>{" "}
+      listening
+    </span>
+  </div>
+
+  <div className="radio-player__body">
+
+    {/* ART */}
+    <div className="radio-player__art-wrap">
+
+      <img
+        src={currentTrack?.art}
+        alt={currentTrack?.title || "Current song"}
+        className="radio-player__art"
+        id="player-art"
+      />
+
+      <div
+        className="radio-player__art-ring"
+        aria-hidden="true"
+      />
+
     </div>
+
+
+    {/* SONG INFORMATION */}
+    <div className="radio-player__meta">
+
+      <p
+        className="radio-player__song"
+        id="player-song-title"
+      >
+        {currentTrack?.title || "No song selected"}
+      </p>
+
+      <p
+        className="radio-player__artist"
+        id="player-song-artist"
+      >
+        {currentTrack?.artist || "Unknown Artist"}
+      </p>
+
+
+      {/* WAVEFORM */}
+      <div
+        className={`waveform ${
+          isPlaying ? "waveform--active" : ""
+        }`}
+        id="player-waveform"
+        aria-hidden="true"
+      >
+        {Array.from({ length: 20 }).map(
+          (_, i) => (
+            <span
+              key={i}
+              className="waveform__bar"
+            />
+          )
+        )}
+      </div>
+
+    </div>
+  </div>
+
+
+  {/* PROGRESS BAR */}
+  <div className="radio-player__progress-container">
+
+    <div className="progress-bar-wrapper">
+
+      <input
+        type="range"
+        className="stylish-progress-bar"
+        min={0}
+        max={duration || 0}
+        step="0.1"
+        value={currentTime}
+        onChange={handleSeek}
+        style={{
+          "--progress-percent":
+            `${progressPercent}%`,
+        }}
+      />
+
+    </div>
+
+    <div className="radio-player__time-display">
+      <span>
+        {formatTime(currentTime)}
+      </span>
+
+      <span>
+        {formatTime(duration)}
+      </span>
+    </div>
+
+  </div>
+
+
+  {/* CONTROLS */}
+  <div className="radio-player__controls">
+
+    {/* PREVIOUS */}
+    <button
+      type="button"
+      className="radio-player__ctrl-btn"
+      onClick={handlePrev}
+      aria-label="Previous song"
+    >
+      <i
+        className="bi bi-skip-start-fill"
+        aria-hidden="true"
+      />
+    </button>
+
+
+    {/* PLAY / PAUSE */}
+    <button
+      type="button"
+      className="radio-player__ctrl-btn radio-player__ctrl-btn--play"
+      onClick={togglePlay}
+      aria-label={
+        isPlaying ? "Pause" : "Play"
+      }
+    >
+      <i
+        className={`bi ${
+          isPlaying
+            ? "bi-pause-fill"
+            : "bi-play-fill"
+        }`}
+        aria-hidden="true"
+      />
+    </button>
+
+
+    {/* NEXT */}
+    <button
+      type="button"
+      className="radio-player__ctrl-btn"
+      onClick={handleNext}
+      aria-label="Next song"
+    >
+      <i
+        className="bi bi-skip-end-fill"
+        aria-hidden="true"
+      />
+    </button>
+
+
+    {/* VOLUME */}
+    <div className="radio-player__volume">
+
+      <i
+        className="bi bi-volume-up-fill"
+        aria-hidden="true"
+      />
+
+      <label
+        htmlFor="player-volume"
+        className="visually-hidden"
+      >
+        Volume
+      </label>
+
+      <input
+        type="range"
+        className="form-range radio-player__volume-slider stylish-progress-bar"
+        id="player-volume"
+        min={0}
+        max={100}
+        value={volume * 100}
+        onChange={handleVolumeChange}
+      />
+
+    </div>
+
+  </div>
+
+
+  {/* ACTUAL AUDIO */}
+  <audio
+    ref={audioRef}
+    src={currentTrack?.src}
+    onTimeUpdate={handleTimeUpdate}
+    onLoadedMetadata={handleLoadedMetadata}
+    onEnded={handleNext}
+    volume={volume}
+    preload="auto"
+  />
+
+</div>
 
 
 

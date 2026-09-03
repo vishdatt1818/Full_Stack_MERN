@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddSong = () => {
   const [title, setSongTitle] = useState("");
-  const [song, setSong] = useState("");
+  const [song, setSong] = useState(null);
 
   const nav = useNavigate();
 
@@ -42,7 +42,7 @@ const AddSong = () => {
     formData.append("title", title);
     formData.append("song", song);
 
-    const response = await fetch("http://localhost:5000/api/songs/upload", {
+    const response = await fetch("http://192.168.29.46:5000/api/songs/upload", {
       method: "POST",
       body: formData,
     });

@@ -277,26 +277,26 @@ function abc(){
 // console.log(result);
 
 
-// let arr = [3, 0, 1];
+let arr5 = [3, 0, 1];
 
-// function findMissing(arr){
-//     let box = {}
-//     for(num of arr){
-//         if(box[num] == undefined){
-//             box[num] = 1
-//         }else{
-//             box[num]++
-//         }
-//     }
+function findMissing(arr){
+    let box = {}
+    for(num of arr){
+        if(box[num] == undefined){
+            box[num] = 1
+        }else{
+            box[num]++
+        }
+    }
 
-//     for(let i=0; i<arr.length ; i++){
-//         if(!(i in box)){
-
-//         }
-//     }
+    for(let i=0; i<arr.length ; i++){
+        if(!(i in box)){
+            return i
+        }
+    }
     
-// }
-// console.log(findMissing(arr));
+}
+console.log(findMissing(arr5));
 
 
 // const str = "well reverse this"
@@ -314,13 +314,13 @@ function abc(){
 
 // );
 
-// if([]){
-//     console.log("hello");
+if({}){
+    console.log("if block");
     
-// }else{
-//     console.log("else block");
+}else{
+    console.log("else block");
     
-// }
+}
 
 // function prime(no){
 //     for(let i = 2 ; i<no ; i++){
@@ -454,29 +454,93 @@ function abc(){
 
 // console.log(binarySearchh([1, 2, 3, 4, 5,6], 6));
 
-// console.log([] == []);
+console.log([] == []);
 
-// console.log({} == {});
+console.log({} == {});
 
-// console.log(typeof []);
+console.log(typeof []);
 
 
-let arr = [1,2,0,6,0,5,0,7]
+// let arr = [1,2,0,6,0,5,0,7]
 
-function moveZero(arr){
-    let index = 0
-    for(let no of arr){
-        if(no !== 0 ){
-            arr[index] = no
-            index++
-        }
+// function moveZero(arr){
+//     let index = 0
+//     for(let no of arr){
+//         if(no !== 0 ){
+//             arr[index] = no
+//             index++
+//         }
       
-    }
-      while(index < arr.length){
-            arr[index] = 0
-            index++
+//     }
+//       while(index < arr.length){
+//             arr[index] = 0
+//             index++
+//         }
+//     return arr
+// }
+
+// console.log(moveZero(arr));
+
+
+let arr33 = [3,[4,5,[5,6,7],7]]
+
+// function flat(arr){
+//     return arr33.flat(Infinity)
+// }
+
+console.log(flat(arr33));
+
+    let result = []
+function customFlat(arr){
+    for(let item of arr){
+        if(Array.isArray(item)){
+            result.push(...customFlat(item))
+        }else{
+            result.push(item)
         }
-    return arr
+    }
+    return result
+}
+console.log(flat(arr33));
+
+
+// console.log(`checking: ${Boolean(false)}`);
+
+
+let a ="vaasu"
+let b = "saini"
+
+let result = ""
+
+let maxLength = Math.max(a.length , b.length)
+
+for(let i=0; i<maxLength ; i++){
+    if(i<a.length){
+
+        result += a[i]
+    }
+
+    if(i<b.length)
+
+        result += b[i]
+    
+}
+console.log(result);
+
+
+let arr = [2,3,4,5,6,7,8]
+
+function twoSum(arr,target){
+    for(let i=0; i<arr.length ; i++){
+       for(let j=0 ; j<arr.length ; j++){
+        if(arr[i]+ arr[j+1] === 10){
+            return [i,j]
+        }
+       }
+    }
 }
 
-console.log(moveZero(arr));
+console.log(twoSum(arr,10));
+
+
+
