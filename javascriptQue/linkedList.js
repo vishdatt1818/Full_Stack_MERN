@@ -63,15 +63,33 @@ class List {
             
         }
     }
+
+    insertNode(index,value){
+        let counter = 1
+        let currentNode = this.head
+        while(counter<index){
+            counter++
+            currentNode = currentNode.next
+
+        }
+        let nextNode = currentNode.next
+        currentNode.next = {
+            value:value,
+            next: nextNode
+        }
+    }
 }
 let list = new List(200)
 list.appendNode(300)
-list.appendNode(400)
-list.appendNode(500)
-list.appendNode(600)
-list.appendNode(700)
+// list.appendNode(400)
+// list.appendNode(500)
+// list.appendNode(600)
+// list.appendNode(700)
 console.log(list);
-list.traversing()
-list.deleteNode(2)
-console.log(list);
+// list.traversing()
+// list.deleteNode(2)
+// console.log(list);
+
+
+
 
