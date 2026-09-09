@@ -12,6 +12,7 @@ import UpdateCategory from "./Components/Admin/Categories/UpdateCategory"
 import News from "./Components/User/Pages/News"
 import ProtectiveLayout from "./Components/Admin/Pages/ProtectiveLayout"
 import ManageCategory from "./Components/Admin/Categories/ManageCategory"
+import Chat from "./Components/User/Pages/Chat"
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
          <Route path='/signup' element={<SignUp/>}></Route>
          <Route path='/news' element={<News/>}></Route>
+         <Route path='/chat' element={<Chat/>}></Route>
 
         </Route>
 

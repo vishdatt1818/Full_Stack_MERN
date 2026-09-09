@@ -94,6 +94,9 @@ const Header = () => {
                   <li>
                     <Link to="/news">News</Link>
                   </li>
+                  <li>
+                    <Link to="/chat">chat</Link>
+                  </li>
                 </ul>
               </nav>
             </div>
