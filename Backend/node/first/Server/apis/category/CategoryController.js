@@ -1,194 +1,272 @@
-const Joi = require("joi")
-
 const CategoryModel = require("./CategoryModel")
 
 
-let product = []
-const Add = async (req, res) => {
+const add = async (req, res) => {
+   try{
 
+    const formData = req.body || {}
 
-    //  const schema = Joi.object({
-    //     name: Joi.string()
-    //         .min(3)
-    //         .max(50)
-    //         .required(),
+    let validation = ""
 
-    //     description: Joi.string()
-    //         .min(10)
-    //         .max(500)
-    //         .required()
-    // })
-
-    //   const { error } = schema.validate(req.body)
-
-    
-    // if (error) {
-    //     return res.status(400).send({
-    //         success: false,
-    //         message: error.details[0].message
-    //     })
-    // }
-
-
-        let errMsg = []
-
-    if (!req.body.name) {
-        errMsg.push("name is required")
+    if(!formData.name){
+        validation += "name is required , "
     }
-    if (!req.body.description) {
-        errMsg.push("description is required")
+    if(!formData.description){
+        validation += "description is required , "
+    }
+    if(!!validation){
+        return res.json({
+             status: 400,
+                success: false,
+                message: validation
+        })
     }
 
-    if (errMsg.length > 0) {
-        res.send({
-            message: errMsg,
+    let count = await CategoryModel.countDocuments({})
+
+    let categoryObj = new CategoryModel()
+
+        categoryObj.name = formData.name
+        categoryObj.description = formData.description
+        categoryObj.image = formData.image
+        categoryObj.price = formData.price
+        categoryObj.stock = formData.stock
+
+        categoryObj.autoId = "CAT-" + (count + 1)
+
+        const categoryData = await categoryObj.save()
+
+        return res.json({
+              status: 200,
+            success: true,
+            message: "Category Added",
+            data: categoryData
+        })
+
+
+   }catch(err){
+         res.json({
+             status: 500,
             success: false,
-            status: 404
+            message: "Internal server error"
         })
-    } else {
-
-
-        let ExistData = await CategoryModel.findOne({ name: req.body.name })
-
-        if (ExistData != null) {
-            return res.send({
-                message: "Category Already Exist",
-                status: 422,
-                success: false
-            })
-        }
-    }
-
+   }
     
+          
 
-    let obj = new CategoryModel()
-
-    obj.name =  req.body.name
-    obj.description = req.body.description
-    obj.image = req.body.image
-    obj.price = req.body.price
-    obj.stock = req.body.stock
-
-     obj.save().then((data) =>{
-        res.send(data)
-    }).catch((err) =>{
-        res.send(err)
-    })
-    product.push(obj)
-    console.log(product);
-    
-    
 }
-const All = async (req, res) => {
 
-    try {
-        let Data = await CategoryModel.find()
+const all = async (req, res) => {
+    try{
 
-        if(Data !=null){
-             res.send({
-                message: "category Loaded",
-                status: 200,
-                total:Data.length,
-                success: true,
-                data:Data
-            })
-        }else{
-             res.send({
-                message: "category Not Loaded",
-                status: 404,
-                success: false
-            })
-        }
+        const formData = req.body || {}
 
-    } catch (err) {
-        res.send({
-            message: "Internal Server Error",
-            status: 500,
-            success: false
+        const totalDocs = await CategoryModel.countDocuments(formData)
+
+        const categories = await CategoryModel.find(formData)
+
+        return res.json({
+             status: 200,
+            success: true,
+            message: "Categories Loaded",
+            total: totalDocs,
+            data: categories
+        })
+
+    }catch(err){
+        return res.json({
+             status: 500,
+            success: false,
+            message: "Internal Server Error: " + err
         })
     }
+
+   
 }
 
 const getSingle = async (req, res) => {
-    try {
-        let id = req.body._id
-        
+  try{
+    const formData = req.body || {}
 
-        let Data = await CategoryModel.findOne({ _id: id })
+    if(!formData._id){
+         return res.json({
+                status: 400,
+                success: false,
+                message: "_id is required"
+            });
+    }
 
-        if (Data != null) {
-            res.send({
+    const category = await CategoryModel.findOne({
+        _id: formData._id,
+        isDelete : false
+    })
+
+    if(category){
+        return res.json({
                 status: 200,
                 success: true,
-                message: "Data Loaded",
-                data: Data
-            })
-        } else {
-            res.send({
-                status: 404,
+                message: "Category Loaded",
+                data: category
+            });
+
+             return res.json({
+            status: 404,
+            success: false,
+            message: "No Category found with such _id"
+        });
+    }
+
+  }catch(err){
+          return res.json({
+            status: 500,
+            success: false,
+            message: "Internal Server Error: " + err.message
+        });
+  }
+}
+
+const update = async (req, res) => {
+    try{
+
+        const formData = req.body || {}
+
+        if(!formData._id){
+            return res.json({
+                  status: 400,
                 success: false,
-                message: "Data not found"
+                message: "_id is required"
             })
         }
-    } catch (err) {
-        res.send({
-            message: "Internal Server Error",
+
+        const category = await CategoryModel.findOne({_id: formData._id})
+
+        if(!category){
+            return res.json({
+                 status: 404,
+                success: false,
+                message: "Category Not Found"
+            })
+        }
+
+        if(category.name){
+            category.name = formData.name
+        }
+        if(category.description){
+            category.description = formData.description
+        }
+
+        const updateCategory = await category.save()
+
+        res.json({
+            status: 200,
+            success: true,
+            message: "Category Updated",
+            data: updateCategory
+        })
+
+    }catch(err){
+        return res.json({
             status: 500,
-            success: false
+            success: false,
+            message: "ISE: " + err
         })
     }
 
-
 }
 
-const deleteCate = async (req, res) => {
-    try {
-        let id = req.body._id
 
-        let Data = await CategoryModel.findOne({ _id: id })
+const deletePermanent = async (req, res) => {
+    try{
+        const {_id} = req.body
 
-        if (Data != null) {
-            CategoryModel.deleteOne({ _id: id }).then((DeletedCategory) => {
-                res.send({
-                    status: 204,
-                    success: true,
-                    message: "Category successfully Deleted",
-                    data:DeletedCategory
-                })
-            }).catch((err) => {
-                res.send({
-                    status: 402,
-                    success: false,
-                    message: err
-                })
-            })
-        } else {
-            res.send({
-                status: 404,
+        if(!_id){
+            return res.json({
+                status: 400,
                 success: false,
-                message: "Data not found"
+                message: "_id is required"
             })
         }
-    } catch (err) {
-        res.send({
+
+        const category = await CategoryModel.findOne({_id})
+        if(!category){
+            return res.json({
+                status: 404,
+                success: false,
+                message: "No such Category found"
+            })
+        }
+
+        const deleted = await CategoryModel.deleteOne({_id})
+
+        return res.json({
+             status: 200,
+            success: true,
+            message: "Category deleted permanently",
+            data: deleted
+        })
+
+    }catch(err){
+        return res.json({
+             status: 500,
+            success: false,
             message: "Internal Server Error",
-            status: 500,
-            success: false
+            error: err.message
+        })
+    }
+}
+
+const softDelete =async (req, res) => {
+  try{
+    const {_id} = req.body
+
+    if(!_id){
+        return res.json({
+            status: 400,
+            success: false,
+            message: "_id is required"
         })
     }
 
+    const category = await CategoryModel.findOne({_id})
+
+    if(!category){
+        return res.json({
+                status: 404,
+                success: false,
+                message: "No such category"
+            });
+    }
+
+    category.isDelete = true
+
+    const savedCategory = await category.save()
+
+          return res.json({
+            status: 200,
+            success: true,
+            message: "Category Deleted"
+        });
+
+  }catch(err){
+    return res.json({
+            status: 500,
+            success: false,
+            message: "Internal Server Error: " + err.message
+        });
+  }
 
 }
 
-// const single = (req, res) => {
-//     let {items, name} = req.body
-
-//     let filterItem = product.filter((ele) =>{
-//         return ele.name.toLowerCase().includes(items)
-//     })
-
-//     res.send(filterItem)
-// }
 
 
-module.exports={Add, All , getSingle ,deleteCate}
+module.exports = { add, all, getSingle, update, deletePermanent, softDelete }
+
+
+
+
+
+
+
+
+
+

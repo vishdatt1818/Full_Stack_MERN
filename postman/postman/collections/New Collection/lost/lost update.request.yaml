@@ -1,0 +1,16 @@
+$kind: http-request
+name: lost update
+url: http://localhost:5002/api/lost/update/
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 6aa39b10ea66233ef1625d37
+    itemName: ""
+    description: ""
+    category: ""
+    location: ""
+    reportedBy: ""
+    contactNumber: ""
+    status: Found
+order: 3997256865248390

@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://localhost:5002/api/candidate/deleteCan/
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 6aa3889a114b4a33729ef07d
+order: 4003165430395203

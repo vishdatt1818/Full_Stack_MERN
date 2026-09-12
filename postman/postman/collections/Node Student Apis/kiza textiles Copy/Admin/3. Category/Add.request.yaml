@@ -2,7 +2,9 @@ $kind: http-request
 url: https://kizaapi.ksesystem.com/api/category/add
 method: POST
 headers:
-  Authorization: "{{json_web_token_0nya}}"
+  - key: Authorization
+    value: "{{json_web_token_0nya}}"
+    disabled: true
 body:
   type: formdata
   content:

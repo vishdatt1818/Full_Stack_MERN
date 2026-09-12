@@ -1,0 +1,10 @@
+$kind: http-request
+url: http://localhost:5002/api/company/update/
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 6aa2d92b0fcf3bbdda651ac8
+    companyName: fb
+    description: ffffff
+order: 3292

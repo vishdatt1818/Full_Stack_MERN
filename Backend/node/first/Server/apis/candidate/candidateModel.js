@@ -5,10 +5,13 @@ const candidateProfileSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+     
       unique: true
     },
 
+    name: {
+      type: String
+    },
     headline: {
       type: String
     },
@@ -69,11 +72,12 @@ const candidateProfileSchema = new mongoose.Schema(
 
     preferredLocation: {
       type: String
-    }
-  },
-  {
-    timestamps: true
+    },
+     isDelete : {type : Boolean, default: false},
+    createdAt: { type: Date, default: new Date },
+    updatedAt : { type: Date, default: null }
   }
+ 
 );
 
 module.exports = mongoose.model(

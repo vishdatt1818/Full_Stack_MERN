@@ -5,7 +5,7 @@ const companySchema = new mongoose.Schema(
     recruiterId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+     
     },
 
     companyName: {
@@ -53,11 +53,11 @@ const companySchema = new mongoose.Schema(
     isVerified: {
       type: Boolean,
       default: false
-    }
+    },
+    isDelete : {type : Boolean, default: false},
+    createdAt: { type: Date, default: new Date },
+    updatedAt : { type: Date, default: null }
   },
-  {
-    timestamps: true
-  }
 );
 
 module.exports = mongoose.model("Company", companySchema);

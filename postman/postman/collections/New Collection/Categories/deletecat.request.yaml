@@ -1,4 +1,8 @@
 $kind: http-request
-url: ""
-method: GET
-order: 3585010298782511
+url: http://localhost:5002/api/category/deleteCate
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 6aa28c22a202ad7bf717fda8
+order: 5000

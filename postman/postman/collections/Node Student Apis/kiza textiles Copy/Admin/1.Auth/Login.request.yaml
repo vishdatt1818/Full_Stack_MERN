@@ -1,6 +1,19 @@
 $kind: http-request
 url: https://kizaapi.ksesystem.com/api/user/login
 method: POST
+queryParams:
+  - key: email
+    value: vishnudatt18@gmail.com
+    disabled: true
+    description: ""
+  - key: name
+    value: vv
+    disabled: true
+    description: ""
+  - key: password
+    value: "123"
+    disabled: true
+    description: ""
 body:
   type: urlencoded
   content:

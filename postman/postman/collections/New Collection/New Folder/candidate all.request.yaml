@@ -1,0 +1,6 @@
+$kind: http-request
+url: http://localhost:5002/api/candidate/all/
+method: POST
+body:
+  type: urlencoded
+order: 1789102015992
