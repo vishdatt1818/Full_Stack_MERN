@@ -4,6 +4,7 @@ const categoryController = require("../apis/category/CategoryController")
 const compayController = require("../apis/company/compayController")
 const candidateController = require("../apis/candidate/candidateController")
 const lostFoundController = require("../apis/LostFound/lostFoundController")
+const userController = require("../apis/user/userController")
 
 router.post("/category/add",categoryController.add)
 router.post("/category/all",categoryController.all)
@@ -37,6 +38,14 @@ router.post("/lost/single",lostFoundController.single)
 router.post("/lost/update",lostFoundController.update)
 router.post("/lost/deleteItem",lostFoundController.deleteItem)
 // router.post("/lost/softDelete",lostFoundController.softDelete)
+
+
+router.post("/user/add",userController.add)
+router.post("/user/all",userController.all)
+router.post("/user/single",userController.getSingle)
+router.post("/user/update",userController.update)
+router.post("/user/deleteItem",userController.deletePermanent)
+router.post("/user/softDelete",userController.softDelete)
 
 
 module.exports = router

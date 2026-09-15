@@ -1,0 +1,10 @@
+$kind: http-request
+url: http://localhost:5002/api/category/update/
+method: POST
+body:
+  type: urlencoded
+  content:
+    name: heroooo
+    description: fsdfasfafdsaf
+    _id: 6aa28f35c1e753276b9e7408
+order: 4180

@@ -1,0 +1,39 @@
+<!-- HTML Structure -->
+<button id="start-btn">Start Listening</button>
+<p id="transcript"></p>
+
+<script>
+  // Compatibility handling for Chrome/Safari
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  
+  if (!SpeechRecognition) {
+    alert("Your browser does not support the Web Speech API.");
+  } else {
+    const recognition = new SpeechRecognition();
+    
+    // Configurations
+    recognition.continuous = true; // Keep listening until stopped
+    recognition.interimResults = true; // Show results in real-time
+    recognition.lang = 'en-US'; // Set language
+
+    const startBtn = document.getElementById('start-btn');
+    const transcriptEl = document.getElementById('transcript');
+
+    startBtn.addEventListener('click', () => {
+      recognition.start();
+      startBtn.textContent = "Listening...";
+    });
+
+    // Handle incoming audio results
+    recognition.onresult = (event) => {
+      let currentResult = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        currentResult += event.results[i][0].transcript;
+      }
+      transcriptEl.textContent = currentResult;
+    };
+
+    recognition.onerror = (err) => console.error("Speech error:", err);
+    recognition.onend = () => startBtn.textContent = "Start Listening";
+  }
+</script>

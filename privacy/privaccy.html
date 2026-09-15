@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Notice | Polymer Connection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+
+/* ═══ EXACT BRAND TOKENS FROM BRANDED DOC ═══ */
+:root {
+  --brand:    #ff5b5c;
+  --brand-2:  #ff7a7b;
+  --gray:     #666666;
+  --gray-2:   #8a8a8a;
+
+  --bg:       #08090b;
+  --surface:  #0f1114;
+  --surface2: #14181e;
+  --surface3: #1a1f27;
+  --border:   rgba(255,255,255,0.08);
+  --border2:  rgba(255,255,255,0.12);
+
+  --text:     #f3f4f6;
+  --muted:    rgba(243,244,246,0.60);
+  --muted2:   rgba(243,244,246,0.72);
+
+  /* CPT accent colors from branded doc */
+  --blue:     #60a5fa;
+  --teal:     #2dd4bf;
+  --indigo:   #818cf8;
+  --purple:   #c084fc;
+  --orange:   #fb923c;
+  --slate:    #9ca3af;
+
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Open Sans', system-ui, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+}
+
+/* grid bg - same as branded doc */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.010) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.010) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none; z-index: 0;
+}
+
+/* ═══ WIREFRAME ANNOTATION LABEL ═══ */
+.wf {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--brand);
+  background: rgba(255,91,92,0.08);
+  border: 1px dashed rgba(255,91,92,0.35);
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* ═══ HEADER ═══ */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,9,11,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 40px; height: 68px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 32px;
+}
+
+.logo img {
+  height: 38px; width: auto;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+
+.header-nav {
+  display: flex; align-items: center; gap: 28px;
+}
+
+.header-nav a {
+  font-size: 13px; font-weight: 600;
+  color: var(--muted2);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.15s;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid transparent;
+}
+
+.header-nav a:hover { color: var(--text); }
+.header-nav a.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+.header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.btn {
+  font-family: var(--sans);
+  font-size: 12px; font-weight: 700;
+  padding: 8px 18px; border-radius: 5px;
+  text-decoration: none; transition: all 0.15s;
+  letter-spacing: 0.02em;
+  cursor: pointer; border: none;
+}
+
+.btn-brand  { background: var(--brand); color: #fff; }
+.btn-brand:hover { background: var(--brand-2); transform: translateY(-1px); }
+.btn-ghost  { background: rgba(255,255,255,0.06); color: var(--muted2); border: 1px solid var(--border2); }
+.btn-ghost:hover { background: rgba(255,255,255,0.10); color: var(--text); }
+
+/* ═══ HERO ═══ */
+.hero {
+  padding: 88px 0 72px;
+  position: relative; overflow: hidden; z-index: 1;
+}
+
+/* radial glows */
+.hero::before {
+  content: '';
+  position: absolute; top: -120px; right: -80px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,91,92,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute; bottom: -80px; left: 0;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 420px;
+  gap: 64px; align-items: center;
+  position: relative; z-index: 1;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--brand); margin-bottom: 20px;
+}
+
+.hero-eyebrow::before {
+  content: ''; width: 20px; height: 1.5px;
+  background: var(--brand); display: block;
+}
+
+.hero-h1 {
+  font-size: 52px; font-weight: 800;
+  color: var(--text); line-height: 1.08;
+  letter-spacing: -0.03em; margin-bottom: 22px;
+}
+
+.hero-h1 .accent { color: var(--brand); }
+.hero-h1 .dim { color: var(--muted); font-weight: 300; }
+
+.hero-sub {
+  font-size: 15px; color: var(--muted2);
+  line-height: 1.75; margin-bottom: 36px;
+  max-width: 480px;
+}
+
+.hero-sub strong { color: var(--text); font-weight: 600; }
+
+.hero-actions { display: flex; gap: 10px; align-items: center; margin-bottom: 36px; }
+
+.hero-proof {
+  display: flex; align-items: center; gap: 20px;
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+}
+
+.hero-proof-item { display: flex; align-items: center; gap: 6px; }
+.proof-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--brand); opacity: 0.5; }
+
+/* HERO RIGHT CARD */
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 14px; padding: 26px;
+}
+
+.hero-card-label {
+  font-family: var(--mono); font-size: 9px;
+  font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.hero-card-label::before { content: '//'; color: var(--brand); }
+
+.search-mock {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.search-mock-icon { color: var(--brand); font-size: 13px; }
+.search-mock-text { font-size: 12px; color: var(--muted); font-style: italic; flex: 1; }
+.search-mock-kbd {
+  font-family: var(--mono); font-size: 9px;
+  padding: 2px 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border2);
+  color: var(--muted);
+}
+
+.search-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+
+.stag {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  padding: 3px 9px; border-radius: 3px;
+  letter-spacing: 0.05em; cursor: pointer;
+  transition: opacity 0.15s;
+}
+.stag:hover { opacity: 0.75; }
+
+.stag-blue   { background: rgba(255,91,92,0.08);  color: var(--brand);   border: 1px solid rgba(255,91,92,0.2); }
+.stag-teal   { background: rgba(255,91,92,0.14);  color: var(--brand);   border: 1px solid rgba(255,91,92,0.3); }
+.stag-orange { background: rgba(255,255,255,0.06); color: var(--muted2);  border: 1px solid var(--border2); }
+.stag-indigo { background: rgba(255,91,92,0.06);  color: var(--muted2);  border: 1px solid rgba(255,91,92,0.15); }
+.stag-brand  { background: rgba(255,91,92,0.18);  color: var(--brand);   border: 1px solid rgba(255,91,92,0.4); }
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.hstat {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px;
+  text-align: center;
+}
+
+.hstat-val {
+  font-family: var(--mono); font-size: 22px; font-weight: 600;
+  color: var(--brand); line-height: 1; margin-bottom: 4px;
+}
+
+.hstat-lbl { font-size: 10px; color: var(--muted); line-height: 1.35; }
+
+/* ═══ TRUST BAR ═══ */
+.trust-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0; position: relative; z-index: 1;
+}
+
+.trust-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 20px;
+}
+
+.trust-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap; flex-shrink: 0;
+}
+
+.trust-items { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--muted2);
+}
+
+.trust-dot {
+  width: 6px; height: 6px;
+  border-radius: 1px; background: var(--brand);
+  flex-shrink: 0;
+}
+
+.trust-sep { width: 1px; height: 20px; background: var(--border2); }
+
+/* ═══ SECTION BASE ═══ */
+.section { padding: 72px 0; position: relative; z-index: 1; }
+.section-alt { background: var(--surface); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--brand); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.eyebrow::before { content: '//'; opacity: 0.5; }
+
+.section-title {
+  font-size: 30px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.025em;
+  line-height: 1.15; margin-bottom: 12px;
+}
+
+.section-sub {
+  font-size: 14px; color: var(--muted2);
+  line-height: 1.7; max-width: 560px;
+}
+
+.section-hdr { margin-bottom: 40px; }
+
+.section-hdr-row {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 20px;
+  margin-bottom: 40px;
+}
+
+.view-all {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--brand); text-decoration: none;
+  letter-spacing: 0.06em; white-space: nowrap;
+  display: flex; align-items: center; gap: 4px;
+  transition: gap 0.15s;
+}
+
+.view-all:hover { gap: 8px; }
+
+/* ═══ HOW IT WORKS ═══ */
+.how-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; position: relative;
+}
+
+.how-grid::before {
+  content: '';
+  position: absolute; top: 27px;
+  left: calc(12.5% + 16px); right: calc(12.5% + 16px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--brand) 0%, rgba(255,91,92,0.2) 100%);
+  z-index: 0;
+}
+
+.how-step {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 0 16px; position: relative; z-index: 1;
+}
+
+.how-num {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--surface2);
+  border: 1.5px solid var(--brand);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 16px; font-weight: 600;
+  color: var(--brand); margin-bottom: 16px;
+  box-shadow: 0 0 0 6px rgba(255,91,92,0.07);
+}
+
+.how-title {
+  font-size: 13px; font-weight: 700;
+  color: var(--text); margin-bottom: 7px;
+}
+
+.how-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ═══ PROCESS CARDS ═══ */
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.pcard {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 16px;
+  text-decoration: none; position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.18s;
+}
+
+.pcard::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--brand);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+
+.pcard:hover {
+  border-color: rgba(255,91,92,0.35);
+  transform: translateY(-2px);
+}
+
+.pcard:hover::after { transform: scaleX(1); }
+
+.pcard-chip {
+  font-family: var(--mono); font-size: 8px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 3px;
+  background: rgba(255,91,92,0.1);
+  border: 1px solid rgba(255,91,92,0.2);
+  color: var(--brand); margin-bottom: 12px;
+  display: inline-block;
+}
+
+.pcard-name {
+  font-size: 13px; font-weight: 700;
+  color: var(--text); margin-bottom: 5px; line-height: 1.25;
+}
+
+.pcard-desc {
+  font-size: 11px; color: var(--muted); line-height: 1.5;
+}
+
+.pcard-arrow {
+  position: absolute; top: 16px; right: 14px;
+  font-size: 12px; color: rgba(255,91,92,0.3);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.pcard:hover .pcard-arrow {
+  color: var(--brand); transform: translateX(3px);
+}
+
+/* ═══ INDUSTRY CARDS ═══ */
+.industry-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.icard {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px 20px;
+  text-decoration: none; position: relative;
+  overflow: hidden; transition: border-color 0.2s, transform 0.18s;
+}
+
+.icard::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--brand);
+  transform: scaleY(0); transition: transform 0.2s;
+  transform-origin: top;
+}
+
+.icard:hover { border-color: var(--border2); transform: translateY(-2px); }
+.icard:hover::before { transform: scaleY(1); }
+
+.icard.priority {
+  border-color: rgba(255,91,92,0.25);
+  background: linear-gradient(135deg, rgba(255,91,92,0.05) 0%, var(--surface2) 100%);
+}
+
+.icard.priority::before { transform: scaleY(1); }
+
+.icard-eyebrow {
+  font-family: var(--mono); font-size: 8px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--brand); margin-bottom: 7px;
+}
+
+.icard-name {
+  font-size: 18px; font-weight: 800;
+  color: var(--text); margin-bottom: 8px; line-height: 1.2;
+}
+
+.icard-desc {
+  font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px;
+}
+
+.icard-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.itag {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  padding: 2px 8px; border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+}
+
+/* ═══ AUTHORITY STATS BAR ═══ */
+.auth-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 0; position: relative; z-index: 1;
+}
+
+.auth-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 48px;
+}
+
+.auth-stats {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.auth-val {
+  font-family: var(--mono); font-size: 38px; font-weight: 600;
+  color: var(--brand); line-height: 1; margin-bottom: 6px;
+}
+
+.auth-lbl { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+/* ═══ VALUE PROPS ═══ */
+.value-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.vcard {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 26px 22px;
+  transition: border-color 0.2s;
+}
+
+.vcard:hover { border-color: rgba(255,91,92,0.25); }
+
+.vcard-icon {
+  width: 42px; height: 42px;
+  background: rgba(255,91,92,0.1);
+  border: 1px solid rgba(255,91,92,0.2);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; margin-bottom: 16px;
+}
+
+.vcard-title {
+  font-size: 15px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+
+.vcard-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* ═══ HOW WE WORK - 2 COL ═══ */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+
+.feature-list { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+
+.feature-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.feature-item:hover { border-color: rgba(255,91,92,0.25); }
+
+.feature-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,91,92,0.1);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+
+.feature-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.feature-desc  { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* FLOW DIAGRAM */
+.flow-box {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px; padding: 28px;
+}
+
+.flow-header {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.flow-header::before { content: '//'; color: var(--brand); }
+
+.flow-steps { display: flex; flex-direction: column; gap: 10px; }
+
+.fstep {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.fstep.hl {
+  background: rgba(255,91,92,0.06);
+  border-color: rgba(255,91,92,0.2);
+}
+
+.fstep-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--brand);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  color: #fff; flex-shrink: 0;
+}
+
+.fstep.dim .fstep-num { background: rgba(255,255,255,0.08); color: var(--muted); }
+
+.fstep-text { font-size: 12px; font-weight: 600; color: var(--muted2); }
+.fstep.hl .fstep-text { color: var(--text); }
+.fstep.dim .fstep-text { color: var(--muted); }
+
+/* ═══ RESOURCE CARDS ═══ */
+.resource-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 18px;
+}
+
+.rcard {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  text-decoration: none;
+  display: flex; flex-direction: column;
+  transition: border-color 0.2s, transform 0.18s;
+}
+
+.rcard:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+.rcard-img {
+  background: var(--surface3);
+  height: 140px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  position: relative;
+}
+
+.rcard.featured .rcard-img { height: 180px; }
+
+.rcard-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono); font-size: 8px; font-weight: 600;
+  padding: 2px 8px; border-radius: 3px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--brand); color: #fff;
+}
+
+.rcard-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+
+.rcard-title {
+  font-size: 13px; font-weight: 700;
+  color: var(--text); line-height: 1.35; margin-bottom: 6px;
+}
+
+.rcard.featured .rcard-title { font-size: 15px; }
+
+.rcard-desc { font-size: 11px; color: var(--muted); line-height: 1.5; flex: 1; }
+
+.rcard-meta {
+  display: flex; align-items: center; gap: 7px;
+  margin-top: 12px; font-family: var(--mono);
+  font-size: 9px; color: var(--muted);
+}
+
+.rcard-meta .dot { color: var(--brand); }
+
+/* ═══ CTA BANNER ═══ */
+.cta-banner {
+  background: linear-gradient(135deg, #1c0607 0%, #2d0d0e 50%, #1c0607 100%);
+  border-top: 1px solid rgba(255,91,92,0.2);
+  border-bottom: 1px solid rgba(255,91,92,0.2);
+  padding: 72px 0; position: relative; overflow: hidden; z-index: 1;
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(255,91,92,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,91,92,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.cta-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 48px;
+  position: relative; z-index: 1;
+}
+
+.cta-title {
+  font-size: 32px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.025em;
+  line-height: 1.15; margin-bottom: 10px;
+}
+
+.cta-title .accent { color: var(--brand); }
+
+.cta-sub { font-size: 14px; color: var(--muted2); line-height: 1.7; max-width: 520px; }
+
+.cta-actions { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+
+.btn-lg {
+  font-family: var(--sans);
+  font-size: 14px; font-weight: 700;
+  padding: 13px 32px; border-radius: 6px;
+  text-decoration: none; white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.btn-lg-brand { background: var(--brand); color: #fff; }
+.btn-lg-brand:hover { background: var(--brand-2); transform: translateY(-1px); }
+.btn-lg-ghost { color: var(--muted2); font-size: 12px; }
+.btn-lg-ghost:hover { color: var(--text); }
+
+/* ═══ FOOTER ═══ */
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 52px 0 28px;
+}
+
+.footer-grid {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.footer-desc {
+  font-size: 12px; color: var(--muted); line-height: 1.65;
+  margin-top: 16px; max-width: 210px;
+}
+
+.footer-col-title {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 9px; }
+.footer-links a {
+  font-size: 13px; color: rgba(243,244,246,0.45);
+  text-decoration: none; transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--brand); }
+
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 9px; color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.footer-bottom a { color: var(--muted); text-decoration: none; }
+.footer-bottom a:hover { color: var(--brand); }
+
+
+/* ═══ V2 ADDITIONS ═══ */
+
+/* CAPABILITIES GRID */
+.cap-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.cap-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px 16px;
+  text-decoration: none; position: relative;
+  transition: border-color 0.2s, transform 0.18s;
+}
+
+.cap-card:hover {
+  border-color: rgba(255,91,92,0.35);
+  transform: translateY(-2px);
+}
+
+.cap-card-num {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--brand); letter-spacing: 0.08em;
+  margin-bottom: 10px; display: block;
+}
+
+.cap-card-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--text); margin-bottom: 6px; line-height: 1.2;
+}
+
+.cap-card-desc {
+  font-size: 11px; color: var(--muted); line-height: 1.55;
+}
+
+.cap-card-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  color: var(--brand); text-decoration: none;
+  letter-spacing: 0.06em; margin-top: 12px;
+  transition: gap 0.15s;
+}
+
+.cap-card-link:hover { gap: 7px; }
+
+/* FEATURED PROCESS */
+.featured-process {
+  display: grid; grid-template-columns: 1fr 380px;
+  gap: 48px; align-items: center;
+}
+
+.fp-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--brand); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.fp-label::before { content: '→'; }
+
+.fp-title {
+  font-size: 26px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.02em;
+  line-height: 1.15; margin-bottom: 14px;
+}
+
+.fp-excerpt {
+  font-size: 14px; color: var(--muted2); line-height: 1.72;
+  margin-bottom: 20px;
+}
+
+.fp-stats {
+  display: flex; gap: 24px; margin-bottom: 24px;
+}
+
+.fp-stat-val {
+  font-family: var(--mono); font-size: 20px; font-weight: 600;
+  color: var(--brand); line-height: 1; margin-bottom: 3px;
+}
+
+.fp-stat-lbl { font-size: 10px; color: var(--muted); }
+
+.fp-card {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px; padding: 24px;
+}
+
+.fp-card-header {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 5px;
+}
+
+.fp-card-header::before { content: '//'; color: var(--brand); }
+
+.fp-row {
+  display: flex; justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.fp-row:last-child { border-bottom: none; }
+.fp-row-lbl { color: var(--muted); }
+.fp-row-val { font-family: var(--mono); font-weight: 600; color: var(--brand); font-size: 11px; }
+
+/* MATRIX PREVIEW */
+.matrix-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.matrix-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 11px; min-width: 700px;
+}
+
+.matrix-table th {
+  background: var(--surface2);
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); padding: 10px 14px; text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.matrix-table th:first-child { color: var(--brand); }
+
+.matrix-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--muted2); font-size: 12px;
+}
+
+.matrix-table td:first-child {
+  font-family: var(--mono); font-weight: 600;
+  color: var(--text); font-size: 11px;
+}
+
+.matrix-table tr:hover td { background: rgba(255,255,255,0.02); }
+.matrix-table tr:last-child td { border-bottom: none; }
+
+.compat {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  padding: 2px 7px; border-radius: 3px;
+  letter-spacing: 0.05em;
+}
+
+.compat-yes  { background: rgba(255,91,92,0.14);  color: var(--brand);  border: 1px solid rgba(255,91,92,0.3); }
+.compat-good { background: rgba(255,91,92,0.07);  color: #ff8e8f;       border: 1px solid rgba(255,91,92,0.18); }
+.compat-no   { background: rgba(255,255,255,0.04); color: var(--muted);  border: 1px solid var(--border); }
+.compat-part { background: rgba(255,91,92,0.05);  color: var(--muted2); border: 1px solid rgba(255,91,92,0.12); }
+
+.matrix-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 14px;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size: 9px; color: var(--muted);
+}
+
+/* DFM PREVIEW */
+.dfm-preview-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.dfm-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+
+.dfm-block-header {
+  background: rgba(255,91,92,0.08);
+  border-bottom: 1px solid rgba(255,91,92,0.15);
+  padding: 10px 16px;
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--brand);
+  display: flex; align-items: center; gap: 6px;
+}
+
+.dfm-block-header::before { content: '//'; opacity: 0.5; }
+
+.dfm-param-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 12px;
+}
+
+.dfm-param-row:last-child { border-bottom: none; }
+.dfm-param-name { color: var(--muted2); }
+.dfm-param-val  { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--brand); }
+
+.checklist-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 11px; color: var(--muted2); line-height: 1.45;
+}
+
+.checklist-item:last-child { border-bottom: none; }
+
+.sev {
+  font-family: var(--mono); font-size: 8px; font-weight: 600;
+  padding: 2px 6px; border-radius: 3px; letter-spacing: 0.06em;
+  text-transform: uppercase; flex-shrink: 0; margin-top: 1px;
+}
+
+.sev-crit { background: rgba(255,91,92,0.15); color: var(--brand);  border: 1px solid rgba(255,91,92,0.35); }
+.sev-warn { background: rgba(255,91,92,0.07); color: #ff8e8f;      border: 1px solid rgba(255,91,92,0.18); }
+.sev-info { background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border2); }
+
+/* ABOUT TEASER */
+.about-teaser {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 56px; align-items: center;
+}
+
+.about-quote {
+  border-left: 2px solid var(--brand);
+  padding-left: 20px; margin: 20px 0;
+  font-size: 15px; font-style: italic;
+  color: var(--muted2); line-height: 1.7;
+}
+
+.about-creds {
+  display: flex; flex-direction: column; gap: 10px; margin-top: 24px;
+}
+
+.cred-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: var(--muted2);
+}
+
+.cred-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand); flex-shrink: 0;
+}
+
+.about-visual-box {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px; padding: 28px;
+}
+
+.av-title {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 5px;
+}
+
+.av-title::before { content: '//'; color: var(--brand); }
+
+.diff-list { display: flex; flex-direction: column; gap: 12px; }
+
+.diff-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.diff-icon {
+  width: 28px; height: 28px;
+  background: rgba(255,91,92,0.1);
+  border-radius: 5px; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+
+.diff-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.diff-desc  { font-size: 10px; color: var(--muted); line-height: 1.45; }
+
+
+
+/* PRIVACY PAGE LAYOUT — uses the exact visual system of home.html */
+.breadcrumb-bar {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 11px 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .05em;
+}
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover { color: var(--brand); }
+.breadcrumb .sep { color: var(--border2); }
+.breadcrumb .current { color: var(--brand); }
+
+.page-hero {
+  padding: 64px 0 56px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: var(--bg);
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -180px;
+  right: -100px;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(255,91,92,.09) 0%, transparent 68%);
+  pointer-events: none;
+}
+.page-hero-inner-capa {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+.page-hero .eyebrow {
+  margin-bottom: 12px;
+}
+.page-title {
+  font-size: 46px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  margin-bottom: 18px;
+}
+.page-title .accent { color: var(--brand); }
+.page-sub {
+  max-width: 720px;
+  font-size: 14px;
+  color: var(--muted2);
+  line-height: 1.75;
+}
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.meta-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: .75;
+}
+
+.content-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: 56px;
+  position: relative;
+  z-index: 1;
+}
+.toc-sidebar {
+  align-self: start;
+  position: sticky;
+  top: 92px;
+}
+.toc-label,
+.toc-glance-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 13px;
+}
+.toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.toc-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-left: 1px solid transparent;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 10px;
+  line-height: 1.35;
+  transition: all .15s;
+}
+.toc-nav a:hover {
+  color: var(--text);
+  border-left-color: var(--brand);
+  background: rgba(255,91,92,.04);
+}
+.toc-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+.toc-glance {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+.toc-glance-label { font-size: 8px; margin-bottom: 11px; }
+.toc-glance-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.toc-glance-row:last-child { border-bottom: none; }
+.toc-glance-key {
+  font-family: var(--mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+.toc-glance-val {
+  font-size: 10px;
+  color: var(--muted2);
+  line-height: 1.4;
+  word-break: break-word;
+}
+.toc-glance-val.brand-val { color: var(--brand); }
+
+.main-content {
+  min-width: 0;
+  font-size: 13px;
+  color: var(--muted2);
+  line-height: 1.8;
+}
+.main-content > p {
+  margin: 0 0 24px;
+}
+.definition-block {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-left: 2px solid var(--brand);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+}
+.definition-block p { margin: 0; }
+.main-content strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.content-section {
+  padding-top: 38px;
+  margin-top: 38px;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 92px;
+}
+.content-section h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  margin-bottom: 14px;
+}
+.content-section h2::before {
+  content: '// ';
+  color: var(--brand);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.content-section p {
+  margin: 0 0 18px;
+}
+.content-section p:last-child { margin-bottom: 0; }
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 16px 18px;
+  margin: 22px 0;
+  background: rgba(255,91,92,.05);
+  border: 1px solid rgba(255,91,92,.18);
+  border-radius: 8px;
+}
+.callout-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.callout-body { min-width: 0; }
+.callout-title {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.callout-text {
+  color: var(--muted2);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.supplier-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(255,91,92,.08), var(--surface2));
+  border: 1px solid rgba(255,91,92,.22);
+  border-radius: 10px;
+}
+.scta-eyebrow {
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 7px;
+}
+.scta-title {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+.scta-desc {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.btn-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all .15s;
+}
+.btn-lg-brand { background: var(--brand); color: #fff; }
+.btn-lg-brand:hover { background: var(--brand-2); transform: translateY(-1px); }
+
+.site-footer .footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.site-footer .footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media (max-width: 900px) {
+  .header-inner { padding: 0 24px; }
+  .header-nav { gap: 16px; }
+  .content-layout {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .toc-sidebar {
+    position: static;
+  }
+  .toc-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 2px 10px;
+  }
+  .page-hero-inner-capa { padding: 0 24px; }
+  .breadcrumb { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 680px) {
+  .header-inner { height: auto; min-height: 68px; }
+  .header-nav { display: none; }
+  .header-actions .btn-ghost { display: none; }
+  .page-hero { padding: 48px 0 42px; }
+  .page-title { font-size: 36px; }
+  .toc-nav { grid-template-columns: 1fr; }
+  .content-layout { padding-top: 38px; padding-bottom: 60px; }
+  .supplier-cta { flex-direction: column; align-items: flex-start; }
+  .scta-right { width: 100%; }
+  .scta-right .btn-lg { width: 100%; }
+  .site-footer .footer-grid { padding-left: 24px; padding-right: 24px; }
+  .site-footer .footer-bottom { padding-left: 24px; padding-right: 24px; }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a class="logo" href="/">
+        <img src="logo.png" alt="Polymer Connection">
+      </a>
+
+      <nav class="header-nav">
+        <a href="/process">Process</a>
+        <a href="/capabilities">Capabilities</a>
+        <a href="/industries">Industries</a>
+        <a href="/resources">Resource Hub</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="/contact">Contact</a>
+        <a class="btn btn-brand" href="/quote">Get a Quote</a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Privacy Notice</span>
+    </div>
+  </div>
+
+
+  <section class="page-hero">
+    <div class="page-hero-inner-capa">
+
+      <div class="eyebrow">Legal</div>
+
+      <h1 class="page-title">
+        Privacy <span class="accent">Notice</span>
+      </h1>
+
+      <p class="page-sub">
+        Polymer Connection (&ldquo;Polymer Connection,&rdquo; &ldquo;we,&rdquo;
+        &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects the privacy of our
+        customers, prospective customers, manufacturing partners, suppliers,
+        website visitors, and other individuals who interact with us.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="meta-dot"></span>
+          Last Updated: August 2026
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="content-layout">
+
+    <aside class="toc-sidebar">
+
+      <div class="toc-label">On This Page</div>
+
+      <nav class="toc-nav">
+        <a href="#information-we-collect">1. Information We Collect</a>
+        <a href="#customer-technical-information">2. Customer &amp; Technical Information</a>
+        <a href="#cad-files">3. CAD Files, Drawings &amp; Documentation</a>
+        <a href="#how-we-use-information">4. How We Use Information</a>
+        <a href="#ai-automated-processing">5. AI &amp; Automated Processing</a>
+        <a href="#manufacturing-partners">6. Manufacturing Partners &amp; Suppliers</a>
+        <a href="#service-providers">7. Service Providers</a>
+        <a href="#website-analytics">8. Website Analytics</a>
+        <a href="#cookies">9. Cookies &amp; Similar Technologies</a>
+        <a href="#marketing-communications">10. Marketing &amp; Business Communications</a>
+        <a href="#data-security">11. Data Security</a>
+        <a href="#data-retention">12. Data Retention</a>
+        <a href="#confidentiality-ip">13. Confidentiality &amp; IP</a>
+        <a href="#legal-disclosures">14. Legal Disclosures</a>
+        <a href="#business-transfers">15. Business Transfers</a>
+        <a href="#third-party-sites">16. Third-Party Websites</a>
+        <a href="#your-privacy-rights">17. Your Privacy Rights</a>
+        <a href="#childrens-privacy">18. Children&rsquo;s Privacy</a>
+        <a href="#changes-to-notice">19. Changes to This Notice</a>
+        <a href="#contact-us">20. Contact Us</a>
+      </nav>
+
+      <div class="toc-divider"></div>
+
+      <div class="toc-glance">
+
+        <div class="toc-glance-label">AT A GLANCE</div>
+
+        <div class="toc-glance-row">
+          <div class="toc-glance-key">Effective</div>
+          <div class="toc-glance-val">August 2026</div>
+        </div>
+
+        <div class="toc-glance-row">
+          <div class="toc-glance-key">Contact</div>
+          <div class="toc-glance-val brand-val">
+            info@polymerconnection.com
+          </div>
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+      <div class="definition-block">
+        <p>
+          For purposes of this Privacy Notice,
+          <strong>&ldquo;Personal Data&rdquo;</strong>
+          means information that identifies, relates to, describes, or can
+          reasonably be associated with an identified or identifiable
+          individual, or as otherwise defined by applicable law.
+        </p>
+      </div>
+
+
+      <p>
+        This Privacy Notice explains the types of information we collect
+        through our website, communications, project submission tools,
+        engineering and manufacturing services, and other services we provide
+        (collectively, the &ldquo;Services&rdquo;). It also explains how we
+        use, process, store, disclose, and protect that information.
+      </p>
+
+
+      <div class="content-section" id="information-we-collect">
+        <h2>1. Information We Collect</h2>
+
+        <p>
+          We may collect information that you voluntarily provide to us,
+          including name, company name, job title or role, business email
+          address, telephone number, mailing or business address, information
+          submitted through website forms, requests for quotations, project
+          inquiries, communications with Polymer Connection, supplier or
+          manufacturing inquiries, and other information you choose to provide.
+        </p>
+
+        <p>
+          When using certain Services, you may also provide technical,
+          engineering, manufacturing, commercial, or project-related
+          information as described below.
+        </p>
+
+        <p>
+          We may automatically collect certain information when you visit or
+          interact with our website, including IP address, browser type,
+          device type, operating system, pages viewed, referring website,
+          approximate geographic information derived from an IP address,
+          website usage and interaction information, cookies, and similar
+          technologies.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="customer-technical-information">
+        <h2>2. Customer and Technical Information</h2>
+
+        <p>
+          Polymer Connection assists customers with engineering, material
+          selection, manufacturing processes, sourcing, supplier
+          identification, quoting, commercialization, and related activities.
+        </p>
+
+        <p>
+          In connection with these activities, customers may provide CAD and
+          STEP files, engineering drawings, specifications, part numbers and
+          revision information, material specifications, manufacturing
+          requirements, quality requirements, testing requirements, production
+          volumes, target pricing, tooling information, application
+          information, photographs and illustrations, reports and technical
+          documents, RFQs and quotation information, project schedules,
+          supplier information, and other technical or commercial project
+          information.
+        </p>
+
+        <p>
+          Some Customer and Technical Information may not constitute Personal
+          Data but may nevertheless be confidential, proprietary, or
+          commercially sensitive.
+        </p>
+
+        <p>
+          Polymer Connection will use Customer and Technical Information for
+          legitimate business purposes associated with evaluating, developing,
+          quoting, sourcing, manufacturing, testing, supporting, or
+          commercializing the applicable project.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="cad-files">
+        <h2>3. CAD Files, Drawings and Project Documentation</h2>
+
+        <p>
+          Customers may submit drawings, CAD files, specifications, models,
+          photographs, and other engineering documentation through our
+          website, email, file-transfer systems, project-management systems,
+          or other approved methods.
+        </p>
+
+        <p>
+          Polymer Connection may process these materials for
+          design-for-manufacturing analysis, manufacturing process evaluation,
+          material evaluation, supplier selection, tooling evaluation, cost
+          and quotation analysis, technical feasibility analysis, quality
+          planning, testing, project management, and manufacturing support.
+        </p>
+
+        <p>
+          Where appropriate for the project, Polymer Connection may share
+          relevant technical information with manufacturing partners, material
+          suppliers, tooling suppliers, testing organizations, engineering
+          providers, and other parties involved in evaluating or executing the
+          project. We seek to limit such disclosure to information reasonably
+          necessary for the applicable business or project purpose.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="how-we-use-information">
+        <h2>4. How We Use Information</h2>
+
+        <p>
+          We may use information we collect to provide and improve our
+          Services; respond to inquiries; evaluate project opportunities;
+          prepare quotations; conduct engineering and manufacturing
+          evaluations; recommend materials and manufacturing processes;
+          identify appropriate manufacturing partners; facilitate
+          communications between customers and suppliers; manage active
+          projects; provide technical and commercial support; perform quality
+          and manufacturing-related activities; improve our website and
+          internal systems; conduct analytics; maintain security; prevent
+          fraud or misuse; maintain business records; comply with legal and
+          regulatory requirements; communicate information about Polymer
+          Connection&rsquo;s capabilities and services; and conduct legitimate
+          business development and marketing activities.
+        </p>
+
+        <p>
+          We may also use aggregated or de-identified information for internal
+          analytics, process improvement, benchmarking, and development of our
+          Services, provided such information does not reasonably identify a
+          customer, individual, or confidential customer project.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="ai-automated-processing">
+        <h2>5. Artificial Intelligence and Automated Processing</h2>
+
+        <p>
+          Polymer Connection may use artificial intelligence, machine
+          learning, automation, and other computational technologies to assist
+          in providing and improving our Services.
+        </p>
+
+        <p>
+          These technologies may be used for document classification, project
+          intake, data extraction, CAD and geometry analysis,
+          design-for-manufacturing analysis, material and manufacturing
+          process evaluation, technical research, supplier identification,
+          project organization, quotation analysis, report preparation,
+          customer relationship management, internal knowledge management,
+          and administrative automation.
+        </p>
+
+        <p>
+          Customer information may therefore be processed by automated systems
+          and, where necessary, technology providers supporting these systems.
+          Polymer Connection seeks to use appropriate safeguards when
+          confidential or proprietary customer information is processed using
+          third-party technology providers.
+        </p>
+
+        <div class="callout info">
+          <div class="callout-icon">i</div>
+
+          <div class="callout-body">
+            <div class="callout-title">AI Model Training</div>
+
+            <div class="callout-text">
+              <strong>
+                Polymer Connection does not use confidential customer
+                technical information to train publicly available artificial
+                intelligence models.
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Where automated analysis is used to support engineering,
+          manufacturing, sourcing, or other significant project decisions,
+          such analysis is intended to assist rather than replace appropriate
+          professional and human judgment. Customers should not rely solely
+          upon automated recommendations for safety-critical, regulatory,
+          engineering, manufacturing, or other decisions requiring professional
+          verification.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="manufacturing-partners">
+        <h2>6. Manufacturing Partners, Suppliers and Other Project Participants</h2>
+
+        <p>
+          Polymer Connection operates as an engineering, manufacturing
+          commercialization, sourcing, and manufacturers&rsquo;
+          representative organization.
+        </p>
+
+        <p>
+          To perform our Services, we may share appropriate customer
+          information with manufacturing partners, material suppliers,
+          tooling suppliers, testing laboratories, engineering providers,
+          quality providers, logistics providers, equipment suppliers, and
+          other technical or commercial partners.
+        </p>
+
+        <p>
+          Information may be shared when reasonably necessary to evaluate,
+          quote, develop, manufacture, test, deliver, or support a customer
+          project. Polymer Connection does not consider the disclosure of
+          project information to an appropriate project participant for these
+          purposes to constitute a sale of Personal Data.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="service-providers">
+        <h2>7. Service Providers</h2>
+
+        <p>
+          We may use third-party service providers to support our business
+          operations. These providers may include companies providing website
+          hosting, cloud infrastructure, email, file storage, customer
+          relationship management, project management, analytics,
+          cybersecurity, artificial intelligence and machine learning,
+          accounting, communications, data backup, engineering software,
+          manufacturing software, and marketing services.
+        </p>
+
+        <p>
+          These service providers may process information on our behalf as
+          reasonably necessary to provide their services to Polymer Connection.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="website-analytics">
+        <h2>8. Website Analytics</h2>
+
+        <p>
+          We may use analytics technologies to understand how visitors use our
+          website. These technologies may collect information such as pages
+          viewed, time spent on pages, referring websites, browser
+          information, device information, and IP addresses.
+        </p>
+
+        <p>
+          We use this information to understand website performance, improve
+          content, identify technical problems, understand visitor interests,
+          and improve our Services.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="cookies">
+        <h2>9. Cookies and Similar Technologies</h2>
+
+        <p>
+          Our website may use cookies and similar technologies. A cookie is a
+          small data file stored on your browser or device when you visit a
+          website.
+        </p>
+
+        <p>
+          We may use necessary cookies to support essential website
+          functionality and security; functionality cookies to remember
+          preferences and improve website functionality; performance cookies
+          to help us understand website performance; analytics cookies to
+          understand how visitors interact with our website; and, where used,
+          marketing cookies to help measure marketing activities or provide
+          more relevant communications.
+        </p>
+
+        <p>
+          Most browsers allow you to control or delete cookies through browser
+          settings. Disabling certain cookies may affect website functionality.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="marketing-communications">
+        <h2>10. Marketing and Business Communications</h2>
+
+        <p>
+          Polymer Connection may use business contact information to
+          communicate with existing customers, prospective customers,
+          suppliers, manufacturers, and other industry participants regarding
+          project opportunities, manufacturing capabilities, materials,
+          processes, technical information, industry information, new
+          services, relevant Polymer Connection content, and other legitimate
+          business communications.
+        </p>
+
+        <p>
+          Recipients may opt out of promotional email communications by using
+          an unsubscribe mechanism provided in the communication or contacting
+          Polymer Connection. We may continue sending non-promotional
+          communications necessary for active projects, existing business
+          relationships, contractual matters, security notices, or
+          administrative purposes.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="data-security">
+        <h2>11. Data Security</h2>
+
+        <p>
+          Polymer Connection seeks to use commercially reasonable
+          administrative, organizational, technical, and physical safeguards
+          designed to protect Personal Data and confidential customer
+          information. These measures may include access controls,
+          authentication, secure cloud services, data backups, encryption,
+          monitoring, and other security practices where appropriate.
+        </p>
+
+        <p>
+          However, no method of electronic transmission or storage is
+          completely secure, and Polymer Connection cannot guarantee absolute
+          security. Customers are also responsible for using appropriate
+          security practices when communicating with Polymer Connection and
+          protecting their own accounts, credentials, systems, and information.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="data-retention">
+        <h2>12. Data Retention</h2>
+
+        <p>
+          Polymer Connection may retain Personal Data and Customer and
+          Technical Information for as long as reasonably necessary to perform
+          Services; maintain project history; support future manufacturing
+          requirements; maintain engineering and quality records; comply with
+          contractual obligations; maintain legitimate business records;
+          resolve disputes; protect legal rights; and comply with applicable
+          laws and regulations.
+        </p>
+
+        <p>
+          Retention periods may vary depending upon the nature of the
+          information, project, customer relationship, contractual
+          requirements, regulatory requirements, and legitimate business
+          needs. Information may be deleted, anonymized, or archived when it
+          is no longer reasonably required.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="confidentiality-ip">
+        <h2>13. Confidentiality and Intellectual Property</h2>
+
+        <p>
+          This Privacy Notice addresses privacy and information-handling
+          practices and does not replace any confidentiality agreement,
+          nondisclosure agreement, supplier agreement, customer agreement,
+          purchase order terms, intellectual-property agreement, or other
+          contractual obligation between Polymer Connection and another party.
+        </p>
+
+        <p>
+          Where a separate agreement imposes additional confidentiality or
+          information-security requirements, Polymer Connection will handle
+          applicable information in accordance with those contractual
+          obligations.
+        </p>
+
+        <p>
+          Ownership of customer drawings, CAD files, intellectual property,
+          specifications, and other proprietary information is not transferred
+          to Polymer Connection merely because such information is submitted
+          to us.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="legal-disclosures">
+        <h2>14. Legal Disclosures</h2>
+
+        <p>
+          Polymer Connection may disclose information when we reasonably
+          believe disclosure is required or permitted to comply with
+          applicable law; respond to lawful court orders, subpoenas, or
+          government requests; protect Polymer Connection&rsquo;s legal
+          rights; enforce agreements; investigate fraud or security
+          incidents; protect customers, suppliers, employees, or others; or
+          address actual or suspected illegal activity.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="business-transfers">
+        <h2>15. Business Transfers</h2>
+
+        <p>
+          If Polymer Connection is involved in a merger, acquisition,
+          restructuring, financing, sale of assets, or similar business
+          transaction, information may be disclosed or transferred as part of
+          that transaction.
+        </p>
+
+        <p>
+          Any Personal Data transferred in such a transaction will remain
+          subject to applicable legal requirements and any privacy commitments
+          that continue to apply.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="third-party-sites">
+        <h2>16. Third-Party Websites and Services</h2>
+
+        <p>
+          Our website or communications may contain links to third-party
+          websites, applications, manufacturing partners, suppliers, or other
+          services.
+        </p>
+
+        <p>
+          Polymer Connection does not control the privacy or security
+          practices of independent third parties. Users should review the
+          privacy policies and terms of third-party services before providing
+          information to them.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="your-privacy-rights">
+        <h2>17. Your Privacy Rights</h2>
+
+        <p>
+          Depending upon where you reside and applicable law, you may have
+          certain rights regarding your Personal Data, which may include
+          rights to request access to Personal Data; request correction of
+          inaccurate Personal Data; request deletion of certain Personal Data;
+          request information regarding how Personal Data is used; object to
+          or restrict certain processing; and opt out of certain marketing
+          communications.
+        </p>
+
+        <p>
+          These rights may be subject to exceptions under applicable law,
+          including situations where information must be retained for
+          contractual, legal, security, manufacturing, quality, or legitimate
+          business purposes.
+        </p>
+
+        <p>
+          Requests may be submitted using the contact information provided
+          below. Polymer Connection may take reasonable steps to verify the
+          identity of individuals making privacy requests.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="childrens-privacy">
+        <h2>18. Children&rsquo;s Privacy</h2>
+
+        <p>
+          Polymer Connection&rsquo;s Services are intended for businesses and
+          professionals. We do not knowingly collect Personal Data from
+          children under 18 through our business Services.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="changes-to-notice">
+        <h2>19. Changes to This Privacy Notice</h2>
+
+        <p>
+          We may update this Privacy Notice periodically to reflect changes in
+          our business, technologies, Services, legal requirements, or
+          information practices.
+        </p>
+
+        <p>
+          The revised Privacy Notice will be posted on our website with an
+          updated effective date. Material changes may also be communicated
+          through additional notices where appropriate or required by law.
+        </p>
+      </div>
+
+
+      <div class="content-section" id="contact-us">
+        <h2>20. Contact Us</h2>
+
+        <p>
+          Questions, comments, or requests regarding this Privacy Notice or
+          Polymer Connection&rsquo;s information practices may be directed to:
+        </p>
+
+        <div class="supplier-cta">
+
+          <div class="scta-left">
+            <div class="scta-eyebrow">Get in touch</div>
+
+            <div class="scta-title">
+              info@polymerconnection.com
+            </div>
+
+            <div class="scta-desc">
+              We&rsquo;ll respond to privacy-related questions and requests as
+              quickly as possible.
+            </div>
+          </div>
+
+          <div class="scta-right">
+            <a
+              class="btn-lg btn-lg-brand"
+              href="mailto:info@polymerconnection.com"
+            >
+              Email Us
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+
+  <footer class="site-footer">
+
+    <div class="footer-grid">
+
+      <div>
+        <a href="/">
+          <img
+            src="logo.png"
+            alt="Polymer Connection"
+            height="32"
+          >
+        </a>
+
+        <p class="footer-desc">
+          Engineering, manufacturing commercialization, and sourcing for
+          polymer parts and assemblies.
+        </p>
+      </div>
+
+
+      <div class="footer-column">
+
+        <div class="footer-col-title">Company</div>
+
+        <ul class="footer-links">
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <div class="footer-col-title">Legal</div>
+
+        <ul class="footer-links">
+          <li>
+            <a href="/privacy-notice">Privacy Notice</a>
+          </li>
+
+          <li>
+            <a href="/terms">Terms of Use</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        &copy; 2026 Polymer Connection. All rights reserved.
+      </span>
+
+      <span>
+        Last Updated: August 2026
+      </span>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>

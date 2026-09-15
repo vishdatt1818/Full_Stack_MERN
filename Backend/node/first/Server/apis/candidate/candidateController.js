@@ -31,6 +31,7 @@ const add = async (req, res) => {
         candidateObj.skills = formData.skills
         candidateObj.linkedinUrl = formData.linkedinUrl
         candidateObj.githubUrl = formData.githubUrl
+        
 
         candidateObj.autoId = "Can-" + (count + 1)
 
