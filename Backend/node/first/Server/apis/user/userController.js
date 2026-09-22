@@ -1,9 +1,11 @@
 const UserModel = require("./userModel")
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken")
 
 
-const add = async (req, res) => {
+
+const register = async (req, res) => {
    try{
 
     const formData = req.body || {}
@@ -67,6 +69,71 @@ const add = async (req, res) => {
           
 
 }
+
+const login = async (req, res) => {
+    try {
+        const formData = req.body || {};
+        let validation = "";
+
+        if (!formData.email) {
+            validation += "email is required, ";
+        }
+        if (!formData.password) {
+            validation += "password is required, ";
+        }
+
+        if (validation) {
+            return res.status(400).json({
+                success: false,
+                message: validation 
+            });
+        }
+
+        const candidate = await UserModel.findOne({ email: formData.email });
+
+        if (!candidate) {
+            return res.status(404).json({
+                success: false,
+                message: "No such user"
+            });
+        }
+
+        const passwordMatch = await bcrypt.compare(formData.password, candidate.password);
+
+        if (!passwordMatch) {
+            return res.status(401).json({
+                success: false,
+                message: "Password does not match"
+            });
+        }
+
+        const payload = {
+            id: candidate._id,
+            email: candidate.email,
+            role:candidate.role
+        };
+
+        const token = jwt.sign(
+            payload,
+            process.env.JWT_SECRET, 
+            { expiresIn: "1d" }     
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token : token,
+            data: candidate
+
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error: " + err.message
+        });
+    }
+};
 
 const all = async (req, res) => {
     try{
@@ -162,9 +229,12 @@ const update = async (req, res) => {
         if(candidate.name){
             candidate.name = formData.name
         }
-        if(candidate.bio){
-            candidate.bio = formData.bio
+        if(candidate.email){
+            candidate.email = formData.email
         }
+        // if(candidate.password){
+        //     candidate.password = formData.password
+        // }
 
         const updateCandidate = await candidate.save()
 
@@ -270,7 +340,7 @@ const softDelete =async (req, res) => {
 
 
 
-module.exports = { add, all, getSingle, update, deletePermanent, softDelete }
+module.exports = { register, all, getSingle, update, deletePermanent, softDelete, login }
 
 
 

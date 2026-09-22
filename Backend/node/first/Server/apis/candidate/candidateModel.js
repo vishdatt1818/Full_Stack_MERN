@@ -8,6 +8,7 @@ const candidateProfileSchema = new mongoose.Schema(
      
       unique: true
     },
+    email:{type:String, default:""},
 
     name: {
       type: String

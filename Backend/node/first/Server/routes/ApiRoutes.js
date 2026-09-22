@@ -1,25 +1,26 @@
 const router = require("express").Router()
 
+
 const categoryController = require("../apis/category/CategoryController")
 const compayController = require("../apis/company/compayController")
 const candidateController = require("../apis/candidate/candidateController")
 const lostFoundController = require("../apis/LostFound/lostFoundController")
 const userController = require("../apis/user/userController")
+const auth = require("../middleware/auth")
+const adminAuth = require("../middleware/adminAuth")
 
-router.post("/category/add",categoryController.add)
+router.post("/user/add",userController.register)
+router.post("/user/login",userController.login)
+
+router.use(auth)
+router.use(adminAuth)
+
+
+
+
 router.post("/category/all",categoryController.all)
 router.post("/category/getSingle",categoryController.getSingle)
-router.post("/category/update",categoryController.update)
-router.post("/category/deleteCate",categoryController.deletePermanent)
-router.post("/category/softDelete",categoryController.softDelete)
 
-
-router.post("/company/add",compayController.add)
-router.post("/company/all",compayController.all)
-router.post("/company/getSingle",compayController.getSingle)
-router.post("/company/update",compayController.update)
-router.post("/company/deleteCom",compayController.deletePermanent)
-router.post("/company/softDelete",compayController.softDelete)
 
 
 
@@ -40,12 +41,12 @@ router.post("/lost/deleteItem",lostFoundController.deleteItem)
 // router.post("/lost/softDelete",lostFoundController.softDelete)
 
 
-router.post("/user/add",userController.add)
 router.post("/user/all",userController.all)
 router.post("/user/single",userController.getSingle)
 router.post("/user/update",userController.update)
 router.post("/user/deleteItem",userController.deletePermanent)
 router.post("/user/softDelete",userController.softDelete)
+
 
 
 module.exports = router

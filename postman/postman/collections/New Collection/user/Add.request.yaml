@@ -1,4 +1,7 @@
 $kind: http-request
-url: ""
-method: GET
-order: 1237319192415786
+name: Add
+url: http://localhost:5002/api/user/all/
+method: POST
+body:
+  type: urlencoded
+order: 7000

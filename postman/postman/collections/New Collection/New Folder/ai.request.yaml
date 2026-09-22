@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://localhost:5002/api/candidate/add/
+method: POST
+body:
+  type: urlencoded
+  content:
+    name: vaasu
+    bio: checking
+    skills: full stack
+    linkedinUrl: vaasu
+    githubUrl: git vaasu
+order: 2238

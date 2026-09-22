@@ -28,11 +28,16 @@ const add = async (req, res) => {
 
         categoryObj.name = formData.name
         categoryObj.description = formData.description
-        categoryObj.image = formData.image
+        // categoryObj.image = formData.image
         categoryObj.price = formData.price
         categoryObj.stock = formData.stock
 
         categoryObj.autoId = "CAT-" + (count + 1)
+        console.log("req.file" + req.file);
+        
+        if(!!req.file){
+            categoryObj.image = "category/" + req.file.filename
+        }
 
         const categoryData = await categoryObj.save()
 

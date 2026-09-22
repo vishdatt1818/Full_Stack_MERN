@@ -8,6 +8,7 @@ import Slots from './Slots'
 import PropertyList from './PropertyList'
 import Clicker from './components/clicker'
 import ColorBox from './components/Customer/ColorBox'
+import FlightSearch from './components/FlightSearch'
 
 // const properties = [
 //   { id: 129031, name: "Desert Yurt", rating: 4.9, price: 150 },
@@ -25,9 +26,10 @@ function App() {
     <>
       <Navbar/>
       <Clicker buttonText="hello" message="hello" />
+      <FlightSearch/>
 
 
-    <ColorBox/>
+    {/* <ColorBox/> */}
     
       {/* <Carosel/> */}
 
