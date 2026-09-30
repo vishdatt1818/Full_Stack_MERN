@@ -9,11 +9,13 @@ const userController = require("../apis/user/userController")
 const auth = require("../middleware/auth")
 const adminAuth = require("../middleware/adminAuth")
 
-router.post("/user/add",userController.register)
+router.post("/candidate/add",candidateController.add)
 router.post("/user/login",userController.login)
+router.post("/user/otpGen",userController.otpGen)
+router.post("/user/verifyOTP",userController.verifyOTP)
 
 router.use(auth)
-router.use(adminAuth)
+// router.use(adminAuth)
 
 
 
@@ -30,6 +32,7 @@ router.post("/candidate/getSingle",candidateController.getSingle)
 router.post("/candidate/update",candidateController.update)
 router.post("/candidate/deleteCan",candidateController.deletePermanent)
 router.post("/candidate/softDelete",candidateController.softDelete)
+router.post("/candidate/changePassword",userController.changePassword)
 
 
 
@@ -41,11 +44,7 @@ router.post("/lost/deleteItem",lostFoundController.deleteItem)
 // router.post("/lost/softDelete",lostFoundController.softDelete)
 
 
-router.post("/user/all",userController.all)
-router.post("/user/single",userController.getSingle)
-router.post("/user/update",userController.update)
-router.post("/user/deleteItem",userController.deletePermanent)
-router.post("/user/softDelete",userController.softDelete)
+
 
 
 

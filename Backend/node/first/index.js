@@ -8,7 +8,7 @@ require("dotenv").config();
 const router = require("./Server/routes/ApiRoutes")
 const seed = require("./Server/config/seed");
 const companyRouter = require("./Server/routes/CompanyRoutes");
-// seed()
+seed()
 
 
 const port = 5002

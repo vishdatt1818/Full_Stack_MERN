@@ -21,6 +21,34 @@ const add = async (req, res) => {
                 message: validation
         })
     }
+     const email = await userModel.findOne({
+                email: formData.email
+            })
+            if (email) {
+                return res.json({
+                    status: 409,
+                    success: false,
+                    message: "Email already registered"
+                })
+            }
+
+    const hashedPassword = await bcrypt.hash(formData.password, saltRounds);
+
+    let userObj = new userModel()
+            userObj.name = formData.companyName
+            userObj.email = formData.email
+            userObj.phone = formData.phone
+    
+            if(formData.role){
+            userObj.role = formData.role
+            }
+    
+            userObj.password = hashedPassword
+
+        const userData = await userObj.save()
+        console.log(userData);
+
+    
 
     let count = await CompanyModel.countDocuments({})
 
@@ -31,6 +59,7 @@ const add = async (req, res) => {
         companyObj.industry = formData.industry
         companyObj.companySize = formData.companySize
         companyObj.website = formData.website
+        companyObj.recruiterId = userData._id
 
         companyObj.autoId = "Com-" + (count + 1)
 

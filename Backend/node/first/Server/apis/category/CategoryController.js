@@ -1,3 +1,4 @@
+const { uploadImg } = require("../../utilities/helper")
 const CategoryModel = require("./CategoryModel")
 
 
@@ -33,10 +34,12 @@ const add = async (req, res) => {
         categoryObj.stock = formData.stock
 
         categoryObj.autoId = "CAT-" + (count + 1)
-        console.log("req.file" + req.file);
+
+        console.log(req.file);
+        
         
         if(!!req.file){
-            categoryObj.image = "category/" + req.file.filename
+            categoryObj.image = await uploadImg(req.file.buffer)
         }
 
         const categoryData = await categoryObj.save()

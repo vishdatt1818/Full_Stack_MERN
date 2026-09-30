@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        /* border: 1px solid black; */
+        /* border-collapse: collapse;  */
+        /* padding: 8px; */
+      }
+
+       /* 1. Merge the borders and set the width */
+  /* table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: sans-serif;
+  } */
+
+  /* 2. Define the inner grid lines and padding (replaces cellpadding) */
+  /* th, td {
+    border: 1px solid #dddddd;
+    padding: 12px;
+    text-align: left;
+  } */
+
+  /* 3. Optional: Add a distinct background color to the header */
+  /* th {
+    background-color: #f2f2f2;
+    color: #333333;
+  } */
+
+    </style>
+  </head>
+  <body>
+    <table border="1" cellspacing="0" width="100%" border-collapse="collapse" border-spacing="0" cellpadding="20">
+      <thead>
+        <tr>
+          <th colspan="2">Name</th>
+          <!-- <th>last name</th> -->
+          <th>age</th>
+          <th>image</th>
+          <th>drop down</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td colspan="">john</td>
+          <td>singh</td>
+          <td>45</td>
+          <td>
+            <img
+              width="80"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJiAVL_HuB_EinJLo8uqdcYgT374UHv9PcD0gwl3-JWg&s=10"
+
+              alt=""
+            />
+          </td>
+          <td rowspan="2">
+            <select style="width: 100px; height: 50px;" name="" id="">
+                <option value="">hello</option>
+                <option value="">how</option>
+                <option value="">are</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>vasu</td>
+          <td>datt</td>
+          <td>20</td>
+          <td >
+            <img
+              width="80"
+              src="./gojo_satoru (1).jpg"
+              alt=""
+            />
+          </td>
+        </tr>
+        <tr>
+            <td>
+                hello
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

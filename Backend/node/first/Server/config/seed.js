@@ -1,4 +1,5 @@
 
+// const userModel = require("../apis/user/userModel");
 const UserModel = require("../apis/user/userModel")
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
@@ -7,8 +8,16 @@ const bcrypt = require('bcrypt');
 
 const seed = async () => {
    try{
-
        
+       const existingAdmin = await UserModel.findOne({
+            email: "admin@gmail.com"
+        });
+
+        if (existingAdmin) {
+            console.log("Admin already exists");
+            return;
+        }
+        
        const hashedPassword = await bcrypt.hash("123", saltRounds);
        let adminObj = new UserModel()
 

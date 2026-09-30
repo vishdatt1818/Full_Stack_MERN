@@ -1,12 +1,16 @@
 const companyRouter = require("express").Router()
 
 const compayController = require("../apis/company/compayController")
-
-
+const adminAuth = require("../middleware/adminAuth")
+const auth = require("../middleware/auth")
 
 
 
 companyRouter.post("/company/add",compayController.add)
+
+companyRouter.use(auth)
+companyRouter.use(adminAuth)
+
 companyRouter.post("/company/all",compayController.all)
 companyRouter.post("/company/getSingle",compayController.getSingle)
 companyRouter.post("/company/update",compayController.update)

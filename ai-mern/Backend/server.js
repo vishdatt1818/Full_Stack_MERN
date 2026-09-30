@@ -1,59 +1,101 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import { GoogleGenAI } from "@google/genai";
+import dotenv from "dotenv";
 
-const OpenAI = require("openai");
-
-
+dotenv.config();
 
 const app = express();
-
-app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-app.get("/", (req, res) => {
-    res.json({
-        message: "AI MERN Backend is running"
-    });
-});
+// Knowledge Base
+const documents = [
+  "Acme Corp refund policy: Full refund within 30 days for unused hardware. Digital downloads non-refundable after 48 hours.",
+  "Acme Corp tech support hours: Monday through Friday from 8:00 AM to 6:00 PM EST.",
+  "Acme Widget Pro specs: 5000mAh battery, IP68 water resistance, 256GB storage."
+];
 
-app.post("/api/ask", async (req, res) => {
+let vectorStore = [];
 
-    try {
+function cosineSimilarity(vecA, vecB) {
+  let dotProduct = 0, normA = 0, normB = 0;
+  for (let i = 0; i < vecA.length; i++) {
+    dotProduct += vecA[i] * vecB[i];
+    normA += vecA[i] * vecA[i];
+    normB += vecB[i] * vecB[i];
+  }
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
 
-        const userMessage = req.body.message;
+// Generate embeddings for documents at startup
+async function initStore() {
+  try {
+    vectorStore = []; // Reset store
+    for (const text of documents) {
+      const res = await ai.models.embedContent({
+        model: "text-embedding-004",
+        contents: text,
+      });
+      
+      // Extract values dynamically
+      const values = res.embedding?.values || res.embeddings?.[0]?.values;
+      if (!values) throw new Error("Could not extract embedding values");
 
-        if (!userMessage) {
-            return res.status(400).json({
-                error: "Message is required"
-            });
-        }
-
-        const response = await client.responses.create({
-            model: "gpt-5.6-luna",
-            input: userMessage
-        });
-        
-        res.json({
-            reply: response.output_text
-        });
-
-    } catch (error) {
-
-        console.error(error);
-
-        res.status(500).json({
-            error: "Something went wrong"
-        });
+      vectorStore.push({ text, embedding: values });
     }
+    console.log("✅ Vector store indexed successfully!");
+  } catch (error) {
+    console.error("❌ Vector store initialization failed:", error.message);
+  }
+}
+
+app.post("/api/query", async (req, res) => {
+  try {
+    const { question } = req.body;
+
+    if (!question) {
+      return res.status(400).json({ error: "Missing 'question' in request body" });
+    }
+
+    // 1. Embed user query
+    const queryEmbedRes = await ai.models.embedContent({
+      model: "text-embedding-004",
+      contents: question,
+    });
+    
+    const queryVector = queryEmbedRes.embedding?.values || queryEmbedRes.embeddings?.[0]?.values;
+
+    // 2. Calculate similarity
+    const scoredDocs = vectorStore.map(doc => ({
+      text: doc.text,
+      score: cosineSimilarity(queryVector, doc.embedding)
+    }));
+
+    scoredDocs.sort((a, b) => b.score - a.score);
+    const topContext = scoredDocs[0].text;
+
+    // 3. Generate answer
+    const prompt = `Answer the question based ONLY on the context provided below. If you cannot answer it from the context, state "I do not have enough information."\n\nContext:\n${topContext}\n\nQuestion: ${question}`;
+    
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
+
+    res.json({
+      question,
+      answer: response.text,
+      matchedContext: topContext
+    });
+  } catch (err) {
+    console.error("Query error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
-
-app.listen(5000, () => {
-    console.log("Server running on port 5000");
+const PORT = 3000;
+app.listen(PORT, async () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  await initStore();
 });

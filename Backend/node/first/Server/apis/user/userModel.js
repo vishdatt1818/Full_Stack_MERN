@@ -16,6 +16,13 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true
     },
+    otp :{
+      type:String
+      
+    },
+    expireOtp : {
+      type:String
+    },
 
     password: {
       type: String,

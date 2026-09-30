@@ -1,64 +1,100 @@
 const CandidateModel = require("./candidateModel")
-
+const userModel = require("../user/userModel")
+const bcrypt = require('bcrypt');
+const saltRounds = 10
 
 const add = async (req, res) => {
-   try{
+    try {
 
-    const formData = req.body || {}
+        const formData = req.body || {}
 
-    let validation = ""
+        let validation = ""
 
-    if(!formData.name){
-        validation += "name is required , "
-    }
-    if(!formData.bio){
-        validation += "bio is required , "
-    }
-    if(!!validation){
-        return res.json({
-             status: 400,
+        if (!formData.name) {
+            validation += "name is required , "
+        }
+        if (!formData.bio) {
+            validation += "bio is required , "
+        }
+        if (!!validation) {
+            return res.json({
+                status: 400,
                 success: false,
                 message: validation
+            })
+        }
+
+        const email = await userModel.findOne({
+            email: formData.email
         })
-    }
+        if (email) {
+            return res.json({
+                status: 409,
+                success: false,
+                message: "Email already registered"
+            })
+        }
 
-    let count = await CandidateModel.countDocuments({})
+        const hashedPassword = await bcrypt.hash(formData.password, saltRounds);
 
-    let candidateObj = new CandidateModel()
+        let userObj = new userModel()
+        userObj.name = formData.name
+        userObj.email = formData.email
+        userObj.phone = formData.phone
+
+        if(formData.role){
+        userObj.role = formData.role
+        }
+
+        userObj.password = hashedPassword
+
+        
+        
+        const userData = await userObj.save()
+        console.log(userData);
+
+        let count = await CandidateModel.countDocuments({})
+
+
+        let candidateObj = new CandidateModel()
 
         candidateObj.name = formData.name
-        candidateObj.bio = formData.description
+        candidateObj.bio = formData.bio
         candidateObj.skills = formData.skills
+        candidateObj.email = formData.email
         candidateObj.linkedinUrl = formData.linkedinUrl
         candidateObj.githubUrl = formData.githubUrl
-        
+        candidateObj.userId = userData._id
+
 
         candidateObj.autoId = "Can-" + (count + 1)
+
+
 
         const candidateData = await candidateObj.save()
 
         return res.json({
-              status: 200,
+            status: 200,
             success: true,
-            message: "Company Added",
+            message: "candidate Added",
             data: candidateData
         })
 
 
-   }catch(err){
-         res.json({
-             status: 500,
+    } catch (err) {
+        res.json({
+            status: 500,
             success: false,
             message: "Internal server error" + err
         })
-   }
-    
-          
+    }
+
+
 
 }
 
 const all = async (req, res) => {
-    try{
+    try {
 
         const formData = req.body || {}
 
@@ -67,91 +103,91 @@ const all = async (req, res) => {
         const candidate = await CandidateModel.find(formData)
 
         return res.json({
-             status: 200,
+            status: 200,
             success: true,
             message: "candidate Loaded",
             total: totalDocs,
             data: candidate
         })
 
-    }catch(err){
+    } catch (err) {
         return res.json({
-             status: 500,
+            status: 500,
             success: false,
             message: "Internal Server Error: " + err
         })
     }
 
-   
+
 }
 
 const getSingle = async (req, res) => {
-  try{
-    const formData = req.body || {}
+    try {
+        const formData = req.body || {}
 
-    if(!formData._id){
-         return res.json({
+        if (!formData._id) {
+            return res.json({
                 status: 400,
                 success: false,
                 message: "_id is required"
             });
-    }
+        }
 
-    const candidate = await CandidateModel.findOne({
-        _id: formData._id
-    })
+        const candidate = await CandidateModel.findOne({
+            _id: formData._id
+        })
 
-    if(candidate){
-        return res.json({
+        if (candidate) {
+            return res.json({
                 status: 200,
                 success: true,
                 message: "candidate Loaded",
                 data: candidate
             });
 
-             return res.json({
-            status: 404,
-            success: false,
-            message: "No candidate found with such _id"
-        });
-    }
+            return res.json({
+                status: 404,
+                success: false,
+                message: "No candidate found with such _id"
+            });
+        }
 
-  }catch(err){
-          return res.json({
+    } catch (err) {
+        return res.json({
             status: 500,
             success: false,
             message: "Internal Server Error: " + err.message
         });
-  }
+    }
 }
 
 const update = async (req, res) => {
-    try{
+    try {
 
         const formData = req.body || {}
 
-        if(!formData._id){
+        if (!formData._id) {
             return res.json({
-                  status: 400,
+                status: 400,
                 success: false,
                 message: "_id is required"
             })
         }
 
-        const candidate = await CandidateModel.findOne({_id: formData._id})
+        const candidate = await CandidateModel.findOne({ _id: formData._id })
 
-        if(!candidate){
+        if (!candidate) {
             return res.json({
-                 status: 404,
+                status: 404,
                 success: false,
                 message: "candidate Not Found"
             })
         }
 
-        if(candidate.name){
+        if (candidate.name) {
             candidate.name = formData.name
         }
-        if(candidate.bio){
+        if (candidate.bio) {
             candidate.bio = formData.bio
         }
 
@@ -164,7 +200,7 @@ const update = async (req, res) => {
             data: updateCandidate
         })
 
-    }catch(err){
+    } catch (err) {
         return res.json({
             status: 500,
             success: false,
@@ -176,10 +212,10 @@ const update = async (req, res) => {
 
 
 const deletePermanent = async (req, res) => {
-    try{
-        const {_id} = req.body
+    try {
+        const { _id } = req.body
 
-        if(!_id){
+        if (!_id) {
             return res.json({
                 status: 400,
                 success: false,
@@ -187,8 +223,8 @@ const deletePermanent = async (req, res) => {
             })
         }
 
-        const candidate = await CandidateModel.findOne({_id})
-        if(!candidate){
+        const candidate = await CandidateModel.findOne({ _id })
+        if (!candidate) {
             return res.json({
                 status: 404,
                 success: false,
@@ -196,18 +232,18 @@ const deletePermanent = async (req, res) => {
             })
         }
 
-        const deleted = await CandidateModel.deleteOne({_id})
+        const deleted = await CandidateModel.deleteOne({ _id })
 
         return res.json({
-             status: 200,
+            status: 200,
             success: true,
             message: "candidate deleted permanently",
             data: deleted
         })
 
-    }catch(err){
+    } catch (err) {
         return res.json({
-             status: 500,
+            status: 500,
             success: false,
             message: "Internal Server Error",
             error: err.message
@@ -215,45 +251,45 @@ const deletePermanent = async (req, res) => {
     }
 }
 
-const softDelete =async (req, res) => {
-  try{
-    const {_id} = req.body
+const softDelete = async (req, res) => {
+    try {
+        const { _id } = req.body
 
-    if(!_id){
-        return res.json({
-            status: 400,
-            success: false,
-            message: "_id is required"
-        })
-    }
+        if (!_id) {
+            return res.json({
+                status: 400,
+                success: false,
+                message: "_id is required"
+            })
+        }
 
-    const candidate = await CandidateModel.findOne({_id})
+        const candidate = await CandidateModel.findOne({ _id })
 
-    if(!candidate){
-        return res.json({
+        if (!candidate) {
+            return res.json({
                 status: 404,
                 success: false,
                 message: "No such candidate"
             });
-    }
+        }
 
-    candidate.isDelete = true
+        candidate.isDelete = true
 
-    const savedCompany = await category.save()
+        const savedCompany = await category.save()
 
-          return res.json({
+        return res.json({
             status: 200,
             success: true,
             message: "candidate Deleted"
         });
 
-  }catch(err){
-    return res.json({
+    } catch (err) {
+        return res.json({
             status: 500,
             success: false,
             message: "Internal Server Error: " + err.message
         });
-  }
+    }
 
 }
 

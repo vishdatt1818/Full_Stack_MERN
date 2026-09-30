@@ -1,74 +1,14 @@
 const UserModel = require("./userModel")
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+// const userModel = require("./userModel");
+const sendMailer = require("../../utilities/emailSender")
+const privateKey=process.env.PRIVATE_KEY
 
 
 
-const register = async (req, res) => {
-   try{
 
-    const formData = req.body || {}
-
-    let validation = ""
-
-    if(!formData.name){
-        validation += "name is required , "
-    }
-    if(!formData.email){
-        validation += "email is required , "
-    }
-    if(!formData.password){
-        validation += "password is required , "
-    }
-    if(!formData.phone){
-        validation += "phone is required , "
-    }
-    if(!!validation){
-        return res.json({
-             status: 400,
-                success: false,
-                message: validation
-        })
-    }
-
-    let count = await UserModel.countDocuments({})
-
-    let userObj = new UserModel()
-
-    const hashedPassword = await bcrypt.hash(formData.password, saltRounds);
-
-        userObj.name = formData.name
-        userObj.email = formData.email
-        userObj.phone = formData.phone
-        userObj.role = formData.role
-        userObj.password = hashedPassword
-
-        
-
-        userObj.autoId = "Can-" + (count + 1)
-
-        const candidateData = await userObj.save()
-
-        return res.json({
-              status: 200,
-            success: true,
-            message: "User Added",
-            data: candidateData
-        })
-
-
-   }catch(err){
-         res.json({
-             status: 500,
-            success: false,
-            message: "Internal server error" + err
-        })
-   }
-    
-          
-
-}
 
 const login = async (req, res) => {
     try {
@@ -116,8 +56,44 @@ const login = async (req, res) => {
         const token = jwt.sign(
             payload,
             process.env.JWT_SECRET, 
-            { expiresIn: "1d" }     
-        );
+            { expiresIn: "1d" }       
+        );  
+
+//          let payloadformail = {
+//                 subject: "User login",
+//                 html: `
+//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+//         <h2 style="color: #28a745;">Registration Successful!</h2>
+
+//         <p>Hello <strong>${candidate.name}</strong>,</p>
+
+//         <p>
+//             Your account has been successfully login.
+        
+//         </p>
+
+//         <a href="http://localhost:3000/login"
+//            style="
+//                background:#007bff;
+//                color:#fff;
+//                padding:12px 20px;
+//                text-decoration:none;
+//                border-radius:5px;
+//            ">
+//             Login Now
+//         </a>
+
+//         <p style="margin-top:30px;">
+//             Thank you for registering with us.
+//         </p>
+//     </div>
+// `
+//             }
+
+//           sendMailer(candidate.email, payloadformail )
+
+
+           
 
         return res.status(200).json({
             success: true,
@@ -135,212 +111,175 @@ const login = async (req, res) => {
     }
 };
 
-const all = async (req, res) => {
+const changePassword = async (req, res) =>{
     try{
+         const formData = req.body || {};
+        let validation = "";
 
-        const formData = req.body || {}
+        // if (!formData.email) {
+        //     validation += "email is required, ";
+        // }
+        if (!formData.oldPassword) {
+            validation += "password is required, ";
+        }
 
-        const totalDocs = await UserModel.countDocuments(formData)
+        if (validation) {
+            return res.status(400).json({
+                success: false,
+                message: validation 
+            });
+        }
 
-        const candidate = await UserModel.find(formData)
+        if (req.body.newPassword == req.body.confirmPassword) {
+            let { email } = req.token
 
-        return res.json({
-             status: 200,
-            success: true,
-            message: "candidate Loaded",
-            total: totalDocs,
-            data: candidate
-        })
+            let userData = await userModel.findOne({ email })
+
+            let result = await bcrypt.compare(req.body.oldPassword, userData.password)
+
+            if (result) {
+
+                userData.password = await bcrypt.hash(req.body.newPassword, 10)
+
+                let savedData = await userData.save()
+                res.send({
+                    message: "Your password has been changed",
+                    success: true,
+                    status: 200,
+                    data:savedData
+                })
+
+            } else {
+                res.send({
+                    message: "Your Old password is incorrect",
+                    success: false,
+                    status: 400
+                })
+            }
+
+
+        } else {
+            res.send({
+                message: "New Password and Confirm password not match",
+                success: false,
+                status: 400
+            })
+        }
+
+
 
     }catch(err){
-        return res.json({
-             status: 500,
-            success: false,
-            message: "Internal Server Error: " + err
-        })
-    }
-
-   
-}
-
-const getSingle = async (req, res) => {
-  try{
-    const formData = req.body || {}
-
-    if(!formData._id){
-         return res.json({
-                status: 400,
-                success: false,
-                message: "_id is required"
-            });
-    }
-
-    const candidate = await UserModel.findOne({
-        _id: formData._id
-    })
-
-    if(candidate){
-        return res.json({
-                status: 200,
-                success: true,
-                message: "candidate Loaded",
-                data: candidate
-            });
-
-             return res.json({
-            status: 404,
-            success: false,
-            message: "No candidate found with such _id"
-        });
-    }
-
-  }catch(err){
-          return res.json({
-            status: 500,
+        console.log(err);
+        
+         return res.status(500).json({
             success: false,
             message: "Internal Server Error: " + err.message
+            
         });
-  }
+    }
 }
 
-const update = async (req, res) => {
-    try{
+const otpGen = async (req, res) => {
+    try {
+        let { email } = req.body
 
-        const formData = req.body || {}
+        let userData = await UserModel.findOne({ email })
 
-        if(!formData._id){
+        if (userData.length <= 0) {
             return res.json({
-                  status: 400,
-                success: false,
-                message: "_id is required"
+                status: 404,
+                massge: "User Not Found",
+                success: false
             })
         }
 
-        const candidate = await UserModel.findOne({_id: formData._id})
 
-        if(!candidate){
+
+        let otp = Math.floor(Math.random() * 1000000)
+        let ExpTime = Date.now() + 5 * 60 * 1000
+
+        userData.otp = otp
+        userData.expireOtp = ExpTime
+
+        await userData.save()
+
+        res.send({
+            massage: "otp Genrated",
+            success: true,
+            status: 200,
+            otp: otp
+        })
+    } catch (err) {
+        console.log(err);
+
+    }
+}
+
+const verifyOTP = async (req, res) => {
+    try {
+        let { email, OTP, newPassword } = req.body
+
+
+        let userData = await UserModel.findOne({ email })
+
+        if (userData == null) {
             return res.json({
-                 status: 404,
-                success: false,
-                message: "candidate Not Found"
+                status: 404,
+                massge: "User Not Found",
+                success: false
             })
         }
 
-        if(candidate.name){
-            candidate.name = formData.name
+        if (userData.expireOtp < Date.now()) {
+            return res.json({
+                status: 403,
+                massge: "OTP EXP",
+                success: false
+            })
         }
-        if(candidate.email){
-            candidate.email = formData.email
-        }
-        // if(candidate.password){
-        //     candidate.password = formData.password
-        // }
 
-        const updateCandidate = await candidate.save()
+
+        if (userData.otp != OTP) {
+            return res.json({
+                status: 403,
+                massge: "OTP is Not Valid",
+                success: false
+            })
+        }
+
+        let result = bcrypt.compareSync(newPassword, userData.password)
+        if (result) {
+           return res.json({
+                massage: "New Password is same as Old password",
+                status: 200,
+                success: true
+
+            })
+        }
+
+        userData.password = bcrypt.hashSync(newPassword, 10)
+        userData.otp = null
+        userData.expireOtp = Date.now()
+
+        await userData.save()
 
         res.json({
+            massage: "You password Has been changed",
             status: 200,
-            success: true,
-            message: "candidate Updated",
-            data: updateCandidate
+            success: true
+
         })
 
-    }catch(err){
-        return res.json({
-            status: 500,
-            success: false,
-            message: "ISE: " + err
-        })
-    }
+    } catch (error) {
+        console.log(error);
 
-}
-
-
-const deletePermanent = async (req, res) => {
-    try{
-        const {_id} = req.body
-
-        if(!_id){
-            return res.json({
-                status: 400,
-                success: false,
-                message: "_id is required"
-            })
-        }
-
-        const candidate = await UserModel.findOne({_id})
-        if(!candidate){
-            return res.json({
-                status: 404,
-                success: false,
-                message: "No such candidate found"
-            })
-        }
-
-        const deleted = await UserModel.deleteOne({_id})
-
-        return res.json({
-             status: 200,
-            success: true,
-            message: "candidate deleted permanently",
-            data: deleted
-        })
-
-    }catch(err){
-        return res.json({
-             status: 500,
-            success: false,
-            message: "Internal Server Error",
-            error: err.message
-        })
     }
 }
 
-const softDelete =async (req, res) => {
-  try{
-    const {_id} = req.body
-
-    if(!_id){
-        return res.json({
-            status: 400,
-            success: false,
-            message: "_id is required"
-        })
-    }
-
-    const candidate = await UserModel.findOne({_id})
-
-    if(!candidate){
-        return res.json({
-                status: 404,
-                success: false,
-                message: "No such candidate"
-            });
-    }
-
-    candidate.isDelete = true
-
-    const savedCompany = await category.save()
-
-          return res.json({
-            status: 200,
-            success: true,
-            message: "candidate Deleted"
-        });
-
-  }catch(err){
-    return res.json({
-            status: 500,
-            success: false,
-            message: "Internal Server Error: " + err.message
-        });
-  }
-
-}
 
 
 
-module.exports = { register, all, getSingle, update, deletePermanent, softDelete, login }
+module.exports = { login, changePassword, otpGen , verifyOTP }
 
 
 
