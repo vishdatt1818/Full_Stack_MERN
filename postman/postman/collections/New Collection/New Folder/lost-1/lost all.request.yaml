@@ -1,0 +1,7 @@
+$kind: http-request
+name: lost all
+url: http://localhost:5002/api/lost/all/
+method: POST
+body:
+  type: urlencoded
+order: 638801973921789

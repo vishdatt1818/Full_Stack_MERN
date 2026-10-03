@@ -1,2 +1,8 @@
 $kind: collection
-name: New Collection
+variables:
+  - key: json_web_token_0t4j
+    secret: true
+    disabled: false
+  - key: json_web_token_0otn
+    secret: true
+    disabled: false

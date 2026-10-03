@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://localhost:5002/api/company/add/
+method: POST
+body:
+  type: urlencoded
+  content:
+    companyName: twitter
+    description: ff
+    industry: social
+    companySize: "33"
+    website: fb.com
+order: 5000

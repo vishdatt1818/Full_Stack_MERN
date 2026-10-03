@@ -1,0 +1,15 @@
+$kind: http-request
+name: lost add
+url: http://localhost:5002/api/lost/add/
+method: POST
+body:
+  type: urlencoded
+  content:
+    itemName: realme
+    description: dddd
+    category: mobile
+    location: jal
+    reportedBy: ff
+    contactNumber: "5555555555"
+    status: ""
+order: 1789104348371

@@ -1,6 +1,8 @@
 $kind: http-request
-url: http://localhost:5002/api/category/getSingle/
+url: http://localhost:5002/api/user/login/
 method: POST
+headers:
+  Authorization: "{{json_web_token_0otn}}"
 queryParams:
   - key: _id
     value: 6a9a6b921354048dfcc50373
@@ -9,5 +11,10 @@ queryParams:
 body:
   type: urlencoded
   content:
-    _id: 6aa28f48049364a268508501
+    email: vishsaini18@gmail.com
+    password: "123"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0t4j}}"
 order: 3000

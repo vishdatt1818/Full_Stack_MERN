@@ -5,7 +5,6 @@ const companySchema = new mongoose.Schema(
     recruiterId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-     
     },
 
     companyName: {

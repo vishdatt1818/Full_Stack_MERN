@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://localhost:5002/api/company/deleteCom/
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 6aa2d469f670956a2b6f33a6
+order: 4000

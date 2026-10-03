@@ -5,13 +5,13 @@ const jobSchema = new mongoose.Schema(
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
-      required: true
+      // required: true
     },
 
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      // required: true
     },
 
     title: {
@@ -70,7 +70,7 @@ const jobSchema = new mongoose.Schema(
 
     location: {
       type: String,
-      required: true
+      // required: true
     },
 
     workMode: {

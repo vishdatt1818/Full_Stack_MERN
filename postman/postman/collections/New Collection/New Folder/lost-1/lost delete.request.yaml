@@ -1,0 +1,9 @@
+$kind: http-request
+name: lost delete
+url: http://localhost:5002/api/lost/single/
+method: POST
+body:
+  type: urlencoded
+  content:
+    _id: 6aa39189c9aea90d023d2c5d
+order: 3907306260250128

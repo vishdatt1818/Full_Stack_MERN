@@ -1,0 +1,13 @@
+$kind: http-request
+url: http://localhost:5002/api/company/getSingle/
+method: POST
+queryParams:
+  - key: _id
+    value: 6aa2d6c3f670956a2b6f33a7
+    disabled: true
+    description: ""
+body:
+  type: urlencoded
+  content:
+    _id: 6aa2d6c3f670956a2b6f33a7
+order: 2000

@@ -2,6 +2,7 @@ const adminRoute = require("express").Router()
 const multer  = require('multer')
 const path = require("path")
 
+const jobCategoryController = require("../apis/jobCategory/jobCategoryController")
 const categoryController = require("../apis/category/CategoryController")
 const compayController = require("../apis/company/compayController")
 const candidateController = require("../apis/candidate/candidateController")
@@ -29,6 +30,7 @@ adminRoute.use(adminAuth)
 // const upload = multer({ storage: storage })
 
 
+
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 
@@ -52,6 +54,15 @@ adminRoute.post("/lost/single",lostFoundController.single)
 adminRoute.post("/lost/update",lostFoundController.update)
 adminRoute.post("/lost/deleteItem",lostFoundController.deleteItem)
 // adminRoute.post("/lost/softDelete",lostFoundController.softDelete)
+
+
+adminRoute.post("/jobCategory/add",upload.single("image"), jobCategoryController.add)
+
+adminRoute.post("/jobCategory/all",compayController.all)
+adminRoute.post("/jobCategory/getSingle",compayController.getSingle)
+adminRoute.post("/jobCategory/update",compayController.update)
+adminRoute.post("/jobCategory/deleteCom",compayController.deletePermanent)
+adminRoute.post("/jobCategory/softDelete",compayController.softDelete)
 
 
 module.exports = adminRoute
